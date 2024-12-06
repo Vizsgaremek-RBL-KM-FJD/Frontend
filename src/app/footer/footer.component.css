@@ -1,0 +1,9 @@
+body {
+    background-color: #1E2019;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    padding: 20px;
+}
