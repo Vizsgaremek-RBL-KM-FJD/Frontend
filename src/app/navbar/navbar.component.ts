@@ -8,10 +8,4 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
-  constructor(private router: Router) { }
-
-  navigate(place:string) {
-    this.router.navigate([place]);
-  }
-}
+export class NavbarComponent { }

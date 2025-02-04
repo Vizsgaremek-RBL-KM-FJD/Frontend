@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BaseService } from '../base.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +10,21 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  constructor(private base: BaseService)  {}
+  places:any = [];
 
+  ngOnInit() {
+    this.getPlaces();
+  }
+
+  getPlaces() {
+    this.base.getAllPlaces().subscribe((data) => {
+      console.log('Kapott adatok:', data);
+      this.places = data;
+    });
+  }
+    
+  
+    
+  
 }
