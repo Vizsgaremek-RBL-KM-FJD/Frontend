@@ -1,3 +1,14 @@
-<p>Home works</p>
 
-{{places | json}}
+<div class="row">
+    <div *ngFor="let places of places" class="card m-4" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{places.place_name}}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary"><a routerLink="profil">Üzemeltető: {{places.owner_name}}</a></h6>
+          <p class="card-text">{{places.address}}</p>
+          <div class="col d-md-flex gap-2">
+            <p>{{places.price}}ft/alkalom</p>
+            <button class="btn btn-primary">Foglalás</button>
+          </div>
+        </div>
+    </div>
+</div>
