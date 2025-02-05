@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
+import { RouterModule, ROUTES } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { ProfilComponent } from './profil/profil.component';
     NgbModule,
     FormsModule
   ],
-  providers: [provideHttpClient()],
+  providers: [
+    provideHttpClient(), 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
