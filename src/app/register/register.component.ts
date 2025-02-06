@@ -10,11 +10,17 @@ import { AuthService } from '../auth.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  first_name=""
+  last_name=""
+  gender=""
+  email=""
+  address=""
+  phone_number=""
+  password=""
 
-  register(user: any) {
-    this.auth.register(user).subscribe((res) => {
-      console.log(res);
-    });
+  constructor(private auth:AuthService){}
+
+  signUp(){
+    this.auth.signUp( this.first_name, this.last_name, this.gender, this.email, this.address, this.phone_number, this.password)
   }
 }
