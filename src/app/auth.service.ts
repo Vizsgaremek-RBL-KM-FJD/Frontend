@@ -17,6 +17,8 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
+  
+
   getAllUser() {
     this.http.get(this.api, this.httpOptions).subscribe(
       (res) => console.log(res)

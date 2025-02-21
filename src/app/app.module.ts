@@ -15,6 +15,7 @@ import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
 import { RouterModule, ROUTES } from '@angular/router';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RouterModule, ROUTES } from '@angular/router';
     FooterComponent,
     ServicesComponent,
     ContactComponent,
-    ProfilComponent
+    ProfilComponent,
+    ReservationsComponent
   ],
   imports: [
     BrowserModule,

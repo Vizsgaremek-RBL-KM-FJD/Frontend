@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { BaseService } from '../base.service';
 
 @Component({
   selector: 'app-profil',
@@ -9,4 +11,6 @@ import { Component } from '@angular/core';
 })
 export class ProfilComponent {
 
+  loggedUser:any
+  constructor(private auth:AuthService) {}
 }
