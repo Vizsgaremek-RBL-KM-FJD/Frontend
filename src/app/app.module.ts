@@ -37,7 +37,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
     FormsModule
   ],
   providers: [
-    provideHttpClient(), 
+    provideHttpClient(),
+    
   ],
   bootstrap: [AppComponent]
 })

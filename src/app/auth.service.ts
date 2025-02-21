@@ -6,7 +6,8 @@ import { map, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private api = "https://localhost:3000/users/";
+  // private api = "https://localhost:3000/users/";
+  private api = "http://localhost:3000/users/";
   private loggedUser: any;
   private userSub = new Subject();
 
