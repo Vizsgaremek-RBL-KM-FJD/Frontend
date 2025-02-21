@@ -16,20 +16,21 @@
           <li class="nav-item">
             <a *ngIf="!loggedUser" class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="login">Bejelentkezés</a>
           </li>
+          <li *ngIf="loggedUser" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profil
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Profil</a></li>
+              <li><a class="dropdown-item" href="#">Foglalások</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item logout" href="#" (click)="logout()">Kijelentkezés</a></li>
+            </ul>
+          </li>
           <form class="container-fluid justify-content-start">
             <button class="btn btn-outline-success me-2" type="button" routerLink="contact">Kapcsolat</button>
           </form>
-        <li *ngIf="loggedUser" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profil
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Profil</a></li>
-            <li><a class="dropdown-item" href="#">Foglalások</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item logout" href="#" (click)="logout()">Kijelentkezés</a></li>
-          </ul>
-        </li>
+        
         </ul>
       </div>
     </div>

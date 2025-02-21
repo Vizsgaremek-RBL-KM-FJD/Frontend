@@ -22,6 +22,11 @@ export class LoginComponent {
     this.password=""
   }
 
+  secretData() {
+    this.auth.getSecret()
+  }
+
+
   getAllUsers(){
     this.auth.getAllUser()
   }

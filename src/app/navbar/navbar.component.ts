@@ -16,12 +16,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private auth:AuthService){   
   }
 
-  ngOnInit(): void {
-    this.feliratkozas=this.auth.getLoggedUser().subscribe(
-      (user)=>this.loggedUser=user
-    )
-  }
+  // ngOnInit(): void {
+  //   this.feliratkozas=this.auth.getLoggedUser().subscribe(
+  //     (user)=>this.loggedUser=user
+  //   )
+  // }
   
+  ngOnInit(): void {
+    // Ellenőrizd a LocalStorage-t
+    const userFromStorage = localStorage.getItem('loggedUser');
+    if (userFromStorage) {
+      this.loggedUser = JSON.parse(userFromStorage);
+    }
+  
+    // Feliratkozás az AuthService-re
+    this.feliratkozas = this.auth.getLoggedUser().subscribe(
+      (user) => this.loggedUser = user
+    );
+  }
+
   ngOnDestroy(): void {
     if (this.feliratkozas) this.feliratkozas.unsubscribe()    
     this.feliratkozas?.unsubscribe()    

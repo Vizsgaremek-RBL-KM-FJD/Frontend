@@ -6,7 +6,7 @@ import { map, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private api = "http://localhost:3000/users/";
+  private api = "https://localhost:3000/users/";
   private loggedUser: any;
   private userSub = new Subject();
 
@@ -14,7 +14,7 @@ export class AuthService {
     withCredentials: true
   };
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   getAllUser() {
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   getLoggedUser() {
-    return this.userSub.asObservable();
+    return this.userSub;
   }
 
   signIn(email: string, password: string) {
@@ -32,13 +32,13 @@ export class AuthService {
       email: email,
       password: password
     };
-
-    this.http.post<{ token: string }>(this.api + "login", body, this.httpOptions).subscribe(
+  
+    this.http.post(this.api + "login", body, this.httpOptions).subscribe(
       {
         next: (res) => {
           console.log(res);
-          localStorage.setItem('token', res.token);
           this.loggedUser = res;
+          localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
           this.userSub.next(this.loggedUser);
         },
         error: (err) => {
@@ -81,12 +81,14 @@ export class AuthService {
   }
 
   logout() {
+    console.log('Logout function called');
     this.http.post(this.api + "logout", {}, this.httpOptions).subscribe(
+    
       {
         next: (res) => {
           console.log(res);
-          localStorage.removeItem('token');
           this.loggedUser = null;
+          localStorage.removeItem('loggedUser');
           this.userSub.next(this.loggedUser);
         },
         error: (err) => console.log(err)
