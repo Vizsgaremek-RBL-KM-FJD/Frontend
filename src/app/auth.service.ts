@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Subject } from 'rxjs';
 
@@ -12,18 +12,24 @@ export class AuthService {
   private userSub = new Subject();
 
   private httpOptions = {
-    withCredentials: true
+    withCredentials: true,
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
   };
 
   constructor(private http: HttpClient) {
+    
   }
-
-  
 
   getAllUser() {
     this.http.get(this.api, this.httpOptions).subscribe(
       (res) => console.log(res)
     );
+  }
+
+  updateUser(id: number, user: any) {
+    return this.http.patch(`${this.api}${id}`, user, this.httpOptions);
   }
 
   getLoggedUser() {
@@ -91,6 +97,7 @@ export class AuthService {
         next: (res) => {
           console.log(res);
           this.loggedUser = null;
+          this.userSub.next(null);
           localStorage.removeItem('loggedUser');
           this.userSub.next(this.loggedUser);
         },
