@@ -39,8 +39,10 @@ html{
 
 .back-to-top {
     text-align: center;
-    margin-top: -20px;
+    margin-top: -15px;
     scroll-behavior: smooth;
+
+    
     
     
 }

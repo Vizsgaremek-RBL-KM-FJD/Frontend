@@ -1,0 +1,23 @@
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0,3;
+    
+    
+    
+  }
+
+
+  .btn{
+    background-color: black;
+    color: white;
+  }
+
+  .btn:hover{
+    background-color: red;
+  }
+  
+  
+
+ 

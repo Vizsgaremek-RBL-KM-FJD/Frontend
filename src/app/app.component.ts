@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -9,8 +9,25 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title = 'Frontend';
+  showBackToTop = false;
+  
+  
 
   constructor(private auth:AuthService){
     
   }
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.showBackToTop = window.scrollY > 100; 
+
+  
+    
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  
+  
 }
