@@ -7,7 +7,7 @@ html{
     color: #fff;
     padding: 20px 0;
     text-align: center;
-    height: 200px;
+    height: 250px;
     width: 100%;
     
 }
@@ -39,10 +39,15 @@ html{
 
 .back-to-top {
     text-align: center;
-    margin-top: -15px;
-    scroll-behavior: smooth;
+    
+    scroll-behavior: smooth; 
+}
 
-    
-    
-    
+.btn {
+    background-color: #222;
+    color: gray;
+}
+
+.btn:hover {
+    color: white;
 }

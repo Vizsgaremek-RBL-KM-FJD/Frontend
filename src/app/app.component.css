@@ -10,12 +10,12 @@
 
 
   .btn{
-    background-color: black;
+    background-color: #0000006e;
     color: white;
   }
 
   .btn:hover{
-    background-color: red;
+    background-color: black;
   }
   
   
