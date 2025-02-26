@@ -1,5 +1,24 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div class="mainpage">
+    <app-navbar></app-navbar>
+    <header>
+        
+    </header>
+    <div class="blocks">
+        <a router-link="#" class="block">terem1</a>
+        <a router-link="#" class="block">terem2</a>
+        <a router-link="#" class="block">terem3</a>
+        <a router-link="#" class="block">terem4</a>
+        <a router-link="#" class="block">terem5</a>
+        <a router-link="#" class="block">terem6</a>
+        <a router-link="#" class="block">terem7</a>
+        <a router-link="#" class="block">terem8</a>
+    </div>
 
+    <router-outlet></router-outlet>
+    
 <button *ngIf="showBackToTop" class="back-to-top btn" (click)="scrollToTop()">▲</button>
-<app-footer></app-footer>
+    <app-footer></app-footer>
+
+</div>
+
+
