@@ -13,6 +13,10 @@ export class HomeComponent {
   constructor(private base: BaseService)  {}
   places:any = [];
 
+  searchTerm: string = '';
+  performSearch() {
+    console.log('Performing search for:', this.searchTerm);
+  }
   ngOnInit() {
     this.getPlaces();
   }

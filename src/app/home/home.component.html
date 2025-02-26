@@ -1,3 +1,27 @@
+<header class="header">
+  <div class="header-elements">
+    <div class="blocks">
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      
+    </div>
+    <div class="search mt-3" >
+      <div class="input-search">
+          <input type="text" class="form-control me-2" placeholder="Keresés" [(ngModel)]="searchTerm">
+    
+          <button class="btn btn-primary" (click)="performSearch()">Keresés</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
 
 <div class="row">
     <div *ngFor="let places of places" class="card m-4" style="width: 18rem;">

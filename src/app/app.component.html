@@ -1,30 +1,9 @@
-<div class="mainpage">
-    <app-navbar></app-navbar>
-    <header>
-        
-    </header>
-    <div class="blocks">
-        <a router-link="#" class="block btn btn-info">terem1</a>
-        <a router-link="#" class="block btn btn-info">terem2</a>
-        <a router-link="#" class="block btn btn-info">terem3</a>
-        <a router-link="#" class="block btn btn-info">terem4</a>
-        <a router-link="#" class="block btn btn-info">terem5</a>
-        <a router-link="#" class="block btn btn-info">terem6</a>
-        <a router-link="#" class="block btn btn-info">terem7</a>
-        <a router-link="#" class="block btn btn-info">terem8</a>
-    </div>
-    <div class="search mt-3" >
-        <div class="input-search">
-            <input type="text" class="form-control" placeholder="Keresés" [(ngModel)]="searchTerm">
-
-            <button class="btn btn-primary" (click)="performSearch()">Keresés</button>
-        </div>
-    </div>
-    <router-outlet></router-outlet>
+<app-navbar></app-navbar>
     
-<button *ngIf="showBackToTop" class="back-to-top btn" (click)="scrollToTop()">▲</button>
-    <app-footer></app-footer>
+<router-outlet></router-outlet>
 
-</div>
+<!-- <button *ngIf="showBackToTop" class="back-to-top btn" (click)="scrollToTop()">▲</button> -->
+<!-- <app-footer></app-footer> -->
+
 
 

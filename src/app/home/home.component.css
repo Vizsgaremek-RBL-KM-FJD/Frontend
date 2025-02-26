@@ -5,3 +5,88 @@ a {
 a:hover {
     color: black;
 }
+
+.blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .block {
+    width: 200px;
+    height: 200px;
+    background-color: whitesmoke;
+    display: inline-block;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  .input-search {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .header {
+    min-height: 100vh;
+    display: flex;
+    background-image: url("../../assets/borito.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-elements {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+  }
+
+  @media (max-width: 1530px) {
+    .block:nth-child(6),
+    .block:nth-child(7) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    
+    .block:nth-child(5),
+    .block:nth-child(6),
+    .block:nth-child(7) {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .block:nth-child(4),
+    .block:nth-child(5),
+    .block:nth-child(6),
+    .block:nth-child(7) {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .block:nth-child(3),
+    .block:nth-child(4),
+    .block:nth-child(5),
+    .block:nth-child(6),
+    .block:nth-child(7) {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .block {
+      display: none;
+    }
+  }
+  
+ 

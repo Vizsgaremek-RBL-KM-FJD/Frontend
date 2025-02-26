@@ -11,10 +11,7 @@ import { AuthService } from './auth.service';
 export class AppComponent {
   title = 'Frontend';
   showBackToTop = false;
-  searchTerm: string = '';
-  performSearch() {
-    console.log('Performing search for:', this.searchTerm);
-  }
+ 
   
   
 
