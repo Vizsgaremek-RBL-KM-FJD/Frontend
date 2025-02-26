@@ -18,6 +18,35 @@
     background-color: black;
   }
   
+  .blocks {
+    display: flex;
+    gap: 20px;
+  }
   
+  .block {
+    width: 200px;
+    height: 200px;
+    background-color: whitesmoke;
+    display: inline-block;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: black;
+  }
+  
+  .block:hover {
+    background-color: grey;
+  }
+   
+
+
+  .input-search {
+    display: flex;
+    align-items: center;
+    margin-left: 400px;
+    margin-right: 400px;
+  }
 
  
