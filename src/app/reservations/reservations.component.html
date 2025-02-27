@@ -1,1 +1,24 @@
-<p>reservations works!</p>
+<div class="container">
+
+    <h1>Foglalásaim</h1>
+    <table>
+      <tr>
+        <th>Terem</th>
+        <th>Dátum</th>
+        <th>Mettől?</th>
+        <th>Meddig?</th>
+        <th>Fizetendő összeg</th>
+        <th>Lemondás*</th>
+      </tr>
+      <tr *ngFor="let rent of rents">
+        <td>{{ rent.place_name }}</td>
+        <td>{{ rent.StartDate | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ rent.StartDate | date: 'HH:mm' }}</td>
+        <td>{{ rent.EndDate | date: 'HH:mm' }}</td>
+        <td>{{ rent.TotalAmount }}</td>
+        <td>
+            <button class="btn btn-outline-danger" (click)="cancelRent(rent.RentID, rent.UserID)" *ngIf="isCancelable(rent)">Lemondás</button>
+        </td>
+      </tr>
+    </table>
+  </div>

@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ServicesComponent } from './services/services.component';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -14,7 +15,7 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'profil', component: ProfilComponent},
   {path: 'services', component: ServicesComponent},
-  {path: 'reservations', component: ServicesComponent},
+  {path: 'reservations', component: ReservationsComponent},
   {path: '', redirectTo : 'home', pathMatch: 'full'},
   {path: '**', redirectTo : 'home', pathMatch: 'full'}
   

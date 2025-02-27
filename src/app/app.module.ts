@@ -14,8 +14,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
-import { RouterModule, ROUTES } from '@angular/router';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { HourFormatPipe } from './hour-format.pipe';
+
 
 @NgModule({
   declarations: [
@@ -28,13 +29,16 @@ import { ReservationsComponent } from './reservations/reservations.component';
     ServicesComponent,
     ContactComponent,
     ProfilComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    HourFormatPipe,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    
   ],
   providers: [
     provideHttpClient(),
