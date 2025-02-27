@@ -36,14 +36,24 @@
         </div>
       </div>
     
-      <div class="card border-info mb-3 me-5" style="max-width: 18rem;">
+      <div class="card border-info mb-3 me-5" style="max-width: 20rem;">
         <div class="card-header">Termek</div>
         <div class="card-body">
-            <ul>
-                <li *ngFor="let place of places">
-                    {{place.place_name}} - {{place.address}}
-                </li>
-            </ul>
+            <div>
+                <div class="terem mb-5" *ngFor="let place of places">
+                    <div class="fomr-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.place_name">
+                    </div>
+                    <div class="fomr-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.address">
+                    </div>
+                    <div class="fomr-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.price">
+                    </div>
+                    <button class="btn btn-outline-success me-2" (click)="updatePlace(place)" >Mentés</button>
+                    <button class="btn btn-outline-danger" (click)="deletePlace(place)">Törlés</button>
+                  </div>
+              </div>
             <ul *ngIf="places.length==0">
                 <p>Még nincs termed, regisztrálj egyet!</p>
             </ul>

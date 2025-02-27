@@ -65,5 +65,30 @@ export class ProfilComponent implements OnInit{
 
   }
 
+  updatePlace(place: any) {
+    console.log(place.PlaceID);
+    const placeId = place.PlaceID;
+    const address = place.address;
+    const place_name = place.place_name;
+    const price = place.price;
+    this.http.put(`http://127.0.0.1:3000/places/${placeId}`, { address, place_name, price }).subscribe((response: any) => {
+      console.log(response);
+    })
+    
+  }
+
+//   async function updatePlace(id, place) {
+//     const result = await db.query('UPDATE place SET address = ?, place_name = ?, price = ? WHERE PlaceID = ?', [place.address, place.place_name, place.price, id]);
+//     return { message: 'Place updated successfully' };
+// }
+
+
+  deletePlace(place: any) {
+    const placeId = place.PlaceID;
+    this.http.delete(`http://127.0.0.1:3000/places/${placeId}`).subscribe((response: any) => {
+      console.log(response);
+    })
+  }
+
 }
 
