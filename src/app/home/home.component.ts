@@ -14,8 +14,7 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
-  selectedDate: any;
-
+  selectedDate: any;         
   selectedPlace: any;
 
 selectPlace(place: any) {
@@ -90,6 +89,10 @@ rentPlace() {
 
 getCurrentDate(): Date {
   return new Date();
+}
+
+getDate(selectedDate: any): Date {
+  return new Date(selectedDate.year, selectedDate.month - 1, selectedDate.day);
 }
     
 }

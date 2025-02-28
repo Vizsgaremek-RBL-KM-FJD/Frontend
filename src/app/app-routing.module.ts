@@ -7,6 +7,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ServicesComponent } from './services/services.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { AdminComponent } from './admin/admin.component';
+import { adminGuard } from './admin.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -16,6 +18,7 @@ const routes: Routes = [
   {path: 'profil', component: ProfilComponent},
   {path: 'services', component: ServicesComponent},
   {path: 'reservations', component: ReservationsComponent},
+  {path: 'admin', component: AdminComponent, canActivate: [adminGuard]},
   {path: '', redirectTo : 'home', pathMatch: 'full'},
   {path: '**', redirectTo : 'home', pathMatch: 'full'}
   

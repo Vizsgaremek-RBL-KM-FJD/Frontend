@@ -7,7 +7,7 @@ import { map, Subject } from 'rxjs';
 })
 export class AuthService {
   // private api = "https://localhost:3000/users/";
-  private api = "http://localhost:3000/users/";
+  private api = "http://127.0.0.1:3000/users/";
   private loggedUser: any;
   private userSub = new Subject();
 
@@ -34,6 +34,12 @@ export class AuthService {
 
   getLoggedUser() {
     return this.userSub;
+  }
+
+  isAdmin() {
+    const id = JSON.parse(localStorage.getItem('loggedUser')!).ID;
+    console.log(id);
+    return this.http.get(this.api + "isAdmin/" + id, this.httpOptions)
   }
 
   signIn(email: string, password: string) {
@@ -105,4 +111,9 @@ export class AuthService {
       }
     );
   }
+
+  
+
 }
+
+

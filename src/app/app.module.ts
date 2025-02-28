@@ -16,6 +16,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { HourFormatPipe } from './hour-format.pipe';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { HourFormatPipe } from './hour-format.pipe';
     ProfilComponent,
     ReservationsComponent,
     HourFormatPipe,
+    AdminComponent,
     
   ],
   imports: [

@@ -1,4 +1,4 @@
-<header class="header">
+<div class="header">
   <div class="header-elements">
     <div class="blocks">
       <div class="block"></div>
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-</header>
+</div>
 
 
 
@@ -131,7 +131,7 @@
       <div class="modal-footer">
         <button class="btn btn-outline-primary" data-bs-target="#rentplaceModalHour" data-bs-toggle="modal">Vissza</button>
         <button class="btn btn-outline-primary" data-bs-dismiss="modal" (click)="rentPlace()" 
-        *ngIf="selectedDate && startHour && endHour && startHour < endHour && startHour >= 0 && endHour >= 0  && selectedDate > getCurrentDate()">Foglalás</button>
+        *ngIf="selectedDate && startHour && endHour && startHour < endHour && startHour >= 0 && endHour >= 0  && getDate(selectedDate) > getCurrentDate()">Foglalás</button>
         <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
       </div>
     </div>

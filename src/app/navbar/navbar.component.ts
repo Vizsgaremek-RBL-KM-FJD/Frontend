@@ -10,9 +10,9 @@ import { AuthService } from '../auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit, OnDestroy { 
-
-  loggedUser:any=null
-  feliratkozas?:Subscription
+  loggedUser:any=null;
+  isAdmin?:boolean;
+  feliratkozas?:Subscription;
   constructor(private auth:AuthService){   
   }
 
@@ -33,7 +33,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.feliratkozas = this.auth.getLoggedUser().subscribe(
       (user) => this.loggedUser = user
     );
+  
+    // Check if user is admin
+    this.auth.isAdmin().subscribe((response: any) => {
+      this.isAdmin = response;
+    });
   }
+
+  
 
   ngOnDestroy(): void {
     if (this.feliratkozas) this.feliratkozas.unsubscribe()    
@@ -44,4 +51,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
     console.log("Kilép")
     if (this.loggedUser) this.auth.logout()
   }
+
 }
