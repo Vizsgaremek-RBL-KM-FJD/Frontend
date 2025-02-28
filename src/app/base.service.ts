@@ -14,6 +14,14 @@ export class BaseService {
     return this.http.get(this.url + 'places');
   }
 
+  getAllUsers() {
+    return this.http.get(this.url + 'users');
+  }
+
+  getAllRents() {
+    return this.http.get(this.url + 'rents');
+  }
+
   createRent(userID: number, placeID: number, startDate: Date, endDate: Date) {
     const body = {
       userID,
@@ -32,6 +40,8 @@ export class BaseService {
   cancelRent(userID: number, rentID: number) {
     return this.http.delete(this.url + 'rents/' + userID + '/' + rentID);
   }
+
+  
 
   
 }

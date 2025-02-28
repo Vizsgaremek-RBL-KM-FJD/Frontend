@@ -13,8 +13,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   loggedUser:any=null;
   isAdmin?:boolean;
   feliratkozas?:Subscription;
-  constructor(private auth:AuthService){   
-  }
+  constructor(private auth:AuthService){ }
 
   // ngOnInit(): void {
   //   this.feliratkozas=this.auth.getLoggedUser().subscribe(
