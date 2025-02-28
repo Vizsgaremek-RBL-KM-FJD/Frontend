@@ -4,6 +4,7 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 
 
+
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -85,6 +86,10 @@ rentPlace() {
       console.error(error);
       // handle error response
     });
+}
+
+getCurrentDate(): Date {
+  return new Date();
 }
     
 }
