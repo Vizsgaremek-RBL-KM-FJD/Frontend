@@ -1,1 +1,156 @@
-<p>admin works!</p>
+<div class="users">
+  <h1 class="text-center mt-5">Felhasználók</h1>
+  
+  <div class="card-container">
+    <div  *ngFor="let user of users" class="card mb-3" style="width: 18rem;">
+  
+        <div class="card-body">
+            <h5 class="card-title">Felhasználó</h5>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="user.ID" type="number" disabled class="form-control" id="floatingInput">
+                <label  for="floatingInput">id</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="user.first_name" type="text" class="form-control" id="floatingInput">
+                <label  for="floatingInput">First name</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="user.last_name" type="text" class="form-control" id="floatingInput">
+                <label for="floatingInput">Last name</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <select [(ngModel)]="user.gender" class="form-control">
+                    <option>férfi</option>
+                    <option>nő</option>
+                    <option>nem nyilatkozom</option>
+                </select>
+                <label for="floatingInput">Gender</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="user.email" type="email" class="form-control" id="floatingInput">
+                <label for="floatingInput">Email address</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="user.address" type="text" class="form-control" id="floatingInput">
+                <label for="floatingInput">address</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="floatingInput">
+                <label for="floatingInput">phone number</label>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="places">
+  <h1 class="text-center mt-5">Termek</h1>
+  
+  <div class="card-container">
+    <div  *ngFor="let place of places" class="card mb-3" style="width: 18rem;">
+  
+        <div class="card-body">
+            <h5 class="card-title">Terem</h5>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="place.PlaceID" disabled type="number" class="form-control" id="floatingInput">
+                <label  for="floatingInput">id</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="place.UserID" disabled type="number" class="form-control" id="floatingInput">
+                <label for="floatingInput">UserID</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="place.owner_name" readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Tulajdonos</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="place.phone_number" readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Tulaj telefonszám</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="place.place_name" type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Terem név</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="place.address" type="text" class="form-control" id="floatingInput">
+            <label for="floatingInput">Cím</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="place.price" type="number" class="form-control" id="floatingInput">
+              <label for="floatingInput">Ár</label>
+          </div> 
+        </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="rents">
+  <h1 class="text-center mt-5">Foglalások</h1>
+  
+  <div class="card-container">
+    <div  *ngFor="let rent of rents" class="card mb-3" style="width: 18rem;">
+  
+        <div class="card-body">
+            <h5 class="card-title">Fogalalás</h5>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="rent.RentID" disabled type="number" class="form-control" id="floatingInput">
+                <label  for="floatingInput">id</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="rent.UserID" disabled type="number" class="form-control" id="floatingInput">
+                <label for="floatingInput">UserID</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control" id="floatingInput">
+                <label for="floatingInput">UserID</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Tulajdonos telefonszáma</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.UserName" readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Bérlő neve</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.PhoneNumber" readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Bérlő telefonszáma</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="rent.StartDate" type="text" class="form-control" id="floatingInput">
+            <label for="floatingInput">Kezdés időpont</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.EndDate" type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Befejezés időpont</label>
+          </div> 
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control" id="floatingInput">
+              <label for="floatingInput">Bérlés összege</label>
+          </div> 
+        </div>
+      </div>
+  </div>
+</div>

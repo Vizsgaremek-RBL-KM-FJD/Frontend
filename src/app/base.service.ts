@@ -41,7 +41,9 @@ export class BaseService {
     return this.http.delete(this.url + 'rents/' + userID + '/' + rentID);
   }
 
-  
+  getPlaceById(userID: number) {
+    return this.http.get(this.url + 'places/' + userID);
+  }
 
   
 }

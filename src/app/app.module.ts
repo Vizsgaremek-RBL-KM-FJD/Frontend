@@ -19,6 +19,7 @@ import { HourFormatPipe } from './hour-format.pipe';
 import { AdminComponent } from './admin/admin.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,6 @@ import { AdminComponent } from './admin/admin.component';
     ReservationsComponent,
     HourFormatPipe,
     AdminComponent,
-    
   ],
   imports: [
     BrowserModule,
