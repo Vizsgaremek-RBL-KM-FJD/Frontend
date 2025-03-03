@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class BaseService {
   // private url = 'https://localhost:3000/';
-  private url = 'http://localhost:3000/';
+  private url = 'http://127.0.0.1:3000/';
 
   constructor(private http: HttpClient) {}
 
@@ -44,6 +44,5 @@ export class BaseService {
   getPlaceById(userID: number) {
     return this.http.get(this.url + 'places/' + userID);
   }
-
   
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../base.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   standalone: false,
@@ -12,7 +13,7 @@ export class AdminComponent implements OnInit {
   users: any = [];
   rents: any = [];
 
-  constructor(private base:BaseService) {}
+  constructor(private base:BaseService, private auth:AuthService) {}
 
   ngOnInit(): void {
     this.base.getAllPlaces().subscribe((places: any) => {
@@ -26,6 +27,11 @@ export class AdminComponent implements OnInit {
     this.base.getAllRents().subscribe((rents: any) => {
       this.rents = rents;
     });
+  }
+
+  UpdateUserAsAdmin(userID: number) {
+    console.log(userID);
+    this.auth.sadmin(userID);
   }
 
   

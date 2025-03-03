@@ -42,6 +42,17 @@ export class AuthService {
     return this.http.get(this.api + "isAdmin/" + id, this.httpOptions)
   }
 
+  sadmin(user:any) {
+    const body:any = {}
+    body.isAdmin = 1
+    console.log("User",user);
+
+    this.http.patch(this.api+"sadmin-update-profile/" + user.ID, user, this.httpOptions).subscribe(
+      (res)=>console.log(res)
+    )
+  }
+
+
   signIn(email: string, password: string) {
     let body = {
       email: email,

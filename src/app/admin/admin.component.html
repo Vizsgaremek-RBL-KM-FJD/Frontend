@@ -44,6 +44,16 @@
                 <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="floatingInput">
                 <label for="floatingInput">phone number</label>
             </div>
+
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="user.isAdmin" *ngIf="!user.isAdmin" type="boolean" class="form-control" id="floatingInput">
+                <label  *ngIf="!user.isAdmin"  for="floatingInput">Admin?</label>
+            </div>
+        </div>
+  
+        <div class="card-footer">
+            <button (click)="UpdateUserAsAdmin(user)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
+            <button  *ngIf="!user.isAdmin" type="button" class="btn btn-danger">Törlés</button>
         </div>
       </div>
   </div>
@@ -91,64 +101,6 @@
           <div class="form-floating mb-3">
               <input [(ngModel)]="place.price" type="number" class="form-control" id="floatingInput">
               <label for="floatingInput">Ár</label>
-          </div> 
-        </div>
-      </div>
-  </div>
-</div>
-
-
-<div class="rents">
-  <h1 class="text-center mt-5">Foglalások</h1>
-  
-  <div class="card-container">
-    <div  *ngFor="let rent of rents" class="card mb-3" style="width: 18rem;">
-  
-        <div class="card-body">
-            <h5 class="card-title">Fogalalás</h5>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="rent.RentID" disabled type="number" class="form-control" id="floatingInput">
-                <label  for="floatingInput">id</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="rent.UserID" disabled type="number" class="form-control" id="floatingInput">
-                <label for="floatingInput">UserID</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control" id="floatingInput">
-                <label for="floatingInput">UserID</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Tulajdonos telefonszáma</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.UserName" readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Bérlő neve</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.PhoneNumber" readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Bérlő telefonszáma</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="rent.StartDate" type="text" class="form-control" id="floatingInput">
-            <label for="floatingInput">Kezdés időpont</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.EndDate" type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Befejezés időpont</label>
-          </div> 
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control" id="floatingInput">
-              <label for="floatingInput">Bérlés összege</label>
           </div> 
         </div>
       </div>
