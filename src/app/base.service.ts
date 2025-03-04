@@ -44,5 +44,10 @@ export class BaseService {
   getPlaceById(userID: number) {
     return this.http.get(this.url + 'places/' + userID);
   }
+
+  updatePlace(place: any) {
+    console.log(place);
+    return this.http.put(this.url + 'places/' + place.PlaceID, place);
+  }
   
 }

@@ -34,5 +34,15 @@ export class AdminComponent implements OnInit {
     this.auth.sadmin(userID);
   }
 
-  
+  DeleteUser(userID: number) {
+    this.auth.deleteUser(userID);
+  }
+
+  UpdatePlace(place: any) {
+    this.base.updatePlace(place);
+  }
+
+  DeletePlace(PlaceID: number) {
+    console.log(PlaceID);
+  }
 }

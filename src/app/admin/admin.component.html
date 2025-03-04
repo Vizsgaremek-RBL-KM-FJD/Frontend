@@ -46,14 +46,14 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input [(ngModel)]="user.isAdmin" *ngIf="!user.isAdmin" type="boolean" class="form-control" id="floatingInput">
-                <label  *ngIf="!user.isAdmin"  for="floatingInput">Admin?</label>
+                <input [(ngModel)]="user.isadmin" type="number" class="form-control" id="floatingInput">
+                <label for="floatingInput">Admin?</label>
             </div>
         </div>
   
         <div class="card-footer">
             <button (click)="UpdateUserAsAdmin(user)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
-            <button  *ngIf="!user.isAdmin" type="button" class="btn btn-danger">Törlés</button>
+            <button  (click)="DeleteUser(user.ID)" type="button" class="btn btn-danger">Törlés</button>
         </div>
       </div>
   </div>
@@ -102,6 +102,10 @@
               <input [(ngModel)]="place.price" type="number" class="form-control" id="floatingInput">
               <label for="floatingInput">Ár</label>
           </div> 
+        </div>
+        <div class="card-footer">
+            <button (click)="UpdatePlace(place)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
+            <button  (click)="DeletePlace(place.PlaceID)" type="button" class="btn btn-danger">Törlés</button>
         </div>
       </div>
   </div>

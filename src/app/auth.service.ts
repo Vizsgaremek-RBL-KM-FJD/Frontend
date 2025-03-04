@@ -52,6 +52,13 @@ export class AuthService {
     )
   }
 
+  deleteUser(userID: number) {
+
+    this.http.delete(this.api + userID, this.httpOptions).subscribe(
+      (res) => console.log(res)
+    );
+  }
+
 
   signIn(email: string, password: string) {
     let body = {
