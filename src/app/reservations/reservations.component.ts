@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseService } from '../base.service';
+import { BaseService } from '../services/base/base.service';
 
 @Component({
   selector: 'app-reservations',

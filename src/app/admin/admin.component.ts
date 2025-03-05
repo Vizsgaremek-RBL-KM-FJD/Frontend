@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseService } from '../base.service';
-import { AuthService } from '../auth.service';
+import { BaseService } from '../services/base/base.service';
+import { AuthService } from '../services/auth/auth.service';
+import { UsersService } from '../services/users/users.service';
 
 @Component({
   standalone: false,
@@ -13,7 +14,7 @@ export class AdminComponent implements OnInit {
   users: any = [];
   rents: any = [];
 
-  constructor(private base:BaseService, private auth:AuthService) {}
+  constructor(private base:BaseService, private auth:AuthService, private UserService:UsersService) {}
 
   ngOnInit(): void {
     this.base.getAllPlaces().subscribe((places: any) => {
@@ -31,11 +32,11 @@ export class AdminComponent implements OnInit {
 
   UpdateUserAsAdmin(userID: number) {
     console.log(userID);
-    this.auth.sadmin(userID);
+    this.UserService.sadmin(userID);
   }
 
   DeleteUser(userID: number) {
-    this.auth.deleteUser(userID);
+    this.UserService.deleteUser(userID);
   }
 
   UpdatePlace(place: any) {

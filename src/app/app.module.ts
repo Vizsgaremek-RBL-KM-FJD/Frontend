@@ -11,7 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
-import { ServicesComponent } from './services/services.component';
+import { InfoComponent } from './info/info.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ReservationsComponent } from './reservations/reservations.component';
@@ -28,12 +28,13 @@ import { AdminComponent } from './admin/admin.component';
     LoginComponent,
     RegisterComponent,
     FooterComponent,
-    ServicesComponent,
+
     ContactComponent,
     ProfilComponent,
     ReservationsComponent,
     HourFormatPipe,
     AdminComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

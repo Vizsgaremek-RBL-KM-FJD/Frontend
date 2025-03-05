@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { UsersService } from '../services/users/users.service';
 
 
 @Component({
@@ -17,7 +18,13 @@ export class ProfilComponent implements OnInit{
   NewplaceAddress: string = "";
   NewplacePrice: number = 0;
 
-  constructor(private auth:AuthService, private http: HttpClient) {}
+  constructor(
+    private auth:AuthService,
+    private userService: UsersService,
+    private http: HttpClient
+  ) {}
+
+
 
   ngOnInit(): void {
     const loggedUser = localStorage.getItem('loggedUser');
@@ -43,7 +50,7 @@ export class ProfilComponent implements OnInit{
       phone_number: this.user.phone_number
     };
   
-    this.auth.updateUser(id, updatedUser).subscribe((response: any) => {
+    this.userService.UpdateUser(id, updatedUser).subscribe((response: any) => {
       console.log(response);
       localStorage.setItem('loggedUser', JSON.stringify(updatedUser));
     });

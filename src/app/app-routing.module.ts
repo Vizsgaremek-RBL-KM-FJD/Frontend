@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
-import { ServicesComponent } from './services/services.component';
+import { InfoComponent } from './info/info.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AdminComponent } from './admin/admin.component';
 import { adminGuard } from './admin.guard';
@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'profil', component: ProfilComponent},
-  {path: 'services', component: ServicesComponent},
+  {path: 'services', component: InfoComponent},
   {path: 'reservations', component: ReservationsComponent},
   {path: 'admin', component: AdminComponent, canActivate: [adminGuard]},
   {path: '', redirectTo : 'home', pathMatch: 'full'},
