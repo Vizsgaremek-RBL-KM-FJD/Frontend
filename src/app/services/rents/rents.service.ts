@@ -36,7 +36,9 @@ export class RentsService {
     return this.http.get(this.base.api + 'rents/' + userID);
   }
 
-  updateRent(userID: number, rentID: number, rent: any) {
-    return this.http.patch(this.base.api + 'rents/' + userID + '/' + rentID, rent);
-  }
+  updateRent(rent: any) {
+    this.http.put(this.base.api + 'rents/' + rent.UserID + '/' + rent.RentID, rent).subscribe((response: any) => {
+        console.log(response);
+    })
+}
 }

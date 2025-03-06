@@ -53,16 +53,34 @@ export class AdminComponent implements OnInit {
   }
 
   DeletePlace(place: any) {
-    this.PlacesService.deletePlace(place);
+    const placeId = place.PlaceID;
+    this.RentsService.getAllRents().subscribe((rents: any) => {
+      const relatedRents = rents.filter((rent: any) => rent.PlaceID === placeId);
+      relatedRents.forEach((rent: any) => {
+        this.cancelRent(rent.UserID, rent.RentID);
+      });
+      this.PlacesService.deletePlace(place);
+    });
   }
 
   UpdateRent(rent:any) {
-    this.RentsService.updateRent(rent.UserID, rent.RentID, rent);
+    this.RentsService.updateRent(rent);
   }
 
-  DeleteRent(rentID: number, UserID: number) {
-    console.log("A törlés elkezdődött", rentID, UserID);
-    this.RentsService.cancelRent(UserID, rentID);
+  cancelRent(userID: number, rentID: number) {
+    console.log("userID:", userID, rentID);
+    this.RentsService.cancelRent(userID, rentID).subscribe({
+      next: () => {
+        console.log("Törlés sikeres! admin", rentID);
+        // Itt frissítheted az adatokat, ha szükséges
+      },
+      error: (error) => {
+        console.error("Hiba a törlés során:", error);
+      },
+      complete: () => {
+        console.log("Cancel rent operation completed");
+      }
+    });
   }
 
 }
