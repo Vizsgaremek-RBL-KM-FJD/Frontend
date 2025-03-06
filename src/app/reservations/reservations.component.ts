@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base/base.service';
+import { RentsService } from '../services/rents/rents.service';
 
 @Component({
   selector: 'app-reservations',
@@ -12,7 +13,10 @@ export class ReservationsComponent implements OnInit {
 
   rents: any = [];
 
-  constructor(private base:BaseService) { }
+  constructor(
+    private base:BaseService,
+    private RentsService: RentsService
+  ) { }
 
   isCancelable(rent: any): boolean {
     return new Date(rent.StartDate) > new Date();
@@ -23,8 +27,8 @@ export class ReservationsComponent implements OnInit {
   }
 
   getRentsForUser() {
-    const userID =JSON.parse(localStorage.getItem('loggedUser')!).ID;
-    this.base.getRentsForUser(userID).subscribe(
+    const userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
+    this.RentsService.getRentsForUser(userID).subscribe(
       (res) => {
         console.log(res);
         this.rents = res;
@@ -32,7 +36,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   cancelRent(rentID: number, userID: number) {
-    this.base.cancelRent(userID, rentID).subscribe(() => {
+    this.RentsService.cancelRent(userID, rentID).subscribe(() => {
       this.getRentsForUser();
     });
   }

@@ -20,7 +20,7 @@ export class RegisterComponent {
 
   constructor(private auth:AuthService){}
 
-  signUp(){
-    this.auth.signUp( this.first_name, this.last_name, this.gender, this.email, this.address, this.phone_number, this.password)
+    Register(){
+    this.auth.Register( this.first_name, this.last_name, this.gender, this.email, this.address, this.phone_number, this.password)
   }
 }

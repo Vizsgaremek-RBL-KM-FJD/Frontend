@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base/base.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { PlacesService } from '../services/places/places.service';
+import { RentsService } from '../services/rents/rents.service';
 
 
 
@@ -22,7 +24,11 @@ selectPlace(place: any) {
   console.log(this.selectedPlace);
 }
   
-  constructor(private base: BaseService)  {}
+  constructor(
+    private base: BaseService,
+    private PlacesService: PlacesService,
+    private RentsService: RentsService
+  )  {}
   places:any = [];
 
   searchTerm: string = '';
@@ -34,7 +40,7 @@ selectPlace(place: any) {
   }
 
   getPlaces() {
-    this.base.getAllPlaces().subscribe((data) => {
+    this.PlacesService.getAllPlaces().subscribe((data) => {
       console.log('Kapott adatok:', data);
       this.places = data;
     });
@@ -77,7 +83,7 @@ rentPlace() {
   const startDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.startHour, 0);
   const endDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.endHour, 0);
 
-  this.base.createRent(userID, placeID, startDate, endDate)
+  this.RentsService.createRent(userID, placeID, startDate, endDate)
     .subscribe((result) => {
       console.log(result);
       // handle success response

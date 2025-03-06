@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from '../services/users/users.service';
+import { PlacesService } from '../services/places/places.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ProfilComponent implements OnInit{
   constructor(
     private auth:AuthService,
     private userService: UsersService,
+    private PlacesService: PlacesService,
     private http: HttpClient
   ) {}
 
@@ -73,15 +75,7 @@ export class ProfilComponent implements OnInit{
   }
 
   updatePlace(place: any) {
-    console.log(place.PlaceID);
-    const placeId = place.PlaceID;
-    const address = place.address;
-    const place_name = place.place_name;
-    const price = place.price;
-    this.http.put(`http://127.0.0.1:3000/places/${placeId}`, { address, place_name, price }).subscribe((response: any) => {
-      console.log(response);
-    })
-    
+    this.PlacesService.updatePlace(place);
   }
 
 //   async function updatePlace(id, place) {
@@ -90,12 +84,10 @@ export class ProfilComponent implements OnInit{
 // }
 
 
-  deletePlace(place: any) {
-    const placeId = place.PlaceID;
-    this.http.delete(`http://127.0.0.1:3000/places/${placeId}`).subscribe((response: any) => {
-      console.log(response);
-    })
-  }
+  
+deletePlace(place: any) {
+  this.PlacesService.deletePlace(place)
+}
 
 }
 

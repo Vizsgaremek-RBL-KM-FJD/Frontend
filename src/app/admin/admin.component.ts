@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base/base.service';
 import { AuthService } from '../services/auth/auth.service';
 import { UsersService } from '../services/users/users.service';
+import { PlacesService } from '../services/places/places.service';
+import { RentsService } from '../services/rents/rents.service';
 
 @Component({
   standalone: false,
@@ -14,20 +16,27 @@ export class AdminComponent implements OnInit {
   users: any = [];
   rents: any = [];
 
-  constructor(private base:BaseService, private auth:AuthService, private UserService:UsersService) {}
+  constructor(
+    private base:BaseService,
+    private auth:AuthService,
+    private UserService:UsersService,
+    private PlacesService:PlacesService,
+    private RentsService:RentsService
+  ) {}
 
   ngOnInit(): void {
-    this.base.getAllPlaces().subscribe((places: any) => {
+    this.PlacesService.getAllPlaces().subscribe((places: any) => {
       this.places = places;
     });
   
-    this.base.getAllUsers().subscribe((users: any) => {
+    this.UserService.getAllUsers().subscribe((users: any) => {
       this.users = users;
     });
   
-    this.base.getAllRents().subscribe((rents: any) => {
+    this.RentsService.getAllRents().subscribe((rents: any) => {
       this.rents = rents;
     });
+    
   }
 
   UpdateUserAsAdmin(userID: number) {
@@ -40,10 +49,20 @@ export class AdminComponent implements OnInit {
   }
 
   UpdatePlace(place: any) {
-    this.base.updatePlace(place);
+    this.PlacesService.updatePlace(place);
   }
 
-  DeletePlace(PlaceID: number) {
-    console.log(PlaceID);
+  DeletePlace(place: any) {
+    this.PlacesService.deletePlace(place);
   }
+
+  UpdateRent(rent:any) {
+    this.RentsService.updateRent(rent.UserID, rent.RentID, rent);
+  }
+
+  DeleteRent(rentID: number, UserID: number) {
+    console.log("A törlés elkezdődött", rentID, UserID);
+    this.RentsService.cancelRent(UserID, rentID);
+  }
+
 }

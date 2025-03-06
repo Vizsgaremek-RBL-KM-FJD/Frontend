@@ -16,8 +16,8 @@ export class LoginComponent {
 
   constructor(private auth:AuthService){}
 
-  signIn(){
-    this.auth.signIn(this.email, this.password)
+  Login(){
+    this.auth.Login(this.email, this.password)
     this.email=""
     this.password=""
   }

@@ -45,10 +45,10 @@
                 <label for="floatingInput">phone number</label>
             </div>
 
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.isadmin" type="number" class="form-control" id="floatingInput">
-                <label for="floatingInput">Admin?</label>
-            </div>
+            <input [(ngModel)]="user.isAdmin" class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label " for="flexCheckDefault">
+                Admin?
+            </label>
         </div>
   
         <div class="card-footer">
@@ -105,8 +105,73 @@
         </div>
         <div class="card-footer">
             <button (click)="UpdatePlace(place)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
-            <button  (click)="DeletePlace(place.PlaceID)" type="button" class="btn btn-danger">Törlés</button>
+            <button  (click)="DeletePlace(place)" type="button" class="btn btn-danger">Törlés</button>
         </div>
       </div>
   </div>
 </div>
+
+<div class="rents">
+  <h1 class="text-center mt-5">Foglalások</h1>
+  
+  <div class="card-container">
+    <div  *ngFor="let rent of rents" class="card mb-3" style="width: 18rem;">
+  
+        <div class="card-body">
+            <h5 class="card-title">Foglalás</h5>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="rent.RentID" Disabled type="number" class="form-control" id="floatingInput">
+                <label  for="floatingInput">id</label>
+            </div>
+  
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="rent.UserID" disabled type="number" class="form-control" id="floatingInput">
+                <label for="floatingInput">UserID</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control" id="floatingInput">
+                <label for="floatingInput">PlaceID</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Tulaj telefonszám</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.UserName" readonly readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Bérlő neve</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.UserPhoneNumber" readonly type="text" class="form-control" id="floatingInput">
+              <label for="floatingInput">Bérlő telefonszáma</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="rent.StartDate" type="datetime" class="form-control" id="floatingInput">
+            <label for="floatingInput">Mikortól</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.EndDate" type="datetime" class="form-control" id="floatingInput">
+              <label for="floatingInput">Meddig?</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control" id="floatingInput">
+              <label for="floatingInput">Teljes összeg?</label>
+          </div> 
+
+
+        </div>
+        <div class="card-footer">
+            <button (click)="UpdateRent(rent)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
+            <button  (click)="DeleteRent(rent.UserID, rent.RentID)" type="button" class="btn btn-danger">Törlés</button>
+        </div>
+      </div>
+  </div>
+</div>
+

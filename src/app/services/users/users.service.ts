@@ -14,10 +14,9 @@ export class UsersService {
     private base:BaseService
   ) { }
 
-  api= "http://127.0.0.1:3000/"
 
   UpdateUser(id: number, user: any) {
-    return this.http.patch(`${this.api}`+`${id}`, user, this.base.httpOptions);
+    return this.http.patch(`${this.base.api}`+`${id}`, user, this.base.httpOptions);
   }
   sadmin(user:any) {
     const body:any = {}
@@ -32,4 +31,10 @@ export class UsersService {
   deleteUser(userID: number) {
     return null;
   }
+
+  getAllUsers() {
+    return this.http.get(this.base.api + 'users');
+  }
+
+  
 }

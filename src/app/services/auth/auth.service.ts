@@ -24,7 +24,7 @@ export class AuthService {
     return this.userSub;
   }
 
-  signUp(
+  Register(
     first_name: string,
     last_name: string,
     gender: string,
@@ -50,7 +50,7 @@ export class AuthService {
     );
   }
 
-  signIn(
+  Login(
     email: string,
     password: string ) {
     let body = {
