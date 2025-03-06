@@ -83,4 +83,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  DisableUser(user:any) {
+    this.UserService.DisableUser(user);
+  }
 }

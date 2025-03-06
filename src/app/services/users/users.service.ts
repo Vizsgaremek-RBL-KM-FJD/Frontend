@@ -36,5 +36,8 @@ export class UsersService {
     return this.http.get(this.base.api + 'users');
   }
 
+  DisableUser(user:any) {
+    return console.log(user)
+  }
   
 }

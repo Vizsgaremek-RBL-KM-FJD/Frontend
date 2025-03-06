@@ -45,10 +45,14 @@
                 <label for="floatingInput">phone number</label>
             </div>
 
-            <input [(ngModel)]="user.isAdmin" class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label " for="flexCheckDefault">
-                Admin?
-            </label>
+            <div class="form-floating mb-3">
+                <select [(ngModel)]="user.active" class="form-control">
+                    <option>active</option>
+                    <option>disabled</option>
+                    <option>deleted</option>
+                </select>
+                <label for="floatingInput">Active?</label>
+            </div>
         </div>
   
         <div class="card-footer">
