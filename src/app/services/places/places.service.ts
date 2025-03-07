@@ -22,11 +22,8 @@ export class PlacesService {
 
   updatePlace(place: any) {
     console.log(place.PlaceID);
-    const placeId = place.PlaceID;
-    const address = place.address;
-    const place_name = place.place_name;
-    const price = place.price;
-    this.http.put(this.base.api + 'places/' + place.PlaceID, { address, place_name, price }).subscribe((response: any) => {
+
+    this.http.put(this.base.api + 'places/' + place.PlaceID, place).subscribe((response: any) => {
       console.log(response);
     })
   }

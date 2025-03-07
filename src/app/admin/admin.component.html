@@ -23,9 +23,9 @@
   
             <div class="form-floating mb-3">
                 <select [(ngModel)]="user.gender" class="form-control">
-                    <option>férfi</option>
-                    <option>nő</option>
-                    <option>nem nyilatkozom</option>
+                    <option value="férfi">férfi</option>
+                    <option value="nő">nő</option>
+                    <option value="nem nyilatkozom">nem nyilatkozom</option>
                 </select>
                 <label for="floatingInput">Gender</label>
             </div>
@@ -47,12 +47,20 @@
 
             <div class="form-floating mb-3">
                 <select [(ngModel)]="user.active" class="form-control">
-                    <option>active</option>
-                    <option>disabled</option>
-                    <option>deleted</option>
+                    <option value="active">active</option>
+                    <option value="disabled">disabled</option>
+                    <option value="deleted">deleted</option>
                 </select>
                 <label for="floatingInput">Active?</label>
             </div>
+
+            <div class="form-check">
+                <input [(ngModel)]="user.isadmin" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" >
+                  Admin?
+                </label>
+            </div>
+
         </div>
   
         <div class="card-footer">
@@ -105,7 +113,15 @@
           <div class="form-floating mb-3">
               <input [(ngModel)]="place.price" type="number" class="form-control" id="floatingInput">
               <label for="floatingInput">Ár</label>
-          </div> 
+          </div>
+          
+          <div class="form-check">
+            <input [(ngModel)]="place.status" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" >
+              Active?
+            </label>
+        </div>
+
         </div>
         <div class="card-footer">
             <button (click)="UpdatePlace(place)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
@@ -168,6 +184,19 @@
               <input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control" id="floatingInput">
               <label for="floatingInput">Teljes összeg?</label>
           </div> 
+
+            <div class="form-floating mb-3">
+                <select [(ngModel)]="rent.status" class="form-control">
+                    <option value="not started">not started</option>
+                    <option value="ongoing">ongoing</option>
+                    <option value="canceled">canceled</option>
+                    <option value="done">done</option>
+                </select>
+                <label for="floatingInput">Status</label>
+            </div>
+
+            <!-- ALTER TABLE rents
+ADD COLUMN status ENUM('not started', 'ongoing', 'canceled', 'done') NOT NULL DEFAULT 'not started'; -->
 
 
         </div>

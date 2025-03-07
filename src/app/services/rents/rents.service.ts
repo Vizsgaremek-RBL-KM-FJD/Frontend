@@ -40,5 +40,15 @@ export class RentsService {
     this.http.put(this.base.api + 'rents/' + rent.UserID + '/' + rent.RentID, rent).subscribe((response: any) => {
         console.log(response);
     })
-}
+  }
+
+  updateStatus(rent:any) {
+    this.http.patch(this.base.api + 'rents/' + rent.UserID + '/' + rent.RentID, rent).subscribe((response: any) => {
+        console.log(response);
+    })
+  }
+
+  getStatus(userID: number, RentID: number) {
+    return this.http.get(this.base.api + 'rents/' + userID + '/' + RentID);
+  }
 }

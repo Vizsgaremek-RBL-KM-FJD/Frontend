@@ -20,21 +20,20 @@
   </div>
 </div>
 
-
-
-
 <div class="row">
-  <div *ngFor="let place of places" class="card m-4" style="width: 18rem;" (click)="selectPlace(place)">
-    <div class="card-body">
-      <h5 class="card-title">{{place.place_name}}</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary"><a routerLink="profil">Üzemeltető: {{place.owner_name}}</a></h6>
-      <p class="card-text">{{place.address}}</p>
-      <div class="col d-md-flex gap-2">
-        <p>{{place.price}}ft/alkalom</p>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentplaceModalStart">Foglalás</button>
+  <ng-container *ngFor="let place of places">
+    <div *ngIf="place.status == true"  class="card m-4" style="width: 18rem;" (click)="selectPlace(place)">
+      <div class="card-body">
+        <h5 class="card-title">{{place.place_name}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><a routerLink="profil">Üzemeltető: {{place.owner_name}}</a></h6>
+        <p class="card-text">{{place.address}}</p>
+        <div class="col d-md-flex gap-2">
+          <p>{{place.price}}ft/alkalom</p>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentplaceModalStart">Foglalás</button>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>
 
 <div class="modal fade" id="rentplaceModalStart" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">

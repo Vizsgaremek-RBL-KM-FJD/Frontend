@@ -39,9 +39,8 @@ export class AdminComponent implements OnInit {
     
   }
 
-  UpdateUserAsAdmin(userID: number) {
-    console.log(userID);
-    this.UserService.sadmin(userID);
+  UpdateUserAsAdmin(user: any) {
+    this.UserService.sadmin(user);
   }
 
   DeleteUser(userID: number) {
