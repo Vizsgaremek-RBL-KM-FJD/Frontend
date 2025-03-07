@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <ng-container *ngFor="let place of places">
     <div *ngIf="place.status == true"  class="card m-4" style="width: 18rem;" (click)="selectPlace(place)">
       <div class="card-body">
@@ -34,7 +34,46 @@
       </div>
     </div>
   </ng-container>
+</div> -->
+
+<div *ngFor="let place of places" class="row justify-content-center">
+  <ng-container >
+    <div *ngIf="place.status == 1" class="card m-4" style="width: 60rem;" (click)="selectPlace(place)">
+      <!-- Kép megjelenítése, ha van feltöltve -->
+      <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
+      
+      <div class="card-body">
+        <h5 class="card-title">{{place.place_name}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+          <a routerLink="profil">Üzemeltető: {{place.owner_name}}</a>
+        </h6>
+        <p class="card-text">{{place.address}}</p>
+        <div class="col d-md-flex gap-2">
+          <p>{{place.price}}ft/alkalom</p>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentplaceModalStart">Foglalás</button>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <h6>Hozzászólások:</h6>
+          <ul *ngFor="let comment of comments" class="list-group mb-3">
+            <li *ngIf="comment.placeID == place.PlaceID" class="list-group-item">
+              <strong>{{comment.username}}:</strong> {{comment.text}}
+            </li>
+          </ul>
+        </div>
+      
+        <!-- Új komment beküldése -->
+        <div class="input-group mb-3">
+          <input [(ngModel)]="newCommentText" type="text" class="form-control" placeholder="Írj egy hozzászólást...">
+          <button class="btn btn-outline-primary" (click)="addComment(place)">Küldés</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>
+
+
 
 <div class="modal fade" id="rentplaceModalStart" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">

@@ -3,6 +3,7 @@ import { BaseService } from '../services/base/base.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { PlacesService } from '../services/places/places.service';
 import { RentsService } from '../services/rents/rents.service';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -18,18 +19,39 @@ export class HomeComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
   selectedDate: any;         
   selectedPlace: any;
+  newCommentText: string = '';
+  comments:any = [];
 
 selectPlace(place: any) {
   this.selectedPlace = place;
   console.log(this.selectedPlace);
 }
-  
   constructor(
     private base: BaseService,
     private PlacesService: PlacesService,
-    private RentsService: RentsService
+    private RentsService: RentsService,
+    private http:HttpClient
   )  {}
   places:any = [];
+
+  addComment(place: any) {
+    if (this.newCommentText.trim() !== '') {
+      const newComment = {
+        user: JSON.parse(localStorage.getItem('loggedUser')!).first_name,
+        text: this.newCommentText
+      };
+  
+      // Küldés az API-nak
+      this.http.post(`http://127.0.0.1:3000/places/${place.PlaceID}/comments`, newComment).subscribe((response: any) => {
+        console.log(response);
+        if (!place.comments) {
+          place.comments = [];
+        }
+        place.comments.push(newComment);
+        this.newCommentText = '';
+      });
+    }
+  }
 
   searchTerm: string = '';
   performSearch() {
@@ -37,6 +59,12 @@ selectPlace(place: any) {
   }
   ngOnInit() {
     this.getPlaces();
+
+    this.PlacesService.getComments().subscribe((comments) => {
+      console.log('Kapott kommentek:', comments);
+      this.comments = comments
+    })
+    
   }
 
   getPlaces() {

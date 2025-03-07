@@ -76,6 +76,10 @@ export class PlacesService {
     this.updatePlace(body);
 }
 
+getComments() {
+  return this.http.get(this.base.api + 'comments/')
+}
+
 // UpdateUserAsAdmin(user: any) {
 //   if (user.status === "disabled" || user.status === "deleted") {
 //       console.log(user.ID);

@@ -15,9 +15,13 @@ import { PlacesService } from '../services/places/places.service';
 export class ProfilComponent implements OnInit{
   user: any;
   places: any[] = [];
-  NewplaceName: string = "";
-  NewplaceAddress: string = "";
-  NewplacePrice: number = 0;
+  // NewplaceName: string = "";
+  // NewplaceAddress: string = "";
+  // NewplacePrice: number = 0;
+  NewplaceName = '';
+  NewplaceAddress = '';
+  NewplacePrice = '';
+  selectedFile: File | null = null;
 
   constructor(
     private auth:AuthService,
@@ -62,17 +66,51 @@ export class ProfilComponent implements OnInit{
    return null;
   }
   
+  // createPlace() {
+  //   const userId = this.user.ID;
+  //   const address = this.NewplaceAddress;
+  //   const placeName = this.NewplaceName;
+  //   const price = this.NewplacePrice;
+
+  //   this.http.post(`http://127.0.0.1:3000/places/create`, { userId, address, placeName, price }).subscribe((response: any) => {
+  //     console.log(response);
+  //   })
+
+  // }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
   createPlace() {
-    const userId = this.user.ID;
+    const userId = JSON.parse(localStorage.getItem('loggedUser')!).ID; 
     const address = this.NewplaceAddress;
     const placeName = this.NewplaceName;
     const price = this.NewplacePrice;
 
-    this.http.post(`http://127.0.0.1:3000/places/create`, { userId, address, placeName, price }).subscribe((response: any) => {
-      console.log(response);
-    })
+    const formData = new FormData();
+    formData.append('userId', userId.toString());
+    formData.append('address', address);
+    formData.append('placeName', placeName);
+    formData.append('price', price);
 
+    // Ha van kiválasztott kép, adjuk hozzá a FormData-hoz
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    this.http.post('http://127.0.0.1:3000/places/create', formData).subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error('Hiba a hely létrehozásakor:', error);
+      }
+    );
   }
+
 
   updatePlace(place: any) {
     this.PlacesService.updatePlace(place);

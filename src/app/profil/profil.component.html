@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createPlaceModalLabel" aria-hidden="true">
+      <!-- <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createPlaceModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -90,5 +90,39 @@
             </div>
           </div>
         </div>
+      </div> -->
+      <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createPlaceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createPlaceModalLabel">Új terem létrehozása</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input [(ngModel)]="NewplaceName" type="text" class="form-control" id="placeNameInput">
+          <label for="placeNameInput">Hely neve</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input [(ngModel)]="NewplaceAddress" type="text" class="form-control" id="addressInput">
+          <label for="addressInput">Cím</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input [(ngModel)]="NewplacePrice" type="number" class="form-control" id="priceInput">
+          <label for="priceInput">Ft / óra</label>
+        </div>
+        <!-- Új: Kép feltöltése mező -->
+        <div class="mb-3">
+          <label for="imageInput" class="form-label">Kép feltöltése</label>
+          <input type="file" class="form-control" id="imageInput" (change)="onFileSelected($event)">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+        <button type="button" class="btn btn-primary" (click)="createPlace()">Létrehozás</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
