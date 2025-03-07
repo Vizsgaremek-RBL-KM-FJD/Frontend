@@ -39,9 +39,38 @@ export class AdminComponent implements OnInit {
     
   }
 
+  // UpdateUserAsAdmin(user: any) {
+  //   if (user.status === "disabled" || user.status === "deleted") {
+  //     console.log(user.ID)
+  //     this.PlacesService.updateStatus(user.ID, false);
+  //     this.UserService.sadmin(user); 
+  //   }
+  //   else {
+  //     this.UserService.sadmin(user);
+  //     return console.log("Update process started", user);
+  //   }
+  //   this.UserService.sadmin(user);
+  // }
+
   UpdateUserAsAdmin(user: any) {
-    this.UserService.sadmin(user);
-  }
+    if (user.status === "disabled" || user.status === "deleted") {
+        console.log(user.ID);
+
+        // Lekérdezzük a felhasználóhoz tartozó összes termet
+        this.PlacesService.getPlaceById(user.ID).subscribe((places: any) => {
+          if (Array.isArray(places) && places.length > 0) {
+              places.forEach((place) => {
+                  this.PlacesService.updateStatus(place, false);
+              });
+          }
+          this.UserService.sadmin(user);
+      });
+    } else {
+        this.UserService.sadmin(user);
+        return console.log("Update process started", user);
+    }
+}
+
 
   DeleteUser(userID: number) {
     this.UserService.deleteUser(userID);

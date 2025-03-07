@@ -19,8 +19,6 @@ export class UsersService {
     return this.http.patch(`${this.base.api}`+`${id}`, user, this.base.httpOptions);
   }
   sadmin(user:any) {
-    console.log("User sasa",user);
-
     this.http.patch(this.base.api+"users/sadmin-update-profile/" + 7, user, this.base.httpOptions).subscribe(
       (res)=>console.log(res)
     )
