@@ -36,7 +36,7 @@
   </ng-container>
 </div> -->
 
-<div *ngFor="let place of places" class="row justify-content-center">
+<div *ngFor="let place of places" class="row justify-content-center mb-5">
   <ng-container >
     <div *ngIf="place.status == 1" class="card m-4" style="width: 60rem;" (click)="selectPlace(place)">
       <!-- Kép megjelenítése, ha van feltöltve -->
@@ -57,8 +57,13 @@
         <div>
           <h6>Hozzászólások:</h6>
           <ul *ngFor="let comment of comments" class="list-group mb-3">
-            <li *ngIf="comment.placeID == place.PlaceID" class="list-group-item">
-              <strong>{{comment.username}}:</strong> {{comment.text}}
+            <li *ngIf="comment.placeID == place.PlaceID && comment.userID != userID" class="list-group-item masok">
+              <strong>{{comment.username}}</strong>  <span class="owner" *ngIf="comment.userID==place.UserID"> Tulajdonos</span>
+              <p>{{comment.text}}</p>  
+            </li>
+            <li *ngIf="comment.placeID == place.PlaceID && comment.userID == userID" class="list-group-item sajat">
+              <strong>{{comment.username}}</strong> <span class="owner" *ngIf="comment.userID==place.UserID"> Tulajdonos</span>
+              <p>{{comment.text}}</p>  
             </li>
           </ul>
         </div>
@@ -66,7 +71,7 @@
         <!-- Új komment beküldése -->
         <div class="input-group mb-3">
           <input [(ngModel)]="newCommentText" type="text" class="form-control" placeholder="Írj egy hozzászólást...">
-          <button class="btn btn-outline-primary" (click)="addComment(place)">Küldés</button>
+          <button class="btn btn-outline-primary" (click)="addComment(place, newCommentText)">Küldés</button>
         </div>
       </div>
     </div>

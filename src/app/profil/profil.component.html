@@ -41,6 +41,7 @@
         <div class="card-body">
             <div>
                 <div class="terem mb-5" *ngFor="let place of places">
+                      <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
                     <div class="fomr-floating mb-3">
                       <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.place_name">
                     </div>
@@ -50,8 +51,15 @@
                     <div class="fomr-floating mb-3">
                       <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.price">
                     </div>
+                    <div class="mb-3">
+                      <label for="imageInput" class="form-label">Kép feltöltése</label>
+                      <input type="file" class="form-control" id="imageInput" (change)="onFileSelectedUpdate($event, place)">
+                    </div>
+
                     <button class="btn btn-outline-success me-2" (click)="updatePlace(place)" >Mentés</button>
                     <button class="btn btn-outline-danger" (click)="deletePlace(place)">Törlés</button>
+                    
+                    
                   </div>
               </div>
             <ul *ngIf="places.length==0">

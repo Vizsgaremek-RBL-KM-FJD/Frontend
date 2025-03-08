@@ -78,12 +78,22 @@ export class ProfilComponent implements OnInit{
 
   // }
 
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
     }
   }
+
+  onFileSelectedUpdate(event: any, place: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFiles[place.PlaceID] = file;
+    }
+  }
+
+
   createPlace() {
     const userId = JSON.parse(localStorage.getItem('loggedUser')!).ID; 
     const address = this.NewplaceAddress;
@@ -111,9 +121,19 @@ export class ProfilComponent implements OnInit{
     );
   }
 
-
+  selectedFiles: { [key: number]: File } = {};
   updatePlace(place: any) {
-    this.PlacesService.updatePlace(place);
+    const formData = new FormData();
+    formData.append('address', place.address);
+    formData.append('place_name', place.place_name);
+    formData.append('price', place.price.toString());
+    formData.append('status', place.status.toString());
+  
+    if (this.selectedFiles[place.PlaceID]) {
+      formData.append('image', this.selectedFiles[place.PlaceID]);
+    }
+  
+    this.PlacesService.updatePlaceFromForm(place.PlaceID, formData);
   }
 
 //   async function updatePlace(id, place) {

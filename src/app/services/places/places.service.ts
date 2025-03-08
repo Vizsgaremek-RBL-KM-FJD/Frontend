@@ -35,30 +35,18 @@ export class PlacesService {
     })
   }
 
+  updatePlaceFromForm(placeID: number, formData: FormData) {
+    this.http.put(this.base.api + 'places/' + placeID, formData).subscribe((response: any) => {
+      console.log(response);
+    });
+  }
+
   deletePlace(place: any) {
     const placeId = place.PlaceID;
     this.http.delete(`${this.base.api}places/${placeId}`).subscribe((response: any) => {
       console.log(response);
     })
   }
-
-  // updateStatus(userID: number, status: boolean) {
-  //   console.log("place status changed to", status);
-  //   console.log(userID);
-  //   this.getPlaceById(userID).subscribe((place: any) => {
-  //     console.log(place);
-  //     const body = {
-  //       PlaceID: place[0].PlaceID,
-  //       UserID: place[0].UserID,
-  //       address: place[0].address,
-  //       place_name: place[0].place_name,
-  //       price: place[0].price,
-  //       status: status,
-  //     }
-  //     console.log(body);
-  //     this.updatePlace(body);
-  //   });
-  // }
 
   updateStatus(place: any, status: boolean) {
     console.log("place status changed to", status);
@@ -80,23 +68,9 @@ getComments() {
   return this.http.get(this.base.api + 'comments/')
 }
 
-// UpdateUserAsAdmin(user: any) {
-//   if (user.status === "disabled" || user.status === "deleted") {
-//       console.log(user.ID);
-
-//       // Lekérdezzük a felhasználóhoz tartozó összes termet
-//       this.PlacesService.getPlaceById(user.ID).subscribe((places: any) => {
-//         if (Array.isArray(places) && places.length > 0) {
-//             places.forEach((place) => {
-//                 this.PlacesService.updateStatus(place.PlaceID, false);
-//             });
-//         }
-//         this.UserService.sadmin(user);
-//     });
-//   } else {
-//       this.UserService.sadmin(user);
-//       return console.log("Update process started", user);
-//   }
-// }
+addComment(placeID: number, userID: number, username: string, text: string) {
+  console.log("kapott", placeID, userID, username, text);
+  return this.http.post(this.base.api + 'comments/create', {placeID, userID, username, text})
+}
 
 }

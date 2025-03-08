@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   newCommentText: string = '';
   comments:any = [];
 
+  userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
+
 selectPlace(place: any) {
   this.selectedPlace = place;
   console.log(this.selectedPlace);
@@ -34,23 +36,19 @@ selectPlace(place: any) {
   )  {}
   places:any = [];
 
-  addComment(place: any) {
-    if (this.newCommentText.trim() !== '') {
-      const newComment = {
-        user: JSON.parse(localStorage.getItem('loggedUser')!).first_name,
-        text: this.newCommentText
-      };
-  
-      // Küldés az API-nak
-      this.http.post(`http://127.0.0.1:3000/places/${place.PlaceID}/comments`, newComment).subscribe((response: any) => {
-        console.log(response);
-        if (!place.comments) {
-          place.comments = [];
-        }
-        place.comments.push(newComment);
-        this.newCommentText = '';
-      });
-    }
+  addComment(place: any, newCommentText: string) {
+    const placeID = place.PlaceID;
+    const userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
+    const username = JSON.parse(localStorage.getItem('loggedUser')!).first_name;
+    const text = newCommentText;
+
+    console.log("elküldendő elemek1", placeID, userID, username, text);
+
+    this.PlacesService.addComment(placeID, userID, username, text).subscribe((result) => {
+      console.log(result);
+    })
+    // placeID, userID, username, text
+
   }
 
   searchTerm: string = '';
