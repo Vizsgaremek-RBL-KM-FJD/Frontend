@@ -53,7 +53,7 @@ export class AdminComponent implements OnInit {
   // }
 
   UpdateUserAsAdmin(user: any) {
-    if (user.status === "disabled" || user.status === "deleted") {
+    if (user.active === "disabled" || user.active === "deleted") {
         console.log(user.ID);
 
         // Lekérdezzük a felhasználóhoz tartozó összes termet

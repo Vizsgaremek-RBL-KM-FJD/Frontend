@@ -1,47 +1,66 @@
-<div class="card" style="width: 18rem;">
-    
-    <div class="card-body">
-        <h5 class="card-title">Register</h5>
+<body>
+    <div class="content d-flex justify-content-center align-items-center vh-100">
+        <div class="card" style="width: 32rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-4">Regisztráció</h5>
 
-        <div class="form-floating mb-3">
-            <input [(ngModel)]="first_name" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">First name</label>
-        </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input [(ngModel)]="last_name" type="text" class="form-control" id="lastNameInput" placeholder="Vezetéknév">
+                            <label for="lastNameInput">Vezetéknév</label>
+                        </div>
+                    </div>
 
-        <div class="form-floating mb-3">
-            <input [(ngModel)]="last_name" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Last name</label>
-        </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input [(ngModel)]="first_name" type="text" class="form-control" id="firstNameInput" placeholder="Keresztnév">
+                            <label for="firstNameInput">Keresztnév</label>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-floating mb-3">
-            <select [(ngModel)]="gender" class="form-control">
-                <option>férfi</option>
-                <option>nő</option>
-                <option>nem nyilatkozom</option>
-            </select>
-            <label for="floatingInput">Gender</label>
-        </div>
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <select [(ngModel)]="gender" class="form-control" id="genderSelect">
+                                <option value="férfi">Férfi</option>
+                                <option value="nő">Nő</option>
+                                <option value="nem nyilatkozom">Nem nyilatkozom</option>
+                            </select>
+                            <label for="genderSelect">Nem</label>
+                        </div>
+                    </div>
 
-        <div class="form-floating mb-3">
-            <input [(ngModel)]="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
-        </div>
-      
-        <div class="form-floating mb-3">
-            <input [(ngModel)]="address" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">address</label>
-        </div>
-      
-        <div class="form-floating mb-3">
-            <input [(ngModel)]="phone_number" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">phone number</label>
-        </div>
-      
-        <div class="form-floating">
-            <input [(ngModel)]="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
+                    <div class="col-8">
+                        <div class="form-floating">
+                            <input [(ngModel)]="email" type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+                            <label for="emailInput">Email cím</label>
+                        </div>
+                    </div>
+                </div>
 
-      <button (click)="Register()" type="button" class=" my-3 btn btn-primary">Register</button>
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="address" type="text" class="form-control" id="addressInput" placeholder="Cím">
+                    <label for="addressInput">Cím</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="phone_number" type="tel" class="form-control" id="phoneInput" placeholder="Telefonszám">
+                    <label for="phoneInput">Telefonszám</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="password" type="password" class="form-control" id="passwordInput" placeholder="Jelszó">
+                    <label for="passwordInput">Jelszó</label>
+                </div>
+
+                <button (click)="Register()" type="button" class="my-3 btn btn-primary w-100">Regisztráció</button>
+            </div>
+
+            <div class="card-footer  text-center" *ngIf="errorMessage || succesMessage">
+                <span class="text-danger">{{ errorMessage }}</span> <span class="text-success">{{succesMessage}}</span>
+            </div>
+        </div>
     </div>
-  </div>
+</body>

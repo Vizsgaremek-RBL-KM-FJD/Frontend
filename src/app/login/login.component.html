@@ -1,17 +1,24 @@
-<div class="card" style="width: 18rem;">
-    
-  <div class="card-body">
-    <h5 class="card-title">Sign in</h5>
-    <div class="form-floating mb-3">
-      <input [(ngModel)]="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+<body>
+  <div class="content">
+    <div class="card" style="width: 18rem;">
+  
+      <div class="card-body">
+        <h5 class="card-title text-center mb-3">Jelentkezz be!</h5>
+        <div class="form-floating mb-3">
+          <input [(ngModel)]="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Email cím...</label>
+        </div>
+        <div class="form-floating">
+          <input [(ngModel)]="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Jelszó...</label>
+        </div>
+        <button (click)="Login()" type="button" class=" my-3 btn btn-outline-primary w-100">Bejelentkezés</button>
+      </div>
+      <div class="card-footer">
+        <p>Nincs még fiókod? <a class="link" routerLink="/register">regisztrálj egyet!</a></p>
+      </div>
     </div>
-    <div class="form-floating">
-      <input [(ngModel)]="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
-    <button (click)="Login()" type="button" class=" my-3 btn btn-primary">Sign in</button>
+  
   </div>
-</div>
+</body>
 
-<a routerLink="/register">regisztráció</a>

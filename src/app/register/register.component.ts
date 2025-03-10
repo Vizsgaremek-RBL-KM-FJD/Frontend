@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
@@ -17,10 +19,22 @@ export class RegisterComponent {
   address=""
   phone_number=""
   password=""
+  errorMessage="";
+  succesMessage="";
 
-  constructor(private auth:AuthService){}
+  constructor(private auth:AuthService, private router:Router){}
 
     Register(){
-    this.auth.Register( this.first_name, this.last_name, this.gender, this.email, this.address, this.phone_number, this.password)
+    if (!this.first_name || !this.last_name || !this.email || !this.address || !this.phone_number || !this.password) {this.errorMessage="Minden mezőt ki kell tölteni!"; this.succesMessage=""}
+    else {
+      this.auth.Register( this.first_name, this.last_name, this.gender, this.email, this.address, this.phone_number, this.password);
+      this.errorMessage="";
+      this.succesMessage="Sikeres regisztráció!"
+
+      setTimeout(() => {
+        this.router.navigate(['login']);
+      }, 2000);
+    }
+    }
   }
-}
+

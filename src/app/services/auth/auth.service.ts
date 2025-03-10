@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Subject } from 'rxjs';
 import { BaseService } from '../base/base.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private base: BaseService ) { }
+    private base: BaseService,
+    private router: Router
+  ) { }
 
   isAdmin() {
     const id = JSON.parse(localStorage.getItem('loggedUser')!).ID;
@@ -65,6 +68,7 @@ export class AuthService {
           this.loggedUser = res;
           localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
           this.userSub.next(this.loggedUser);
+          this.router.navigate(['home']);
         },
         error: (err) => {
           console.log(err);
