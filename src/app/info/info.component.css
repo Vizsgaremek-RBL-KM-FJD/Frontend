@@ -1,0 +1,31 @@
+
+
+h4 {
+    margin-bottom: 20px;
+}
+
+.left {
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+.paragraph {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.marginLeft{
+    margin-left: 20px;
+}
+
+.marginBottom {
+    margin-bottom: 100px;
+}
+
+body{
+    margin: 5px;
+}
+
+.end {
+    text-align: center;
+}
