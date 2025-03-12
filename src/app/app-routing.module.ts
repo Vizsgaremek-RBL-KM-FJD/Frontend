@@ -9,15 +9,16 @@ import { InfoComponent } from './info/info.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AdminComponent } from './admin/admin.component';
 import { adminGuard } from './admin.guard';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [authGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'profil', component: ProfilComponent},
+  {path: 'profil', component: ProfilComponent, canActivate: [authGuard]},
   {path: 'services', component: InfoComponent},
-  {path: 'reservations', component: ReservationsComponent},
+  {path: 'reservations', component: ReservationsComponent, canActivate: [authGuard]},
   {path: 'admin', component: AdminComponent, canActivate: [adminGuard]},
   {path: '', redirectTo : 'home', pathMatch: 'full'},
   {path: '**', redirectTo : 'home', pathMatch: 'full'}

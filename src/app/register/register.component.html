@@ -58,8 +58,9 @@
                 <button (click)="Register()" type="button" class="my-3 btn btn-primary w-100">Regisztráció</button>
             </div>
 
-            <div class="card-footer  text-center" *ngIf="errorMessage || succesMessage">
-                <span class="text-danger">{{ errorMessage }}</span> <span class="text-success">{{succesMessage}}</span>
+            <div class="card-footer  text-center" >
+                <span *ngIf="errorMessage || succesMessage" class="text-danger">{{ errorMessage }}</span> <span class="text-success">{{succesMessage}}</span>
+                <p>Van már fiókod? <a class="link" routerLink="/login">Jelentkezz be!</a></p>
             </div>
         </div>
     </div>

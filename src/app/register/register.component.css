@@ -1,5 +1,5 @@
 body {
-    background-image: url(../resources/background.jpg);
+    background-image: url(../../assets/background.jpg);
 }
 
 .content {
@@ -8,4 +8,15 @@ body {
     align-items: center;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
+}
+
+.link {
+    text-decoration: none;
+    color:darkgoldenrod;
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: goldenrod;
+    
 }

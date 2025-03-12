@@ -1,210 +1,141 @@
-<div class="users">
-  <h1 class="text-center mt-5">Felhasználók</h1>
-  
-  <div class="card-container">
-    <div  *ngFor="let user of users" class="card mb-3" style="width: 18rem;">
-  
-        <div class="card-body">
-            <h5 class="card-title">Felhasználó</h5>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.ID" type="number" disabled class="form-control" id="floatingInput">
-                <label  for="floatingInput">id</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.first_name" type="text" class="form-control" id="floatingInput">
-                <label  for="floatingInput">First name</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.last_name" type="text" class="form-control" id="floatingInput">
-                <label for="floatingInput">Last name</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <select [(ngModel)]="user.gender" class="form-control">
-                    <option value="férfi">férfi</option>
-                    <option value="nő">nő</option>
-                    <option value="nem nyilatkozom">nem nyilatkozom</option>
-                </select>
-                <label for="floatingInput">Gender</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.email" type="email" class="form-control" id="floatingInput">
-                <label for="floatingInput">Email address</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.address" type="text" class="form-control" id="floatingInput">
-                <label for="floatingInput">address</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="floatingInput">
-                <label for="floatingInput">phone number</label>
-            </div>
-
-            <div class="form-floating mb-3">
-                <select [(ngModel)]="user.active" class="form-control">
-                    <option value="active">active</option>
-                    <option value="disabled">disabled</option>
-                    <option value="deleted">deleted</option>
-                </select>
-                <label for="floatingInput">Status</label>
-            </div>
-
-            <div class="form-check">
-                <input [(ngModel)]="user.isadmin" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" >
-                  Admin?
-                </label>
-            </div>
-
-        </div>
-  
-        <div class="card-footer">
+<div class="users mb-5">
+    <h1 class="text-center mt-5">Felhasználók</h1>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Email address</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone number</th>
+          <th scope="col">Status</th>
+          <th scope="col">Admin?</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users | paginate: { itemsPerPage: pageSizeUsers, currentPage: currentPageUsers }">
+          <td><input [(ngModel)]="user.ID" type="number" disabled class="form-control"></td>
+          <td><input [(ngModel)]="user.first_name" type="text" class="form-control"></td>
+          <td><input [(ngModel)]="user.last_name" type="text" class="form-control"></td>
+          <td>
+            <select [(ngModel)]="user.gender" class="form-control">
+              <option value="férfi">férfi</option>
+              <option value="nő">nő</option>
+              <option value="nem nyilatkozom">nem nyilatkozom</option>
+            </select>
+          </td>
+          <td><input [(ngModel)]="user.email" type="email" class="form-control"></td>
+          <td><input [(ngModel)]="user.address" type="text" class="form-control"></td>
+          <td><input [(ngModel)]="user.phone_number" type="text" class="form-control"></td>
+          <td>
+            <select [(ngModel)]="user.active" class="form-control">
+              <option value="active">active</option>
+              <option value="disabled">disabled</option>
+              <option value="deleted">deleted</option>
+            </select>
+          </td>
+          <td><input [(ngModel)]="user.isadmin" type="checkbox" class="form-check-input"></td>
+          <td>
             <button (click)="UpdateUserAsAdmin(user)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
-            <button  (click)="DeleteUser(user.ID)" type="button" class="btn btn-danger">Törlés</button>
-        </div>
-      </div>
+            <button (click)="DeleteUser(user.ID)" type="button" class="btn btn-danger">Törlés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <pagination-controls (pageChange)="currentPageUsers = $event"></pagination-controls>
   </div>
-</div>
-
-<div class="places">
-  <h1 class="text-center mt-5">Termek</h1>
   
-  <div class="card-container">
-    <div  *ngFor="let place of places" class="card mb-3" style="width: 18rem;">
-  
-        <div class="card-body">
-            <h5 class="card-title">Terem</h5>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="place.PlaceID" disabled type="number" class="form-control" id="floatingInput">
-                <label  for="floatingInput">id</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="place.UserID" disabled type="number" class="form-control" id="floatingInput">
-                <label for="floatingInput">UserID</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input [(ngModel)]="place.owner_name" readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Tulajdonos</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="place.phone_number" readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Tulaj telefonszám</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="place.place_name" type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Terem név</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="place.address" type="text" class="form-control" id="floatingInput">
-            <label for="floatingInput">Cím</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="place.price" type="number" class="form-control" id="floatingInput">
-              <label for="floatingInput">Ár</label>
-          </div>
-          
-          <div class="form-check">
-            <input [(ngModel)]="place.status" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" >
-              Active?
-            </label>
-        </div>
-
-        </div>
-        <div class="card-footer">
+  <div class="places mb-5">
+    <h1 class="text-center mt-5">Termek</h1>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">UserID</th>
+          <th scope="col">Tulajdonos</th>
+          <th scope="col">Tulaj telefonszám</th>
+          <th scope="col">Terem név</th>
+          <th scope="col">Cím</th>
+          <th scope="col">Ár</th>
+          <th scope="col">Active?</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let place of places | paginate: { itemsPerPage: pageSizePlaces, currentPage: currentPagePlaces }">
+          <td><input [(ngModel)]="place.PlaceID" disabled type="number" class="form-control"></td>
+          <td><input [(ngModel)]="place.UserID" disabled type="number" class="form-control"></td>
+          <td><input [(ngModel)]="place.owner_name" readonly type="text" class="form-control"></td>
+          <td><input [(ngModel)]="place.phone_number" readonly type="text" class="form-control"></td>
+          <td><input [(ngModel)]="place.place_name" type="text" class="form-control"></td>
+          <td><input [(ngModel)]="place.address" type="text" class="form-control"></td>
+          <td><input [(ngModel)]="place.price" type="number" class="form-control"></td>
+          <td><input [(ngModel)]="place.status" class="form-check-input" type="checkbox"></td>
+          <td>
             <button (click)="UpdatePlace(place)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
-            <button  (click)="DeletePlace(place)" type="button" class="btn btn-danger">Törlés</button>
-        </div>
-      </div>
+            <button (click)="DeletePlace(place)" type="button" class="btn btn-danger">Törlés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    
+    <pagination-controls (pageChange)="currentPagePlaces = $event"></pagination-controls>
   </div>
-</div>
-
-<div class="rents">
-  <h1 class="text-center mt-5">Foglalások</h1>
   
-  <div class="card-container">
-    <div  *ngFor="let rent of rents" class="card mb-3" style="width: 18rem;">
+
+  <!-- <div class="rents mb-5">
+    <h1 class="text-center mt-5">Foglalások</h1>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">UserID</th>
+          <th scope="col">PlaceID</th>
+          <th scope="col">Tulaj telefonszám</th>
+          <th scope="col">Bérlő neve</th>
+          <th scope="col">Bérlő telefonszáma</th>
+          <th scope="col">Mikortól</th>
+          <th scope="col">Meddig?</th>
+          <th scope="col">Teljes összeg</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rent of rents | paginate: { itemsPerPage: pageSizeRents, currentPage: currentPageRents }">
+          <td><input [(ngModel)]="rent.RentID" disabled type="number" class="form-control"></td>
+          <td><input [(ngModel)]="rent.UserID" disabled type="number" class="form-control"></td>
+          <td><input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control"></td>
+          <td><input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control"></td>
+          <td><input [(ngModel)]="rent.UserName" readonly type="text" class="form-control"></td>
+          <td><input [(ngModel)]="rent.UserPhoneNumber" readonly type="text" class="form-control"></td>
+          <td><input [(ngModel)]="rent.StartDate" type="datetime" class="form-control"></td>
+          <td><input [(ngModel)]="rent.EndDate" type="datetime" class="form-control"></td> 
+          <td><input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control"></td>
+          <td>
+            <select [(ngModel)]="rent.status" class="form-control">
+              <option value="not started">not started</option>
+              <option value="ongoing">ongoing</option>
+              <option value="canceled">canceled</option>
+              <option value="done">done</option>
+            </select>
+          </td>
+          <td>
+            <button (click)="UpdateRent(rent)" type="button" class="btn btn-outline-primary me-2 mb-2">Módosítás</button>
+            <button (click)="cancelRent(rent.UserID, rent.RentID)" type="button" class="btn btn-danger">Törlés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <pagination-controls (pageChange)="currentPageRents = $event"></pagination-controls>
+  </div> -->
   
-        <div class="card-body">
-            <h5 class="card-title">Foglalás</h5>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="rent.RentID" Disabled type="number" class="form-control" id="floatingInput">
-                <label  for="floatingInput">id</label>
-            </div>
-  
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="rent.UserID" disabled type="number" class="form-control" id="floatingInput">
-                <label for="floatingInput">UserID</label>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control" id="floatingInput">
-                <label for="floatingInput">PlaceID</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Tulaj telefonszám</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.UserName" readonly readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Bérlő neve</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.UserPhoneNumber" readonly type="text" class="form-control" id="floatingInput">
-              <label for="floatingInput">Bérlő telefonszáma</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="rent.StartDate" type="datetime" class="form-control" id="floatingInput">
-            <label for="floatingInput">Mikortól</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.EndDate" type="datetime" class="form-control" id="floatingInput">
-              <label for="floatingInput">Meddig?</label>
-          </div>
-
-          <div class="form-floating mb-3">
-              <input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control" id="floatingInput">
-              <label for="floatingInput">Teljes összeg?</label>
-          </div> 
-
-            <div class="form-floating mb-3">
-                <select [(ngModel)]="rent.status" class="form-control">
-                    <option value="not started">not started</option>
-                    <option value="ongoing">ongoing</option>
-                    <option value="canceled">canceled</option>
-                    <option value="done">done</option>
-                </select>
-                <label for="floatingInput">Status</label>
-            </div>
-
-            <!-- ALTER TABLE rents
-ADD COLUMN status ENUM('not started', 'ongoing', 'canceled', 'done') NOT NULL DEFAULT 'not started'; -->
-
-
-        </div>
-        <div class="card-footer">
-            <button (click)="UpdateRent(rent)" type="button" class="btn btn-outline-primary me-2">Módosítás</button>
-            <button  (click)="cancelRent(rent.UserID, rent.RentID)" type="button" class="btn btn-danger">Törlés</button>
-        </div>
-      </div>
-  </div>
-</div>
-

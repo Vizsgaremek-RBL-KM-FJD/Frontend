@@ -16,6 +16,13 @@ export class AdminComponent implements OnInit {
   users: any = [];
   rents: any = [];
 
+  pageSizeUsers: number = 5;
+  pageSizePlaces: number = 1;
+  pageSizeRents: number = 1;
+  currentPageUsers: number = 1;
+  currentPagePlaces: number = 1;
+  currentPageRents: number = 1;
+
   constructor(
     private base:BaseService,
     private auth:AuthService,

@@ -27,6 +27,11 @@ export class AuthService {
     return this.userSub;
   }
 
+  isLoggedIn(): boolean {
+    console.log('Is logged in:', this.loggedUser);
+    return !!JSON.parse(localStorage.getItem('loggedUser')!);
+  }
+
   Register(
     first_name: string,
     last_name: string,

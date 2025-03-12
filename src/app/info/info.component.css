@@ -1,4 +1,10 @@
-
+header {
+    height: 100vh;
+    background-image: url(../../assets/borito.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
 h4 {
     margin-bottom: 20px;

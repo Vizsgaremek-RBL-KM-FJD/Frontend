@@ -1,52 +1,22 @@
- a {
+.search {
+  margin: 50px 10% 100px 10%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+
+
+
+a {
     text-decoration: none;
     color: darkgray;
 }
 a:hover {
     color: black;
 }
-
-.blocks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
- 
-  .block {
-    width: 200px;
-    height: 200px;
-    background-color: whitesmoke;
-    display: inline-block;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-  
-
-  .input-search {
-    display: flex;
-    align-items: center;
-    width: 50%;
-    margin: 0 auto;
-  }
- 
-  .header {
-    height: 100vh;
-    display: flex;
-    background-image: url("../../assets/borito.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .header-elements {
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 50px;
-  }
 
   .custom-day {
     text-align: center;
