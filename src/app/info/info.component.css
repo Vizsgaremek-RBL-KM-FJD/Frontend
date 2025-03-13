@@ -1,9 +1,13 @@
 header {
-    height: 115vh;
+    height: 100%;
     background-image: url(../../assets/borito.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    
   }
 
 h4 {
@@ -35,7 +39,7 @@ h4 {
 }
 
 .picture {
-    color: white;
+    color: white
 }
 
 h2{
