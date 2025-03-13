@@ -1,5 +1,5 @@
 header {
-    height: 100vh;
+    height: 115vh;
     background-image: url(../../assets/borito.jpg);
     background-position: center;
     background-size: cover;
@@ -28,10 +28,25 @@ h4 {
     margin-bottom: 100px;
 }
 
-body{
-    margin: 5px;
-}
+
 
 .end {
     text-align: center;
 }
+
+.picture {
+    color: white;
+}
+
+h2{
+    text-align: center;
+    padding-top: 20px;
+    
+}
+
+
+
+.littleLeft {
+    margin-left: 5px;
+}
+
