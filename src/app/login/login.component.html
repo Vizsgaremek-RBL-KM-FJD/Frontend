@@ -6,7 +6,7 @@
         <h5 class="card-title text-center mb-3">Jelentkezz be!</h5>
         <div class="form-floating mb-3">
           <input [(ngModel)]="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Email cím...</label>
+          <label for="floatingInput">E-mail cím...</label>
         </div>
         <div class="form-floating">
           <input [(ngModel)]="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -15,6 +15,7 @@
         <button (click)="Login()" type="button" class=" my-3 btn btn-outline-primary w-100">Bejelentkezés</button>
       </div>
       <div class="card-footer">
+        <span *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</span>
         <p>Nincs még fiókod? <a class="link" routerLink="/register">regisztrálj egyet!</a></p>
       </div>
     </div>

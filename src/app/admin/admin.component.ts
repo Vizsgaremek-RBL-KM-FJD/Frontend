@@ -17,8 +17,8 @@ export class AdminComponent implements OnInit {
   rents: any = [];
 
   pageSizeUsers: number = 5;
-  pageSizePlaces: number = 1;
-  pageSizeRents: number = 1;
+  pageSizePlaces: number = 5;
+  pageSizeRents: number = 5;
   currentPageUsers: number = 1;
   currentPagePlaces: number = 1;
   currentPageRents: number = 1;

@@ -24,10 +24,6 @@
             <a routerLink="profil">Üzemeltető: {{place.owner_name}}</a>
           </h6>
           <p class="card-text">{{place.address}}</p>
-          <div class="col d-md-flex gap-2">
-            <p>{{place.price}}ft/alkalom</p>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentplaceModalStart">Foglalás</button>
-          </div>
         </div>
         <div class="card-footer">
           <div>
@@ -49,6 +45,10 @@
             <input [(ngModel)]="newCommentText" type="text" class="form-control" placeholder="Írj egy hozzászólást...">
             <button class="btn btn-outline-primary" (click)="addComment(place, newCommentText)">Küldés</button>
           </div>
+        </div>
+        <div class="col d-md-flex textecske gap-3 m-3">
+          <p class="textecskep fw-bold">{{place.price}}Ft</p>
+          <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#rentplaceModalStart">Foglalás <i class="bi bi-check-circle"></i></button>
         </div>
       </div>
     </ng-container>

@@ -21,7 +21,7 @@
           </li>
           <li *ngIf="loggedUser" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Szia {{loggedUser.first_name}}!
+              <i class="bi bi-person-circle"></i> Szia {{loggedUser.first_name}}!
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" [routerLinkActive]="['active']" routerLink="profil">Profil</a></li>

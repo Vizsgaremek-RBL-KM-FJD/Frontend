@@ -45,9 +45,13 @@ selectPlace(place: any) {
     console.log("elküldendő elemek1", placeID, userID, username, text);
 
     this.PlacesService.addComment(placeID, userID, username, text).subscribe((result) => {
+      this.PlacesService.getComments().subscribe((comments) => {
+        console.log('Kapott kommentek:', comments);
+        this.comments = comments
+      })
       console.log(result);
     })
-    // placeID, userID, username, text
+    this.newCommentText = '';
 
   }
 

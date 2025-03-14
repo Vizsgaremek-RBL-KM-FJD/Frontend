@@ -5,9 +5,14 @@
   text-align: center;
 }
 
+.textecske {
+  justify-content: end;
+}
 
-
-
+.textecskep {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 
 a {
