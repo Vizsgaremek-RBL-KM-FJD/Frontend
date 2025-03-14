@@ -1,5 +1,19 @@
 .row {
-    margin-top: 50px;
-    margin-left: 50px ;
-    margin-bottom: 100px;
+    width: 100%;
+}
+
+.profilecol {
+    width: 30% !important;
+}
+
+.placescol {
+    width: 70% !important;
+}
+
+.col {
+    flex: none;
+}
+
+.content {
+    margin: 30px;
 }

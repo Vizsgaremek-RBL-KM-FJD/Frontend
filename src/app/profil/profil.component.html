@@ -1,75 +1,80 @@
-<div class="row">
-    
-    
-    <div class="card border-info mb-3 me-5" style="max-width: 18rem;">
-        <div class="card-header">Profil</div>
-        <div class="card-body">
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.first_name" type="text" class="form-control" id="floatingInput" >
-                <label for="floatingInput">Keresztnév</label>
-              </div>
-    
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.last_name" type="text" class="form-control" id="floatingInput" >
-                <label for="floatingInput">Vezetéknév</label>
-              </div>
-    
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.email" type="email" class="form-control" id="floatingInput">
-                <label for="floatingInput">Email</label>
-            </div>
-    
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.address" type="text" class="form-control" id="floatingInput">
-                <label for="floatingInput">Lakcím</label>
-            </div>
-    
-            <div class="form-floating mb-3">
-                <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="floatingInput">
-                <label for="floatingInput">Telefonszám</label>
-            </div>
-    
-    
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-secondary" (click)="updateProfile()">Adatok frissítése</button>
-        </div>
-      </div>
-    
-      <div class="card border-info mb-3 me-5" style="max-width: 20rem;">
-        <div class="card-header">Termek</div>
-        <div class="card-body">
-            <div>
-                <div class="terem mb-5" *ngFor="let place of places">
-                      <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
-                    <div class="fomr-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.place_name">
-                    </div>
-                    <div class="fomr-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.address">
-                    </div>
-                    <div class="fomr-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.price">
-                    </div>
-                    <div class="mb-3">
-                      <label for="imageInput" class="form-label">Kép feltöltése</label>
-                      <input type="file" class="form-control" id="imageInput" (change)="onFileSelectedUpdate($event, place)">
-                    </div>
-
-                    <button class="btn btn-outline-success me-2" (click)="updatePlace(place)" >Mentés</button>
-                    <button class="btn btn-outline-danger" (click)="deletePlace(place)">Törlés</button>
-                    
-                    
+<div class="content w-100">
+  <div class="row ">
+  
+      <div class="col profilecol">
+        <h3>Profil</h3>
+        <div class="card border-info mb-3 me-5" style="max-width: 18rem;">
+            <div class="card-body">
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="user.first_name" type="text" class="form-control" id="floatingInput" >
+                    <label for="floatingInput">Keresztnév</label>
                   </div>
-              </div>
-            <ul *ngIf="places.length==0">
-                <p>Még nincs termed, regisztrálj egyet!</p>
-            </ul>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem létrehozása</button>
-        </div>
+  
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="user.last_name" type="text" class="form-control" id="floatingInput" >
+                    <label for="floatingInput">Vezetéknév</label>
+                  </div>
+  
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="user.email" type="email" class="form-control" id="floatingInput">
+                    <label for="floatingInput">Email</label>
+                </div>
+  
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="user.address" type="text" class="form-control" id="floatingInput">
+                    <label for="floatingInput">Lakcím</label>
+                </div>
+  
+                <div class="form-floating mb-3">
+                    <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="floatingInput">
+                    <label for="floatingInput">Telefonszám</label>
+                </div>
+  
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-secondary" (click)="updateProfile()">Adatok frissítése</button>
+            </div>
+          </div>
       </div>
+  
+  
+        <div class="col placescol">
+          <h3>Termek</h3>
+        <ng-container *ngFor="let place of places">
+          
+            <div *ngIf="place.status == 1"   class="card border-info mb-3" style="max-width: 20rem;">
+              <div class="card-body">
+                  <div>
+                      <div class="terem mb-5" >
+                            <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
+                          <div class="fomr-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.place_name">
+                          </div>
+                          <div class="fomr-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.address">
+                          </div>
+                          <div class="fomr-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.price">
+                          </div>
+                          <div class="mb-3">
+                            <label for="imageInput" class="form-label">Kép feltöltése</label>
+                            <input type="file" class="form-control" id="imageInput" (change)="onFileSelectedUpdate($event, place)">
+                          </div>
+                          <button class="btn btn-outline-success me-2" (click)="updatePlace(place)" >Mentés</button>
+                          <button class="btn btn-outline-danger" (click)="deletePlace(place)">Törlés</button>
+                        </div>
+                    </div>
+                  <ul *ngIf="places.length==0">
+                      <p>Még nincs termed, regisztrálj egyet!</p>
+                  </ul>
+              </div>
+              <div class="card-footer">
+                  <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem létrehozása</button>
+              </div>
+            </div>
+        </ng-container>
+        </div>
+</div>
 
       <!-- <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createPlaceModalLabel" aria-hidden="true">
         <div class="modal-dialog">
