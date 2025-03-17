@@ -1,56 +1,13 @@
 header {
-    height: 100%;
+    height: 100vh;
     background-image: url(../../assets/borito.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     padding-bottom: 100px;
     display: flex;
     flex-direction: column;
     
   }
-
-h4 {
-    margin-bottom: 20px;
-}
-
-.left {
-    margin-left: 40px;
-    margin-right: 10px;
-}
-
-.paragraph {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.marginLeft{
-    margin-left: 20px;
-}
-
-.marginBottom {
-    margin-bottom: 100px;
-}
-
-
-
-.end {
-    text-align: center;
-}
-
-.picture {
-    color: white
-}
-
-h2{
-    text-align: center;
-    padding-top: 20px;
-    
-}
-
-
-
-.littleLeft {
-    margin-left: 5px;
-}
 

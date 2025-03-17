@@ -1,27 +1,30 @@
+<!-- <div class="post-nav">
+  <i class="bi bi-facebook"></i> <i class="bi bi-instagram"></i> <i class="bi bi-youtube"></i> <i class="bi bi-twitter-x"></i>
+</div> -->
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Kezdőrúgás</a>
+      <a class="navbar-brand logo" href="#">KEZDŐRÚGÁS</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" *ngIf="loggedUser" [routerLinkActive]="['active']" aria-current="page" routerLink="home">Főoldal</a>
+            <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="services">Főoldal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="loggedUser" [routerLinkActive]="['active']" aria-current="page" routerLink="home">Böngészés</a>
           </li>
           <li class="nav-item" *ngIf="isAdmin">
             <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="admin">Admin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="services">Rólunk</a>
           </li>
           <li class="nav-item">
             <a *ngIf="!loggedUser" class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="login">Bejelentkezés</a>
           </li>
           <li *ngIf="loggedUser" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-circle"></i> Szia {{loggedUser.first_name}}!
+              <i class="bi bi-person-circle"></i>
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" [routerLinkActive]="['active']" routerLink="profil">Profil</a></li>
