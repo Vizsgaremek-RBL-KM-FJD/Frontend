@@ -35,10 +35,9 @@ export class ReservationsComponent implements OnInit {
       })
   }
 
-  cancelRent(rentID: number, userID: number) {
-    console.log("rentservice", userID, rentID);
-    this.RentsService.cancelRent(userID, rentID).subscribe(() => {
-      this.getRentsForUser();
-    });
+  cancelRent(rent:any) {
+    console.log("rentservice");
+    const status = "canceled"
+    this.RentsService.updateStatus(rent, status);
   }
 }

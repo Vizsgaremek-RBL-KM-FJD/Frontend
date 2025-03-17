@@ -19,7 +19,6 @@ export class AuthService {
 
   isAdmin() {
     const id = JSON.parse(localStorage.getItem('loggedUser')!).ID;
-    console.log(id);
     return this.http.get(this.base.api + "users/isAdmin/" + id, this.base.httpOptions)
   }
 
@@ -28,7 +27,6 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    console.log('Is logged in:', this.loggedUser);
     return !!JSON.parse(localStorage.getItem('loggedUser')!);
   }
 

@@ -7,6 +7,8 @@ import { BaseService } from '../base/base.service';
 })
 export class RentsService {
 
+  
+
   constructor(
     private http: HttpClient,
     private base: BaseService
@@ -42,8 +44,11 @@ export class RentsService {
     })
   }
 
-  updateStatus(rent:any) {
-    this.http.patch(this.base.api + 'rents/' + rent.UserID + '/' + rent.RentID, rent).subscribe((response: any) => {
+
+  updateStatus(rent:any, status:string) {
+    console.log(status, rent)
+    const requestBody = { status: status };
+    this.http.patch(this.base.api + 'rents/' + rent.RentID, status).subscribe((response: any) => {
         console.log(response);
     })
   }

@@ -18,6 +18,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { HourFormatPipe } from './hour-format.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
 
 
 
@@ -42,8 +44,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    NgxPaginationModule
-    
+    NgxPaginationModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
     provideHttpClient(),
