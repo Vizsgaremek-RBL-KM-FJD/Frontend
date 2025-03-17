@@ -13,9 +13,19 @@
     padding: 10px 50px 10px 50px;
     background-color: white !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+
       
       
 }
+
+.navbarRight {
+    margin-right:60px ;
+    
+}
+
+
+
 
 /* .post-nav {
     background-color: #343633;
