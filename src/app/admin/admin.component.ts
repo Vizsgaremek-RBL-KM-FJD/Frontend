@@ -99,6 +99,11 @@ export class AdminComponent implements OnInit {
   }
 
   UpdateRent(rent:any) {
+    
+    console.log(rent)
+    rent.startDate=this.convertDate(String(rent.startDate))
+    rent.endDate=this.convertDate(String(rent.endDate))
+    console.log("gewgfi", rent)
     this.RentsService.updateRent(rent);
   }
 
@@ -120,5 +125,12 @@ export class AdminComponent implements OnInit {
 
   DisableUser(user:any) {
     this.UserService.DisableUser(user);
+  }
+
+  convertDate(date:String){
+    // '2025-03-30 15:00:00'
+    // "2025-03-20T10:27"
+    return date.replace("T", " ")+(":00")
+
   }
 }

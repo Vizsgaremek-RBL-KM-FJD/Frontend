@@ -110,6 +110,7 @@ formatDate(date: any) {
 rentPlace() {
   const userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
   const placeID = this.selectedPlace.PlaceID;
+  
   const startDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.startHour, 0);
   const endDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.endHour, 0);
 
