@@ -1,5 +1,5 @@
 <div class="search">
-  <h1 class="text-start">Könnyítsd meg a keresést! asd</h1>
+  <h1 class="text-start">Könnyítsd meg a keresést!</h1>
   <div class="row">
     <div class="input-group input-group">
       <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-default">
@@ -15,8 +15,8 @@
 <div class="container">
   <div *ngFor="let place of places" class="row justify-content-center mb-5">
     <ng-container >
-      <div *ngIf="place.status == 1" class="card m-4" style="width: 60rem;" (click)="selectPlace(place)">
-        <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
+      <div *ngIf="place.status == 1" class="card m-4 image" style="width: 60rem;" (click)="selectPlace(place)">
+        <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top border" alt="{{place.place_name}}">
   
         <div class="card-body">
           <h5 class="card-title">{{place.place_name}}</h5>

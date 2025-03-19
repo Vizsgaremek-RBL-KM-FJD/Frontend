@@ -14,6 +14,14 @@
   margin-bottom: 10px;
 }
 
+.image {
+  padding-top: 10px;
+}
+
+.border {
+  border-radius: 10px;
+}
+
 
 a {
     text-decoration: none;
