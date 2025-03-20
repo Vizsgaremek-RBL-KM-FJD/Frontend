@@ -1,6 +1,0 @@
-Home componentben van egy startdate enddate amit csináltál okosan, na azt kell az adminba is áthelyezni és akkor elvileg frissülni fog és lehet állítani.
-a folyamat most megtörténik, lehet változtatni, csak nem jelenik meg, de azt mi nem tudjuk hogy kell mert hülyék vagyunk hahaha
-
-const startDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.startHour, 0);
-const endDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.endHour, 0);
-home.component.ts-ből van

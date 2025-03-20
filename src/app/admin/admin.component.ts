@@ -13,15 +13,16 @@ import { RentsService } from '../services/rents/rents.service';
 })
 export class AdminComponent implements OnInit {
   places: any = [];
+  placesByUser: any = [];
   users: any = [];
+  selectedUser: any = [];
   rents: any = [];
+  rentsByUser:any = [];
 
-  pageSizeUsers: number = 5;
-  pageSizePlaces: number = 5;
-  pageSizeRents: number = 5;
-  currentPageUsers: number = 1;
-  currentPagePlaces: number = 1;
-  currentPageRents: number = 1;
+  
+
+  PageSize: number = 10;
+  CurrentPage: number = 1;
 
   constructor(
     private base:BaseService,
@@ -42,22 +43,41 @@ export class AdminComponent implements OnInit {
   
     this.RentsService.getAllRents().subscribe((rents: any) => {
       this.rents = rents;
+      console.log()
     });
     
   }
 
-  // UpdateUserAsAdmin(user: any) {
-  //   if (user.status === "disabled" || user.status === "deleted") {
-  //     console.log(user.ID)
-  //     this.PlacesService.updateStatus(user.ID, false);
-  //     this.UserService.sadmin(user); 
-  //   }
-  //   else {
-  //     this.UserService.sadmin(user);
-  //     return console.log("Update process started", user);
-  //   }
-  //   this.UserService.sadmin(user);
-  // }
+  
+
+  viewDetails(id: number) {
+    const SelectedId = id;
+    this.getUserById(SelectedId);
+    this.getPlacesById(SelectedId);
+    this.getRentsByUser(SelectedId);
+  }
+
+  getPlacesById(SelectedId: number) {
+    this.PlacesService.getPlaceById(SelectedId).subscribe((res: any) => {
+      console.log(res)
+      this.placesByUser = res;
+    });
+  }
+
+  getUserById(SelectedId: number) {
+    this.UserService.getUserById(SelectedId).subscribe((res: any) => {
+      console.log(res)
+      this.selectedUser = res;
+      
+    })
+  }
+
+  getRentsByUser(SelectedId: number) {
+    this.RentsService.getRentsForUser(SelectedId).subscribe((res: any) => {
+      console.log(res)
+      this.rentsByUser = res;
+    })
+  }
 
   UpdateUserAsAdmin(user: any) {
     if (user.active === "disabled" || user.active === "deleted") {
@@ -100,10 +120,11 @@ export class AdminComponent implements OnInit {
 
   UpdateRent(rent:any) {
     
-    console.log(rent)
-    rent.startDate=this.convertDate(String(rent.startDate))
-    rent.endDate=this.convertDate(String(rent.endDate))
-    console.log("gewgfi", rent)
+    console.log("alap date",rent)
+
+    rent.startDate=this.convertDate(String(rent.StartDate))
+    rent.endDate=this.convertDate(String(rent.EndDate))
+    console.log("megváltoztatott date", rent)
     this.RentsService.updateRent(rent);
   }
 

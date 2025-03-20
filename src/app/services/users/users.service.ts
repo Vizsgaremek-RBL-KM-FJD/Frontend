@@ -16,7 +16,7 @@ export class UsersService {
 
 
   UpdateUser(id: number, user: any) {
-    return this.http.patch(`${this.base.api}`+`${id}`, user, this.base.httpOptions);
+    return this.http.patch(`${this.base.api}users/`+`${id}`, user, this.base.httpOptions);
   }
   sadmin(user:any) {
     this.http.patch(this.base.api+"users/sadmin-update-profile/" + user.ID, user, this.base.httpOptions).subscribe(
@@ -26,6 +26,10 @@ export class UsersService {
 
   deleteUser(userID: number) {
     return this.http.delete(this.base.api + 'users/' + userID);
+  }
+
+  getUserById(ID: number) {
+    return this.http.get(this.base.api + 'users/' + ID);
   }
 
   getAllUsers() {

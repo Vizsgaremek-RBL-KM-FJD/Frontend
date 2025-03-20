@@ -1,54 +1,216 @@
-<div class="users mb-5">
-    <h1 class="text-center mt-5">Felhasználók</h1>
-    
-    <table class="table table-striped">
-      <thead>
+<div class="container mt-5">
+  <div class="table-container">
+    <!-- Bal oldali tábla -->
+    <table class="table table-bordered table-hover shadow-sm" style="table-layout: auto; width: 100%;">
+      <thead class="table-dark">
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">First name</th>
-          <th scope="col">Last name</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Email address</th>
-          <th scope="col">Address</th>
-          <th scope="col">Phone number</th>
-          <th scope="col">Status</th>
-          <th scope="col">Admin?</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users | paginate: { itemsPerPage: pageSizeUsers, currentPage: currentPageUsers }">
-          <td><input [(ngModel)]="user.ID" type="number" disabled class="form-control"></td>
-          <td><input [(ngModel)]="user.first_name" type="text" class="form-control"></td>
-          <td><input [(ngModel)]="user.last_name" type="text" class="form-control"></td>
+        <tr *ngFor="let user of users | paginate: { itemsPerPage: PageSize, currentPage: CurrentPage }">
+          <td>{{user.ID}}</td>
+          <td>{{user.first_name}} {{user.last_name}}</td>
+          <td>{{user.email}}</td>
           <td>
-            <select [(ngModel)]="user.gender" class="form-control">
+            <button class="btn btn-outline-dark btn-sm" (click)="viewDetails(user.ID)">
+              <i class="bi bi-person-fill"></i> View Details
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">
+            <pagination-controls (pageChange)="CurrentPage = $event"></pagination-controls>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="content">
+    <!-- Jobb oldali cuccok -->
+    <h3 class="section-title">Details</h3>
+    <div class="row user-details">
+      <div class="col">
+        <span class="label">ID:</span> <span class="value">{{selectedUser.ID}}</span>
+      </div>
+      <div class="col">
+        <span class="label">Name:</span> <span class="value">{{selectedUser.last_name}} {{selectedUser.first_name}}</span>
+      </div>
+      <div class="col">
+        <span class="label">Gender:</span> <span class="value">{{selectedUser.gender}}</span>
+      </div>
+    </div>
+    <div class="row user-details">
+      <div class="col">
+        <span class="label">Email:</span> <span class="value">{{selectedUser.email}}</span>
+      </div>
+      <div class="col">
+        <span class="label">Address:</span> <span class="value">{{selectedUser.address}}</span>
+      </div>
+      <div class="col">
+        <span class="label">Phone:</span> <span class="value">{{selectedUser.phone_number}}</span>
+      </div>
+    </div>
+    <div class="row user-details">
+      <div class="col">
+        <span class="label">Status:</span> <span class="value">{{selectedUser.active}}</span>
+      </div>
+      <div class="col">
+        <span class="label">Admin?</span> <span class="value">{{selectedUser.isadmin}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editUserModal">Szerkesztés</button>
+      </div>
+    </div>
+
+
+  <ng-container>
+    <h3 class="section-title">User Rents</h3>
+    <div class="row user-details" *ngFor="let rent of rentsByUser">
+      <div class="col">
+        <span class="label">ID:</span> <span class="value">{{rentsByUser.RentID}}</span>
+      </div>
+      <div class="col">
+        <span class="label">PlaceID:</span> <span class="value">{{rentsByUser.PlaceID}}</span>
+      </div>
+      <div class="col">
+        <span class="label">Mikortól:</span> <span class="value">{{rentsByUser.StartDate}}</span>
+      </div>
+      <div class="col">
+        <span class="label">Meddig:</span> <span class="value">{{rentsByUser.EndDate}}</span>
+      </div>
+    </div>
+    </ng-container>
+    </div>
+
+    <!-- <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>StartDate</th>
+          <th>EndDate</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rent of rentsByUser">
+          <td>{{rent.RentID}}</td>
+          <td>{{rent.StartDate}}</td>
+          <td>{{rent.EndDate}}</td>
+          <td>{{rent.TotalAmount}}</td>
+        </tr>
+      </tbody> -->
+
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Last Name</th>
+              <th>First Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Gender</th>
+              <th>Phone</th>
+              <th>Status</th>
+              <th>Admin?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input [(ngModel)]="selectedUser.ID" type="number" disabled class="form-control"></td>
+          <td><input [(ngModel)]="selectedUser.first_name" type="text" class="form-control"></td>
+          <td><input [(ngModel)]="selectedUser.last_name" type="text" class="form-control"></td>
+          <td>
+            <select [(ngModel)]="selectedUser.gender" class="form-control">
               <option value="férfi">férfi</option>
               <option value="nő">nő</option>
               <option value="nem nyilatkozom">nem nyilatkozom</option>
             </select>
           </td>
-          <td><input [(ngModel)]="user.email" type="email" class="form-control"></td>
-          <td><input [(ngModel)]="user.address" type="text" class="form-control"></td>
-          <td><input [(ngModel)]="user.phone_number" type="text" class="form-control"></td>
+          <td><input [(ngModel)]="selectedUser.email" type="email" class="form-control"></td>
+          <td><input [(ngModel)]="selectedUser.address" type="text" class="form-control"></td>
+          <td><input [(ngModel)]="selectedUser.phone_number" type="text" class="form-control"></td>
           <td>
-            <select [(ngModel)]="user.active" class="form-control">
+            <select [(ngModel)]="selectedUser.active" class="form-control">
               <option value="active">active</option>
               <option value="disabled">disabled</option>
               <option value="deleted">deleted</option>
             </select>
           </td>
-          <td><input [(ngModel)]="user.isadmin" type="checkbox" class="form-check-input"></td>
-          <td>
-            <button (click)="UpdateUserAsAdmin(user)" type="button" class="btn btn-outline-primary me-2"><i class="bi bi-pencil-square"></i></button>
-            <button (click)="DeleteUser(user.ID)" type="button" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <pagination-controls (pageChange)="currentPageUsers = $event"></pagination-controls>
+          <td><input [(ngModel)]="selectedUser.isadmin" type="checkbox" class="form-check-input"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Bezárás</button>
+        <button (click)="UpdateUserAsAdmin(selectedUser)" type="button" class="btn btn-outline-primary me-2"><i class="bi bi-pencil-square"></i></button>
+        <button (click)="DeleteUser(selectedUser.ID)" type="button" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+      </div>
+    </div>
   </div>
+</div>
+
+      
+      
+
+      <!-- <table>
+        <thead>
+          <tr>
+            <th>Place name</th>
+            <th>Place address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let place of placesByUser">
+            <td>{{place.place_name}}</td>
+            <td>{{place.address}}</td>
+          </tr>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rent of rentsByUser">
+            <td>{{rent.RentID}}</td>
+            <td>{{rent.StartDate}}</td>
+            <td>{{rent.EndDate}}</td>
+            <td>{{rent.TotalAmount}}</td>
+          </tr>
+        </tbody>
+      </table> -->
+    
+
+
+
+
+
+
+
+<!-- 
   
   <div class="places mb-5">
     <h1 class="text-center mt-5">Termek</h1>
@@ -68,7 +230,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let place of places | paginate: { itemsPerPage: pageSizePlaces, currentPage: currentPagePlaces }">
+        <tr *ngFor="let place of places">
           <td><input [(ngModel)]="place.PlaceID" disabled type="number" class="form-control"></td>
           <td><input [(ngModel)]="place.UserID" disabled type="number" class="form-control"></td>
           <td><input [(ngModel)]="place.owner_name" readonly type="text" class="form-control"></td>
@@ -84,9 +246,6 @@
         </tr>
       </tbody>
     </table>
-    
-    
-    <pagination-controls (pageChange)="currentPagePlaces = $event"></pagination-controls>
   </div>
   
 
@@ -110,15 +269,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rent of rents | paginate: { itemsPerPage: pageSizeRents, currentPage: currentPageRents }">
+        <tr *ngFor="let rent of rents">
           <td><input [(ngModel)]="rent.RentID" disabled type="number" class="form-control"></td>
           <td><input [(ngModel)]="rent.UserID" disabled type="number" class="form-control"></td>
           <td><input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control"></td>
           <td><input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control"></td>
           <td><input [(ngModel)]="rent.UserName" readonly type="text" class="form-control"></td>
           <td><input [(ngModel)]="rent.UserPhoneNumber" readonly type="text" class="form-control"></td>
-          <td><input [(ngModel)]="rent.StartDate" type="datetime-local" class="form-control"></td>
-          <td><input [(ngModel)]="rent.EndDate" type="datetime-local" class="form-control"></td> 
+          <td>
+            <input [ngModel]="rent.StartDate | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="rent.StartDate = $event" type="datetime-local" class="form-control">
+          </td>
+          <td>
+            <input [ngModel]="rent.StartDate | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="rent.EndDate = $event" type="datetime-local" class="form-control">
+          </td>
           <td><input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control"></td>
           <td>
             <select [(ngModel)]="rent.status" class="form-control">
@@ -135,7 +298,5 @@
         </tr>
       </tbody>
     </table>
-    
-    <pagination-controls (pageChange)="currentPageRents = $event"></pagination-controls>
   </div>
-  
+   -->

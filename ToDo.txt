@@ -1,0 +1,8 @@
+Mi nem jó?????
+
+home - kereső
+
+admin:
+    felhasználó törlés
+    rents státusz állítás
+    számozás
