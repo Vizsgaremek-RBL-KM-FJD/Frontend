@@ -114,15 +114,17 @@ rentPlace() {
   const startDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.startHour, 0);
   const endDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.endHour, 0);
 
+  // home.component.ts
+  // ...
   this.RentsService.createRent(userID, placeID, startDate, endDate)
     .subscribe((result) => {
       console.log(result);
-      // handle success response
     }, (error) => {
       console.error(error);
-      // handle error response
+      alert('Error creating rent: ' + error.message);
     });
 }
+
 
 getCurrentDate(): Date {
   return new Date();

@@ -25,7 +25,10 @@ export class PlacesService {
     return this.http.get<any[]>(this.base.api + 'places/' + userID);
 }
 
-
+// Add a new method to your PlacesService class
+deletePlaceImage(placeId: number) {
+  return this.http.delete(`${this.base.api}places/${placeId}/image`);
+}
 
   updatePlace(place: any) {
     console.log(place.PlaceID);

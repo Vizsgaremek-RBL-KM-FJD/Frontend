@@ -5,19 +5,21 @@ import { UsersService } from '../services/users/users.service';
 import { PlacesService } from '../services/places/places.service';
 import { RentsService } from '../services/rents/rents.service';
 
+
 @Component({
   standalone: false,
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+
 export class AdminComponent implements OnInit {
   places: any = [];
-  placesByUser: any = [];
+  placesByUser: any[] = [];
   users: any = [];
   selectedUser: any = [];
   rents: any = [];
-  rentsByUser:any = [];
+  rentsByUser:any[] = [];
 
   
 
@@ -119,7 +121,7 @@ export class AdminComponent implements OnInit {
   }
 
   UpdateRent(rent:any) {
-    
+    //nem tudsz egyszerre csak egyet frissíteni !!!!!!!!!! -- javítani kell!!!!
     console.log("alap date",rent)
 
     rent.startDate=this.convertDate(String(rent.StartDate))
@@ -133,7 +135,7 @@ export class AdminComponent implements OnInit {
     this.RentsService.cancelRent(userID, rentID).subscribe({
       next: () => {
         console.log("Törlés sikeres! admin", rentID);
-        // Itt frissítheted az adatokat, ha szükséges
+
       },
       error: (error) => {
         console.error("Hiba a törlés során:", error);

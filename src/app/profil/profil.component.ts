@@ -94,6 +94,16 @@ export class ProfilComponent implements OnInit{
     }
   }
 
+  // Add a new method to your ProfilComponent class
+deletePlaceImage(place: any) {
+  const placeId = place.PlaceID;
+  this.PlacesService.deletePlaceImage(placeId).subscribe((response: any) => {
+    console.log(response);
+    // Update the place image path to null
+    place.image_path = null;
+  });
+}
+
 
   createPlace() {
     const userId = JSON.parse(localStorage.getItem('loggedUser')!).ID; 

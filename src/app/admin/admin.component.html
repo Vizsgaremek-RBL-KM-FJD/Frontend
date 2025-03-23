@@ -71,43 +71,47 @@
       </div>
     </div>
 
-
-  <ng-container>
     <h3 class="section-title">User Rents</h3>
-    <div class="row user-details" *ngFor="let rent of rentsByUser">
+    <div class="row user-details" *ngFor="let rent of rentsByUser | slice:-3">
       <div class="col">
-        <span class="label">ID:</span> <span class="value">{{rentsByUser.RentID}}</span>
+        <span class="label">ID:</span> <span class="value">{{rent.RentID}}</span>
       </div>
       <div class="col">
-        <span class="label">PlaceID:</span> <span class="value">{{rentsByUser.PlaceID}}</span>
+        <span class="label">PlaceID:</span> <span class="value">{{rent.PlaceID}}</span>
       </div>
       <div class="col">
-        <span class="label">Mikortól:</span> <span class="value">{{rentsByUser.StartDate}}</span>
+        <span class="label">Mikortól:</span> <span class="value">{{rent.StartDate| date: 'yyyy-MM-dd HH:mm'}}</span>
       </div>
       <div class="col">
-        <span class="label">Meddig:</span> <span class="value">{{rentsByUser.EndDate}}</span>
+        <span class="label">Meddig:</span> <span class="value">{{rent.EndDate | date: 'yyyy-MM-dd HH:mm'}}</span>
       </div>
     </div>
-    </ng-container>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editRentModal">Továbbiak mutatása</button>
+      </div>
     </div>
 
-    <!-- <table>
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>StartDate</th>
-          <th>EndDate</th>
-          <th>Cost</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let rent of rentsByUser">
-          <td>{{rent.RentID}}</td>
-          <td>{{rent.StartDate}}</td>
-          <td>{{rent.EndDate}}</td>
-          <td>{{rent.TotalAmount}}</td>
-        </tr>
-      </tbody> -->
+
+  <h3 class="section-title">User Places</h3>
+  <div class="row user-details" *ngFor="let place of placesByUser | slice:-3">
+    <div class="col">
+      <span class="label">ID:</span> <span class="value">{{place.PlaceID}}</span>
+    </div>
+    <div class="col">
+      <span class="label">Place Name:</span> <span class="value">{{place.place_name}}</span>
+    </div>
+    <div class="col">
+      <span class="label">Place Address:</span> <span class="value">{{place.address}}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editPlaceModal">Továbbiak mutatása</button>
+    </div>
+  </div>
+</div>
+
 
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
@@ -167,136 +171,109 @@
   </div>
 </div>
 
-      
-      
-
-      <!-- <table>
-        <thead>
-          <tr>
-            <th>Place name</th>
-            <th>Place address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let place of placesByUser">
-            <td>{{place.place_name}}</td>
-            <td>{{place.address}}</td>
-          </tr>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>StartDate</th>
-            <th>EndDate</th>
-            <th>Cost</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let rent of rentsByUser">
-            <td>{{rent.RentID}}</td>
-            <td>{{rent.StartDate}}</td>
-            <td>{{rent.EndDate}}</td>
-            <td>{{rent.TotalAmount}}</td>
-          </tr>
-        </tbody>
-      </table> -->
-    
-
-
-
-
-
-
-
-<!-- 
-  
-  <div class="places mb-5">
-    <h1 class="text-center mt-5">Termek</h1>
-    
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">UserID</th>
-          <th scope="col">Tulajdonos</th>
-          <th scope="col">Tulaj telefonszám</th>
-          <th scope="col">Terem név</th>
-          <th scope="col">Cím</th>
-          <th scope="col">Ár</th>
-          <th scope="col">Active?</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let place of places">
-          <td><input [(ngModel)]="place.PlaceID" disabled type="number" class="form-control"></td>
-          <td><input [(ngModel)]="place.UserID" disabled type="number" class="form-control"></td>
-          <td><input [(ngModel)]="place.owner_name" readonly type="text" class="form-control"></td>
-          <td><input [(ngModel)]="place.phone_number" readonly type="text" class="form-control"></td>
-          <td><input [(ngModel)]="place.place_name" type="text" class="form-control"></td>
-          <td><input [(ngModel)]="place.address" type="text" class="form-control"></td>
-          <td><input [(ngModel)]="place.price" type="number" class="form-control"></td>
-          <td><input [(ngModel)]="place.status" class="form-check-input" type="checkbox"></td>
-          <td>
-            <button (click)="UpdatePlace(place)" type="button" class="btn btn-outline-primary me-2"><i class="bi bi-pencil-square"></i></button>
-            <button (click)="DeletePlace(place)" type="button" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="modal fade" id="editRentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>UserID</th>
+              <th>PlaceID</th>
+              <th>Tulaj telefonszáma</th>
+              <th>Mikortól</th>
+              <th>Meddig</th>
+              <th>Teljes összeg</th>
+              <th>Státusz</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rent of rentsByUser">
+              <td><input [(ngModel)]="rent.RentID" disabled type="number" class="form-control"></td>
+              <td><input [(ngModel)]="rent.UserID" disabled type="number" class="form-control"></td>
+              <td><input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control"></td>
+              <td><input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control"></td>
+              <td><input [(ngModel)]="rent.UserName" readonly type="text" class="form-control"></td>
+              <td><input [(ngModel)]="rent.UserPhoneNumber" readonly type="text" class="form-control"></td>
+              <td>
+                <input [ngModel]="rent.StartDate | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="rent.StartDate = $event" type="datetime-local" class="form-control">
+              </td>
+              <td>
+                <input [ngModel]="rent.EndDate | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="rent.EndDate = $event" type="datetime-local" class="form-control">
+              </td>
+              <td><input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control"></td>
+              <td>
+                <select [(ngModel)]="rent.status" class="form-control">
+                  <option value="not started">not started</option>
+                  <option value="ongoing">ongoing</option>
+                  <option value="canceled">canceled</option>
+                  <option value="done">done</option>
+                </select>
+              </td>
+              <td>
+                <button (click)="UpdateRent(rent)" type="button" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-pencil-square"></i></button>
+                <button (click)="cancelRent(rent.UserID, rent.RentID)" type="button" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Bezárás</button>
+      </div>
+    </div>
   </div>
-  
-
-  <div class="rents mb-5">
-    <h1 class="text-center mt-5">Foglalások</h1>
-    
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">UserID</th>
-          <th scope="col">PlaceID</th>
-          <th scope="col">Tulaj telefonszám</th>
-          <th scope="col">Bérlő neve</th>
-          <th scope="col">Bérlő telefonszáma</th>
-          <th scope="col">Mikortól</th>
-          <th scope="col">Meddig?</th>
-          <th scope="col">Teljes összeg</th>
-          <th scope="col">Status</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let rent of rents">
-          <td><input [(ngModel)]="rent.RentID" disabled type="number" class="form-control"></td>
-          <td><input [(ngModel)]="rent.UserID" disabled type="number" class="form-control"></td>
-          <td><input [(ngModel)]="rent.PlaceID" disabled type="number" class="form-control"></td>
-          <td><input [(ngModel)]="rent.OwnerPhoneNumber" readonly type="text" class="form-control"></td>
-          <td><input [(ngModel)]="rent.UserName" readonly type="text" class="form-control"></td>
-          <td><input [(ngModel)]="rent.UserPhoneNumber" readonly type="text" class="form-control"></td>
-          <td>
-            <input [ngModel]="rent.StartDate | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="rent.StartDate = $event" type="datetime-local" class="form-control">
-          </td>
-          <td>
-            <input [ngModel]="rent.StartDate | date: 'yyyy-MM-ddTHH:mm'" (ngModelChange)="rent.EndDate = $event" type="datetime-local" class="form-control">
-          </td>
-          <td><input [(ngModel)]="rent.TotalAmount" readonly type="number" class="form-control"></td>
-          <td>
-            <select [(ngModel)]="rent.status" class="form-control">
-              <option value="not started">not started</option>
-              <option value="ongoing">ongoing</option>
-              <option value="canceled">canceled</option>
-              <option value="done">done</option>
-            </select>
-          </td>
-          <td>
-            <button (click)="UpdateRent(rent)" type="button" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-pencil-square"></i></button>
-            <button (click)="cancelRent(rent.UserID, rent.RentID)" type="button" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+</div>
+      
+<div class="modal fade" id="editPlaceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>UserID</th>
+              <th>Tulajdonos</th>
+              <th>Tulaj telefonszáma</th>
+              <th>Terem neve</th>
+              <th>Terem helye</th>
+              <th>Ár</th>
+              <th>Státusz</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let place of placesByUser">
+              <td><input [(ngModel)]="place.PlaceID" disabled type="number" class="form-control"></td>
+              <td><input [(ngModel)]="place.UserID" disabled type="number" class="form-control"></td>
+              <td><input [(ngModel)]="place.owner_name" readonly type="text" class="form-control"></td>
+              <td><input [(ngModel)]="place.phone_number" readonly type="text" class="form-control"></td>
+              <td><input [(ngModel)]="place.place_name" type="text" class="form-control"></td>
+              <td><input [(ngModel)]="place.address" type="text" class="form-control"></td>
+              <td><input [(ngModel)]="place.price" type="number" class="form-control"></td>
+              <td><input [(ngModel)]="place.status" class="form-check-input" type="checkbox"></td>
+              <td>
+                <button (click)="UpdatePlace(place)" type="button" class="btn btn-outline-primary me-2"><i class="bi bi-pencil-square"></i></button>
+                <button (click)="DeletePlace(place)" type="button" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Bezárás</button>
+      </div>
+    </div>
   </div>
-   -->
+</div>

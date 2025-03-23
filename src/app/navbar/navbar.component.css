@@ -1,20 +1,64 @@
-.logout {
-    color: red
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-    font-family:Arial, Helvetica, sans-serif;
-    letter-spacing: -1.5px;
-}
-
 .navbar {
-    padding: 10px 50px 10px 50px;
-    background-color: white !important;
+    padding: 12px 50px;
+    background-color: rgba(68, 45, 31, 0.9) !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
+    backdrop-filter: blur(10px);
+}
 
-      
-      
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #fff !important;
+    letter-spacing: -1px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #a67c52 !important; /* Világosabb barna */
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 18px;
+    padding: 8px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover, 
+.navbar-nav .nav-link.active {
+    color: #a67c52 !important;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.dropdown-menu {
+    background-color: rgba(68, 45, 31, 0.95);
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu .dropdown-item {
+    color: #fff !important;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #a67c52 !important; /* Világosabb barna */
+    color: #fff !important;
+}
+
+.logout {
+    color: #ff4d4d !important; /* Pirosabb kiemelés */
+    font-weight: bold;
+}
+
+.logout:hover {
+    background-color: rgba(255, 0, 0, 0.2) !important;
 }
