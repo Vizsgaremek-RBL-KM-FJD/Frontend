@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   selectedPlace: any;
   newCommentText: string = '';
   comments:any = [];
+  data:any = [];
 
   userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
 
@@ -55,10 +56,15 @@ selectPlace(place: any) {
 
   }
 
-  searchTerm: string = '';
-  performSearch() {
-    console.log('Performing search for:', this.searchTerm);
+  searchText = '';
+  
+  
+  get filteredItems() {
+    return this.data.filter((data: any) =>
+      data.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
+
   ngOnInit() {
     this.getPlaces();
 

@@ -1,5 +1,7 @@
 body {
-    background-image: url(../../assets/background.jpg);
+    background-image: url(../../assets/borito.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .content {

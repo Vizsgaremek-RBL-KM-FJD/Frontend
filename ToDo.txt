@@ -1,8 +1,20 @@
 Mi nem jó?????
 
 home - kereső
+     - ne lehessen egyszerre foglalni
+
+-főoldal szövegek
+
+-profil oldal design
+-profil oldal - profil törlése gomb
+-profil oldal profilkép
+-főoldal design + kommentek report
+-profil fül - termekhez a foglalások kezelése mint tulaj
+
+-email küldés regisztrációkor, és bérléskor, stb...
+
+
 
 admin:
-    felhasználó törlés
+    
     rents státusz állítás
-    számozás

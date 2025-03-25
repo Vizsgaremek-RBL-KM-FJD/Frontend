@@ -1,84 +1,76 @@
-<div class="content w-100">
-  <div class="row ">
-  
-      <div class="col profilecol">
-        <h3>Profil</h3>
-        <div class="card border-info mb-3 me-5" style="max-width: 18rem;">
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- Profil szekció -->
+    <div class="col-lg-4 col-md-6">
+      <h3 class="text-center">Profil</h3>
+      <div class="card border-info shadow-sm">
+        <div class="card-body">
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="user.first_name" type="text" class="form-control" id="firstName">
+            <label for="firstName">Keresztnév</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="user.last_name" type="text" class="form-control" id="lastName">
+            <label for="lastName">Vezetéknév</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="user.email" type="email" class="form-control" id="email">
+            <label for="email">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="user.address" type="text" class="form-control" id="address">
+            <label for="address">Lakcím</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="phone">
+            <label for="phone">Telefonszám</label>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-info w-100" (click)="updateProfile()">Adatok frissítése</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Termek szekció -->
+    <div class="col-lg-8 col-md-6">
+      <h3 class="text-center">Termek</h3>
+      <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <ng-container *ngFor="let place of places">
+          <div class="card border-info shadow-sm" style="max-width: 18rem;">
+            <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
             <div class="card-body">
-                <div class="form-floating mb-3">
-                    <input [(ngModel)]="user.first_name" type="text" class="form-control" id="floatingInput" >
-                    <label for="floatingInput">Keresztnév</label>
-                  </div>
-  
-                <div class="form-floating mb-3">
-                    <input [(ngModel)]="user.last_name" type="text" class="form-control" id="floatingInput" >
-                    <label for="floatingInput">Vezetéknév</label>
-                  </div>
-  
-                <div class="form-floating mb-3">
-                    <input [(ngModel)]="user.email" type="email" class="form-control" id="floatingInput">
-                    <label for="floatingInput">Email</label>
-                </div>
-  
-                <div class="form-floating mb-3">
-                    <input [(ngModel)]="user.address" type="text" class="form-control" id="floatingInput">
-                    <label for="floatingInput">Lakcím</label>
-                </div>
-  
-                <div class="form-floating mb-3">
-                    <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="floatingInput">
-                    <label for="floatingInput">Telefonszám</label>
-                </div>
-  
-            </div>
-            <div class="card-footer text-center">
-                <button class="btn btn-secondary" (click)="updateProfile()">Adatok frissítése</button>
+              <div class="form-floating mb-2">
+                <input type="text" class="form-control" [(ngModel)]="place.place_name">
+                <label>Hely neve</label>
+              </div>
+              <div class="form-floating mb-2">
+                <input type="text" class="form-control" [(ngModel)]="place.address">
+                <label>Cím</label>
+              </div>
+              <div class="form-floating mb-2">
+                <input type="text" class="form-control" [(ngModel)]="place.price">
+                <label>Ár (Ft/óra)</label>
+              </div>
+              <div class="mb-2">
+                <label for="imageUpload" class="form-label">Kép feltöltése</label>
+                <input type="file" class="form-control" id="imageUpload" (change)="onFileSelectedUpdate($event, place)">
+              </div>
+              <button class="btn btn-success w-100 mb-1" (click)="updatePlace(place)">Mentés</button>
+              <button class="btn btn-danger w-100 mb-1" (click)="deletePlace(place)">Törlés</button>
+              <button class="btn btn-warning w-100" (click)="deletePlaceImage(place)">Kép törlése</button>
             </div>
           </div>
-      </div>
-  
-  
-        <div class="col placescol">
-          <h3>Termek</h3>
-          <ul *ngIf="places.length==0">
-            <p>Még nincs termed, regisztrálj egyet!</p>
-            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem létrehozása</button>
-        </ul>
-        <ng-container *ngFor="let place of places">
-          
-            <div *ngIf="place.status == 1" class="card border-info mb-3" style="max-width: 20rem;">
-              <div class="card-body">
-                  <div>
-                      <div class="terem mb-5" >
-                            <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
-                          <div class="fomr-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.place_name">
-                          </div>
-                          <div class="fomr-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.address">
-                          </div>
-                          <div class="fomr-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" [(ngModel)]="place.price">
-                          </div>
-                          <div class="mb-3">
-                            <label for="imageInput" class="form-label">Kép feltöltése</label>
-                            <input type="file" class="form-control" id="imageInput" (change)="onFileSelectedUpdate($event, place)">
-                          </div>
-                          <button class="btn btn-outline-success me-2" (click)="updatePlace(place)" >Mentés</button>
-                          <button class="btn btn-outline-danger" (click)="deletePlace(place)">Törlés</button>
-                          <!-- Add a new button to your profil.component.html template -->
-                          <button (click)="deletePlaceImage(place)" type="button" class="btn btn-danger">Delete Image</button>
-                        </div>
-                    </div>
-              </div>
-              <div class="card-footer">
-                  <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem létrehozása</button>
-              </div>
-            </div>
         </ng-container>
-        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem létrehozása</button>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- Modal az új terem létrehozásához -->
 <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createPlaceModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -99,7 +91,6 @@
           <input [(ngModel)]="NewplacePrice" type="number" class="form-control" id="priceInput">
           <label for="priceInput">Ft / óra</label>
         </div>
-        <!-- Új: Kép feltöltése mező -->
         <div class="mb-3">
           <label for="imageInput" class="form-label">Kép feltöltése</label>
           <input type="file" class="form-control" id="imageInput" (change)="onFileSelected($event)">
@@ -111,6 +102,4 @@
       </div>
     </div>
   </div>
-</div>
-
 </div>

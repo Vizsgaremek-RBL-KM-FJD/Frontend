@@ -39,16 +39,8 @@ export class RentsService {
   }
 
   updateRent(rent: any) {
+    console.log(rent);
     this.http.put(this.base.api + 'rents/' + rent.UserID + '/' + rent.RentID, rent).subscribe((response: any) => {
-        console.log(response);
-    })
-  }
-
-
-  updateStatus(rent:any, status:string) {
-    console.log(status, rent)
-    const requestBody = { status: status };
-    this.http.patch(this.base.api + 'rents/' + rent.RentID, status).subscribe((response: any) => {
         console.log(response);
     })
   }
