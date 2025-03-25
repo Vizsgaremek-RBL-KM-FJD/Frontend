@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let rent of rents">
-          <ng-container *ngIf="rent.status != 'canceled'">
+          <ng-container *ngIf="rent.status == 'ongoing' || rent.status == 'not started'">
             <td data-label="Terem">{{ rent.place_name }}</td>
             <td data-label="Dátum">{{ rent.StartDate | date: 'yyyy-MM-dd' }}</td>
             <td data-label="Mettől?">{{ rent.StartDate | date: 'HH:mm' }}</td>
@@ -26,6 +26,34 @@
             </td>
             <td data-label="Lemondás">
               <button class="cancel-btn" (click)="cancelRent(rent)" *ngIf="isCancelable(rent)">Lemondás</button>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table> 
+
+    <h2>History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Terem</th>
+          <th>Dátum</th>
+          <th>Mettől?</th>
+          <th>Meddig?</th>
+          <th>Fizetendő összeg</th>
+          <th>Státusz</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rent of rents">
+          <ng-container *ngIf="rent.status != 'not started' && rent.status != 'ongoing'">
+            <td data-label="Terem">{{ rent.place_name }}</td>
+            <td data-label="Dátum">{{ rent.StartDate | date: 'yyyy-MM-dd' }}</td>
+            <td data-label="Mettől?">{{ rent.StartDate | date: 'HH:mm' }}</td>
+            <td data-label="Meddig?">{{ rent.EndDate | date: 'HH:mm' }}</td>
+            <td class="fw-bold" data-label="Fizetendő összeg">{{ rent.TotalAmount + " Ft" }}</td>
+            <td data-label="Státusz" [class.done]="rent.status == 'done'" [class.pending]="rent.status == 'pending'">
+              {{ rent.status }}
             </td>
           </ng-container>
         </tr>

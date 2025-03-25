@@ -36,8 +36,17 @@ export class ReservationsComponent implements OnInit {
   }
 
   cancelRent(rent:any) {
-    console.log("rentservice");
+    rent.startDate = this.convertDate(rent.StartDate);
+    rent.endDate = this.convertDate(rent.EndDate);
+    console.log("reservations c.", rent);
     rent.status = 'canceled';
+    console.log("reservations c. updated", rent);
     this.RentsService.updateRent(rent);
+  }
+
+  convertDate(date:String){
+    console.log(date.replace("T", " ").slice(0,19));
+    return date.replace("T", " ").slice(0,19)
+
   }
 }

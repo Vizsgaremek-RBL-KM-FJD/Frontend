@@ -18,6 +18,7 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { HourFormatPipe } from './hour-format.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SearchPipe } from './search.pipe';
 
 
 
@@ -36,6 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HourFormatPipe,
     AdminComponent,
     InfoComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

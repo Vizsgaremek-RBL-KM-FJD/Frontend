@@ -39,7 +39,7 @@ export class RentsService {
   }
 
   updateRent(rent: any) {
-    console.log(rent);
+    console.log("átjön ez a szar",rent);
     this.http.put(this.base.api + 'rents/' + rent.UserID + '/' + rent.RentID, rent).subscribe((response: any) => {
         console.log(response);
     })
