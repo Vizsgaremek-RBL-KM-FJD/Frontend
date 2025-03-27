@@ -37,7 +37,8 @@
             <h6>Hozzászólások:</h6>
             <ul *ngFor="let comment of comments" class="list-group mb-3">
               <li *ngIf="comment.placeID == place.PlaceID && comment.userID != userID" class="list-group-item masok">
-                <strong>{{comment.username}}</strong>  <span class="owner" *ngIf="comment.userID==place.UserID"> Tulajdonos</span>
+                <strong>{{comment.username}}</strong> <span class="owner" *ngIf="comment.userID==place.UserID"> Tulajdonos</span>
+                <button class="btn btn-outlinve-warning" data-bs-toggle="modal" data-bs-target="#reportModal" (click)="setComment(comment)"><i class="bi bi-exclamation-circle"></i></button>
                 <p>{{comment.text}}</p>
               </li>
               <li *ngIf="comment.placeID == place.PlaceID && comment.userID == userID" class="list-group-item sajat">
@@ -146,4 +147,27 @@
     </div>
   </div>
   
+  <div class="modal fade" id="reportModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content shadow-lg rounded-lg border-0">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fs-4" id="exampleModalToggleLabel2">Bejelentés</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-3">
+          <p>Kiválasztott üzenet: {{selectedComment.text}}</p>
+
+          <div class="form-floating mb-3">
+            <h5>Miért szeretnéd bejelenteni a kommentet?</h5>
+            <textarea [(ngModel)]="reportText" type="text" class="form-control" id="reportText" placeholder="Bejelentés"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-outline-success" data-bs-dismiss="modal" (click)="reportComment(selectedComment.userID)">Jelentés</button>
+          <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

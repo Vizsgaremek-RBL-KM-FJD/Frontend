@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
   comments:any = [];
   data:any = [];
   rents:any[] = [];
+  selectedComment: any = [];
+  reportText: string = '';
 
   userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
 
@@ -236,6 +238,52 @@ getRentsByPlaceID(): Observable<{ areHoursOverlapping: boolean; occupiedHours: n
   );
 }
 
+reportComment(userID: number) {
+  const body = {
+    report_type: "comment",
+    reported_id: this.selectedComment.userID,
+    reporter_id: JSON.parse(localStorage.getItem('loggedUser')!).ID,
+    report_date: new Date().toISOString().replace('T', ' ').replace('Z', ''),
+    checked: false,
+    reason: this.reportText,
+    commentID: this.selectedComment.id,
+    placeID: null
+  };
+  console.log(body);
+
+  this.http.post(this.base.api + 'reports/create', body)
+    .subscribe(
+      (response) => {
+        console.log('Report created successfully', response);
+      },
+      (error) => {
+        console.error('Error creating report', error);
+        // You can also display an error message to the user here
+      }
+    );
+  }
+
+
+// async function createReport(report_type, reported_id, reporter_id, report_date, checked, reason) {
+//   try {
+//        const result = await db.query(
+//            'INSERT INTO reported (report_type, reported_id, reporter_id, report_date, checked, reason) VALUES (?, ?, ?, ?, ?, ?)',
+//            [report_type, reported_id, reporter_id, report_date, checked, reason]
+//        );
+//        return { message: 'Report created successfully'};
+//    } catch (err) {
+//        console.error('Error creating report:', err);
+//        throw new Error('Failed to create report', err);
+//   }
+// }
+
+setComment(comment: any) {
+  console.log("komment",comment);
+  console.log("selected komment", this.selectedComment);
+
+  this.selectedComment = comment;
+  console.log("selected komment2 ", this.selectedComment);
+}
 
 rentPlace() {
   this.getRentsByPlaceID().subscribe((result) => {

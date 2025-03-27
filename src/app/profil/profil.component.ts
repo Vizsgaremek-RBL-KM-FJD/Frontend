@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from '../services/users/users.service';
 import { PlacesService } from '../services/places/places.service';
+import { RentsService } from '../services/rents/rents.service';
 
 
 @Component({
@@ -15,9 +16,7 @@ import { PlacesService } from '../services/places/places.service';
 export class ProfilComponent implements OnInit{
   user: any;
   places: any[] = [];
-  // NewplaceName: string = "";
-  // NewplaceAddress: string = "";
-  // NewplacePrice: number = 0;
+  rents:any[] = [];
   NewplaceName = '';
   NewplaceAddress = '';
   NewplacePrice = '';
@@ -27,7 +26,8 @@ export class ProfilComponent implements OnInit{
     private auth:AuthService,
     private userService: UsersService,
     private PlacesService: PlacesService,
-    private http: HttpClient
+    private http: HttpClient,
+    private RentsService: RentsService
   ) {}
 
 
@@ -44,6 +44,30 @@ export class ProfilComponent implements OnInit{
     } else {
       console.log('No logged user found');
     }
+
+    
+  }
+
+  getRentsbyPlaceID(placeID: number) {
+    console.log(placeID);
+    this.RentsService.getRentsByPlaceID(placeID).subscribe((res: any) => {
+      this.rents = res;
+      console.log(this.places);
+    })
+  }
+
+  cancelRent(rent:any) {
+    rent.startDate = this.convertDate(rent.StartDate);
+    rent.endDate = this.convertDate(rent.EndDate);
+    console.log("reservations c.", rent);
+    rent.status = 'canceled';
+    console.log("reservations c. updated", rent);
+    this.RentsService.updateRent(rent);
+  }
+  convertDate(date:String){
+    console.log(date.replace("T", " ").slice(0,19));
+    return date.replace("T", " ").slice(0,19)
+
   }
 
   updateProfile() {
@@ -66,19 +90,6 @@ export class ProfilComponent implements OnInit{
   createPlaceForm() {
    return null;
   }
-  
-  // createPlace() {
-  //   const userId = this.user.ID;
-  //   const address = this.NewplaceAddress;
-  //   const placeName = this.NewplaceName;
-  //   const price = this.NewplacePrice;
-
-  //   this.http.post(`http://127.0.0.1:3000/places/create`, { userId, address, placeName, price }).subscribe((response: any) => {
-  //     console.log(response);
-  //   })
-
-  // }
-
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -146,13 +157,6 @@ deletePlaceImage(place: any) {
   
     this.PlacesService.updatePlaceFromForm(place.PlaceID, formData);
   }
-
-//   async function updatePlace(id, place) {
-//     const result = await db.query('UPDATE place SET address = ?, place_name = ?, price = ? WHERE PlaceID = ?', [place.address, place.place_name, place.price, id]);
-//     return { message: 'Place updated successfully' };
-// }
-
-
   
 deletePlace(place: any) {
   this.PlacesService.deletePlace(place)

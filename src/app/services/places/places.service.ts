@@ -18,6 +18,10 @@ export class PlacesService {
     return this.http.get(this.base.api + 'places');
   }
 
+  getAllComments() {
+    return this.http.get(this.base.api + 'comments/');
+  }
+
   getPlaceById(userID: number) {
     return this.http.get(this.base.api + 'places/' + userID);
   }
@@ -37,6 +41,13 @@ deletePlaceImage(placeId: number) {
       console.log(response);
     })
   }
+
+deleteComment(id: number) {
+  this.http.delete(`${this.base.api}comments/${id}`).subscribe((response: any) => {
+    console.log(response);
+  })
+  }
+
 
   updatePlaceFromForm(placeID: number, formData: FormData) {
     this.http.put(this.base.api + 'places/' + placeID, formData).subscribe((response: any) => {
@@ -69,6 +80,10 @@ deletePlaceImage(placeId: number) {
 
 getComments() {
   return this.http.get(this.base.api + 'comments/')
+}
+
+getCommentsById(userID: number) {
+  return this.http.get(`${this.base.api}comments/user/${userID}`)
 }
 
 addComment(placeID: number, userID: number, username: string, text: string) {

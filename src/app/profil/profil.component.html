@@ -56,6 +56,9 @@
                 <label for="imageUpload" class="form-label">Kép feltöltése</label>
                 <input type="file" class="form-control" id="imageUpload" (change)="onFileSelectedUpdate($event, place)">
               </div>
+              <h5>Foglalások a teremhez:</h5>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentsModal" (click)="getRentsbyPlaceID(place.PlaceID)" >Foglalások mutatása</button>
+              
               <button class="btn btn-success w-100 mb-1" (click)="updatePlace(place)">Mentés</button>
               <button class="btn btn-danger w-100 mb-1" (click)="deletePlace(place)">Törlés</button>
               <button class="btn btn-warning w-100" (click)="deletePlaceImage(place)">Kép törlése</button>
@@ -99,6 +102,127 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
         <button type="button" class="btn btn-primary" (click)="createPlace()">Létrehozás</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="rentsModal" tabindex="-1" aria-labelledby="rentsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rentsModalLabel">Teremhez tartozó foglalások</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <h4>Jelenlegi foglalás</h4>
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <td>Ügyfél</td>
+              <th>Ügyfél telefonszám</th>
+              <th>Dátum</th>
+              <th>Mettől?</th>
+              <th>Meddig?</th>
+              <th>Fizetendő összeg</th>
+              <th>Státusz</th>
+              <th>Lemondás</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rent of rents">
+              <ng-container *ngIf="rent.status=='ongoing'">
+                <td data-label="Név">{{rent.UserName}}</td>
+                <td data-label="Telefonszám">{{rent.UserPhoneNumber}}</td>
+                <td data-label="Dátum">{{ rent.StartDate | date: 'yyyy-MM-dd' }}</td>
+                <td data-label="Mettől?">{{ rent.StartDate | date: 'HH:mm' }}</td>
+                <td data-label="Meddig?">{{ rent.EndDate | date: 'HH:mm' }}</td>
+                <td class="fw-bold" data-label="Fizetendő összeg">{{ rent.TotalAmount + " Ft" }}</td>
+                <td data-label="Státusz" [class.done]="rent.status == 'done'" [class.pending]="rent.status == 'pending'">
+                  {{ rent.status }}
+                </td>
+                <td data-label="Lemondás" >
+                  <button class="btn btn-outline-danger" *ngIf="rent.status !== 'canceled'" (click)="cancelRent(rent)">Lemondás</button>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <h4 class="mt-5">Jövőbeli foglalások</h4>
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Bérlő</th>
+              <th>Bérlő telefonszáma</th>
+              <th>Dátum</th>
+              <th>Mettől?</th>
+              <th>Meddig?</th>
+              <th>Fizetendő összeg</th>
+              <th>Státusz</th>
+              <th>Lemondás</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rent of rents">
+              <ng-container *ngIf="rent.status=='not started'">
+                <td data-label="Név">{{rent.UserName}}</td>
+                <td data-label="Telefonszám">{{rent.UserPhoneNumber}}</td>
+                <td data-label="Dátum">{{ rent.StartDate | date: 'yyyy-MM-dd' }}</td>
+                <td data-label="Mettől?">{{ rent.StartDate | date: 'HH:mm' }}</td>
+                <td data-label="Meddig?">{{ rent.EndDate | date: 'HH:mm' }}</td>
+                <td class="fw-bold" data-label="Fizetendő összeg">{{ rent.TotalAmount + " Ft" }}</td>
+                <td data-label="Státusz" [class.done]="rent.status == 'done'" [class.pending]="rent.status == 'pending'">
+                  {{ rent.status }}
+                </td>
+                <td data-label="Lemondás" >
+                  <button class="btn btn-outline-danger" *ngIf="rent.status !== 'canceled'" (click)="cancelRent(rent)">Lemondás</button>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="mt-5">Egyéb foglalások</h4>
+        <table class="table table-stripped">
+          <thead>
+            <tr>
+              <th>Bérlő</th>
+              <th>Bérlő telefonszáma</th>
+              <th>Dátum</th>
+              <th>Mettől?</th>
+              <th>Meddig?</th>
+              <th>Fizetendő összeg</th>
+              <th>Státusz</th>
+              <th>Lemondás</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rent of rents">
+              <ng-container *ngIf="rent.status !== 'ongoing' && rent.status!=='not started'">
+                <td data-label="Név">{{rent.UserName}}</td>
+                <td data-label="Telefonszám">{{rent.UserPhoneNumber}}</td>
+                <td data-label="Dátum">{{ rent.StartDate | date: 'yyyy-MM-dd' }}</td>
+                <td data-label="Mettől?">{{ rent.StartDate | date: 'HH:mm' }}</td>
+                <td data-label="Meddig?">{{ rent.EndDate | date: 'HH:mm' }}</td>
+                <td class="fw-bold" data-label="Fizetendő összeg">{{ rent.TotalAmount + " Ft" }}</td>
+                <td data-label="Státusz" [class.done]="rent.status == 'done'" [class.pending]="rent.status == 'pending'">
+                  {{ rent.status }}
+                </td>
+                <td data-label="Lemondás" >
+                  <button class="btn btn-outline-danger"  (click)="cancelRent(rent)">Lemondás</button>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth/auth.service';
 import { UsersService } from '../services/users/users.service';
 import { PlacesService } from '../services/places/places.service';
 import { RentsService } from '../services/rents/rents.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -20,6 +21,9 @@ export class AdminComponent implements OnInit {
   selectedUser: any = [];
   rents: any = [];
   rentsByUser:any[] = [];
+  reports:any[] = [];
+  comments:any[] = [];
+  commentsByUser:any[] = [];
 
   
 
@@ -31,7 +35,8 @@ export class AdminComponent implements OnInit {
     private auth:AuthService,
     private UserService:UsersService,
     private PlacesService:PlacesService,
-    private RentsService:RentsService
+    private RentsService:RentsService,
+    private http:HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -45,8 +50,23 @@ export class AdminComponent implements OnInit {
   
     this.RentsService.getAllRents().subscribe((rents: any) => {
       this.rents = rents;
-      console.log()
     });
+
+    this.PlacesService.getAllComments().subscribe((comments: any) => {
+      console.log('Kapott kommentek:', comments);
+      this.comments = comments
+    })
+      this.http.get(this.base.api + 'reports').subscribe((res: any) => {
+        this.reports = res;
+      }
+    );
+  }
+
+  updateReport(id: number, checked: boolean) {
+    console.log(id, checked);
+    this.http.put(this.base.api + 'reports/update', { id, checked }).subscribe((res: any) => {
+      console.log(res);
+    })
     
   }
 
@@ -57,6 +77,7 @@ export class AdminComponent implements OnInit {
     this.getUserById(SelectedId);
     this.getPlacesById(SelectedId);
     this.getRentsByUser(SelectedId);
+    this.getCommentsById(SelectedId);
   }
 
   getPlacesById(SelectedId: number) {
@@ -64,6 +85,23 @@ export class AdminComponent implements OnInit {
       console.log(res)
       this.placesByUser = res;
     });
+  }
+
+  deleteComment(id: number) {
+    this.PlacesService.deleteComment(id)
+  }
+
+  getCommentsById(SelectedId: number) {
+    console.log("SelectedId for comments", SelectedId)
+    this.PlacesService.getCommentsById(SelectedId).subscribe(
+      (res: any) => {
+        console.log("Comments response:", res)
+        this.commentsByUser = res;
+      },
+      (error: any) => {
+        console.error("Error getting comments:", error)
+      }
+    )
   }
 
   getUserById(SelectedId: number) {
