@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { RentsService } from '../services/rents/rents.service';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -17,9 +18,13 @@ export class LoginComponent implements OnInit {
   password=""
   errorMessage=""
 
+  private loggedUser: any;
+    private userSub = new Subject();
+
   constructor(
     private auth:AuthService,
-    private rentsServce: RentsService
+    private rentsServce: RentsService,
+    private router:Router
   ){}
 
   ngOnInit(): void {
@@ -75,15 +80,36 @@ export class LoginComponent implements OnInit {
   
   
 
-  Login(){
-    if (this.email==="" || this.password==="") {
-      this.errorMessage = "Hibás e-mail cím, vagy jelszó!"
+  Login() {
+    if (!this.email || !this.password) {
+      this.errorMessage = "Hibás e-mail cím vagy jelszó!";
+      return;
     }
-    this.auth.Login(this.email, this.password)
-    this.email=""
-    this.password=""
-    
+  
+    this.auth.Login(this.email, this.password).subscribe({
+      next: (res) => {
+        this.errorMessage = ""; // Sikeres bejelentkezés esetén töröljük az üzenetet
+        this.email = "";
+        this.password = "";
+        this.loggedUser = res;
+        localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
+        this.userSub.next(this.loggedUser);
+        this.router.navigate(['home']);
+        // this.router.navigate(['home']);
+      },
+      error: (err) => {
+        if (err.status === 401 || err.status === 500) {
+          this.errorMessage = "Hibás e-mail vagy jelszó!";
+        } else {
+          this.errorMessage = "Ismeretlen hiba történt. Próbáld újra később!";
+        }
+        this.loggedUser = null;
+        this.userSub.next(this.loggedUser);
+      }
+    });
   }
+  
+  
 
 }
 

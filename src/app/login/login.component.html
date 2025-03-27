@@ -15,7 +15,9 @@
         <button (click)="Login()" type="button" class=" my-3 btn btn-outline-primary w-100">Bejelentkezés</button>
       </div>
       <div class="card-footer">
-        <span *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</span>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
         <p>Nincs még fiókod? <a class="link" routerLink="/register">regisztrálj egyet!</a></p>
       </div>
     </div>

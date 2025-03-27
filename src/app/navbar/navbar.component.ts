@@ -22,21 +22,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // }
   
   ngOnInit(): void {
-    // Ellenőrizd a LocalStorage-t
-    const userFromStorage = localStorage.getItem('loggedUser');
-    if (userFromStorage) {
-      this.loggedUser = JSON.parse(userFromStorage);
-    }
-  
-    // Feliratkozás az AuthService-re
+    
     this.feliratkozas = this.auth.getLoggedUser().subscribe(
-      (user) => this.loggedUser = user
+      (user) => {
+        this.loggedUser = user;
+        if (user) {
+          this.isAdmin = user.isAdmin; // Ha van ilyen mező az API válaszában
+        } else {
+          this.isAdmin = false;
+        }
+      }
+    );
+
+    this.auth.isAdmin$.subscribe(
+      (isAdmin) => this.isAdmin = isAdmin
     );
   
-    // Check if user is admin
-    this.auth.isAdmin().subscribe((response: any) => {
-      this.isAdmin = response;
-    });
   }
 
   
