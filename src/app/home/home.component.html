@@ -64,106 +64,86 @@
   
   
   <div class="modal fade" id="rentplaceModalStart" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Válassz egy napot</h1>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content shadow-lg rounded-lg border-0 text-center">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fs-4" id="exampleModalToggleLabel">Válassz egy napot és időintervallumot</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body py-3">
+          <div class="d-flex">
+            <!-- Left Side - Calendar -->
+            <div class="calendar-container me-3">
+              <ngb-datepicker #dp outsideDays="hidden" [displayMonths]="1" (dateSelect)="selectDate($event)" [dayTemplate]="customDay"></ngb-datepicker>
+              <ng-template #customDay let-date let-focused="focused" let-selected="selected" let-disabled="disabled" let-context="context">
+                <span
+                  class="custom-day rounded-circle d-flex justify-content-center align-items-center p-2"
+                  [class.focused]="focused"
+                  [class.bg-primary]="date === selectedDate"
+                  [class.bg-info]="isHovered(date)"
+                  [class.bg-disabled]="disabled"
+                  (mouseenter)="hoveredDate = date"
+                  (mouseleave)="hoveredDate = null"
+                  (click)="selectDate(date)"
+                  >{{ date.day }}</span>
+              </ng-template>
+            </div>
   
-          <ngb-datepicker #dp outsideDays="hidden" [displayMonths]="1" (dateSelect)="selectDate($event)" [dayTemplate]="customDay"></ngb-datepicker>
-  
-          <ng-template #customDay let-date let-focused="focused" let-selected="selected" let-disabled="disabled" let-context="context">
-            <span
-              class="custom-day"
-              [class.focused]="focused"
-              [class.bg-primary]="date === selectedDate"
-              [class.bg-info]="isHovered(date)"
-              [class.bg-disabled]="disabled"
-              (mouseenter)="hoveredDate = date"
-              (mouseleave)="hoveredDate = null"
-              (click)="selectDate(date)"
-            >{{ date.day }}</span>
-          </ng-template>
-  
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-outline-primary" data-bs-target="#rentplaceModalHour" data-bs-toggle="modal">Tovább</button>
-          <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal fade" id="rentplaceModalHour" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Válassz időintervallumot</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-  
-          <div class="hour-picker">
-            <table>
-              <tr>
-                <th>Start Hour</th>
-                <th>End Hour</th>
-              </tr>
-              <tr *ngFor="let hour of hours">
-                <td>
-                  <input type="radio" name="startHour" [value]="hour" (change)="selectStartHour(hour)">
-                  {{ hour | hourFormat }}
-                </td>
-                <td>
-                  <input type="radio" name="endHour" [value]="hour" (change)="selectEndHour(hour)">
-                  {{ hour | hourFormat }}
-                </td>
-              </tr>
-            </table>
+            <!-- Right Side - Hour Picker -->
+            <div class="hour-picker-container" style="overflow-y: auto; max-height: 300px;">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th>Start Hour</th>
+                    <th>End Hour</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let hour of hours">
+                    <td>
+                      <input type="radio" name="startHour" [value]="hour" (change)="selectStartHour(hour)" class="form-check-input">
+                      {{ hour | hourFormat }}
+                    </td>
+                    <td>
+                      <input type="radio" name="endHour" [value]="hour" (change)="selectEndHour(hour)" class="form-check-input">
+                      {{ hour | hourFormat }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-  
         </div>
-        <div class="modal-footer">
-          <button class="btn btn-outline-primary" data-bs-target="#rentplaceModalStart" data-bs-toggle="modal">Vissza</button>
-          <button id="rentplaceModalHour" class="btn btn-outline-primary" data-bs-target="#rentplaceModalEnd" data-bs-toggle="modal">Tovább</button>
+        <div class="modal-footer border-0">
           <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
+          <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-target="#rentplaceModalEnd" data-bs-toggle="modal">Tovább</button>
         </div>
       </div>
     </div>
   </div>
-
+  
+  
   <div class="modal fade" id="rentplaceModalEnd" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Összefoglalás</h1>
+      <div class="modal-content shadow-lg rounded-lg border-0">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fs-4" id="exampleModalToggleLabel2">Összefoglalás</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-  
-          <ul>
-            <li>
-              <input type="text" name="startHour" [(ngModel)]="startHour">
-            </li>
-            <li>
-              <input type="text" name="endHour" [(ngModel)]="endHour">
-            </li>
-            <li>
-              <input type="text" name="selectedDate" [ngModel]="selectedDate | json" (ngModelChange)="selectedDate = $event">
-            </li>
+        <div class="modal-body py-3">
+          <ul class="list-unstyled">
+            <li><strong>Start Hour:</strong> <input disabled="disabled" type="text" name="startHour" [(ngModel)]="startHour" class="form-control"></li>
+            <li><strong>End Hour:</strong> <input disabled="disabled" type="text" name="endHour" [(ngModel)]="endHour" class="form-control"></li>
+            <li><strong>Selected Date:</strong> <input disabled="disabled" type="text" name="selectedDate" [ngModel]="selectedDate | json" (ngModelChange)="selectedDate = $event" class="form-control"></li>
           </ul>
-  
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-0">
           <button class="btn btn-outline-primary" data-bs-target="#rentplaceModalHour" data-bs-toggle="modal">Vissza</button>
-          <button class="btn btn-outline-primary" data-bs-dismiss="modal" (click)="rentPlace()"
-          *ngIf="selectedDate && startHour && endHour && startHour < endHour && startHour >= 0 && endHour >= 0  && getDate(selectedDate) > getCurrentDate()">Foglalás</button>
+          <button class="btn btn-outline-success" data-bs-dismiss="modal" (click)="rentPlace()" *ngIf="selectedDate && startHour && endHour && startHour < endHour && startHour >= 0 && endHour >= 0 && getDate(selectedDate) > getCurrentDate()">Foglalás</button>
           <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
-          <button class="btn btn-outline-primary" (click)="getRentsByPlaceID()">asd</button>
         </div>
       </div>
     </div>
   </div>
+  
 </div>

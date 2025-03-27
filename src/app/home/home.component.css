@@ -22,34 +22,33 @@
   border-radius: 10px;
 }
 
-
 a {
-    text-decoration: none;
-    color: darkgray;
+  text-decoration: none;
+  color: darkgray;
 }
 a:hover {
-    color: black;
+  color: black;
 }
 
-  .custom-day {
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    display: inline-block;
-    height: 2rem;
-    width: 2rem;
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
 }
 .custom-day.focused {
-    background-color: #e6e6e6;
-    border-radius: 10px;
+  background-color: #e6e6e6;
+  border-radius: 10px;
 }
 .custom-day.range,
 .custom-day:hover {
-    background-color: rgb(2, 117, 216);
-    color: white;
-    border-radius: 10px;
+  background-color: rgb(2, 117, 216);
+  color: white;
+  border-radius: 10px;
 }
 .custom-day.faded {
-    background-color: rgba(2, 117, 216, 0.5);
+  background-color: rgba(2, 117, 216, 0.5);
 }
 
 .masok {
@@ -70,44 +69,38 @@ a:hover {
   font-weight: italic;
 }
 
-  @media (max-width: 1530px) {
-    .block:nth-child(6),
-    .block:nth-child(7) {
-      display: none;
-    }
-  }
+.modal-body {
+  display: flex;
+  justify-content: center; /* Középre igazítja a két oszlopot */
+  align-items: center; /* Vertikálisan középre igazítja */
+  gap: 30px; /* Két elem közötti távolság */
+}
 
-  @media (max-width: 1200px) {
-    
-    .block:nth-child(5),
-    .block:nth-child(6),
-    .block:nth-child(7) {
-      display: none;
-    }
-  }
-  
-  @media (max-width: 1000px) {
-    .block:nth-child(4),
-    .block:nth-child(5),
-    .block:nth-child(6),
-    .block:nth-child(7) {
-      display: none;
-    }
-  }
-  
-  @media (max-width: 800px) {
-    .block:nth-child(3),
-    .block:nth-child(4),
-    .block:nth-child(5),
-    .block:nth-child(6),
-    .block:nth-child(7) {
-      display: none;
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .block {
-      display: none;
-    }
-  }
-  
+.calendar-container, .hour-picker-container {
+  width: 100%; /* Kitölti a rendelkezésre álló helyet */
+  max-width: 500px; /* Beállíthatsz egy maximális szélességet */
+}
+
+.hour-picker-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+
+.table th, .table td {
+  text-align: center;
+}
+
+.table th {
+  width: 50%;
+}
+
+.table td {
+  width: 50%;
+}
+
+.custom-day {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
