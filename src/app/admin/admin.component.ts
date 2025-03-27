@@ -50,7 +50,7 @@ export class AdminComponent implements OnInit {
     
   }
 
-  
+  searchText = '';
 
   viewDetails(id: number) {
     const SelectedId = id;

@@ -24,17 +24,27 @@ export class RegisterComponent {
 
   constructor(private auth:AuthService, private router:Router){}
 
-    Register(){
-    if (!this.first_name || !this.last_name || !this.email || !this.address || !this.phone_number || !this.password) {this.errorMessage="Minden mezőt ki kell tölteni!"; this.succesMessage=""}
-    else {
+  validatePassword(password: string): boolean {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+    return passwordRegex.test(password);
+  }
+
+  Register(){
+    if (!this.first_name || !this.last_name || !this.email || !this.address || !this.phone_number || !this.password)
+      {this.errorMessage="Minden mezőt ki kell tölteni!"; this.succesMessage=""}
+  
+    if (!this.validatePassword(this.password) && !this.errorMessage)
+      {this.errorMessage="A jelszónak minimum 6 karakternek kell lennie, tartalmaznia kell kis- e és nagybetüket, és számokat!"; this.succesMessage=""}
+  
+    if (!this.errorMessage) {
       this.auth.Register( this.first_name, this.last_name, this.gender, this.email, this.address, this.phone_number, this.password);
       this.errorMessage="";
       this.succesMessage="Sikeres regisztráció!"
-
+  
       setTimeout(() => {
         this.router.navigate(['login']);
       }, 2000);
     }
-    }
+  }
   }
 

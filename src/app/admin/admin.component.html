@@ -1,5 +1,19 @@
 <div class="container mt-5">
   <div class="table-container">
+
+    <div class="search">
+      <div class="row">
+        <div class="input-group input-group">
+          <input type="text" [(ngModel)]="searchText" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-default">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Bal oldali tábla -->
     <table class="table table-bordered table-hover shadow-sm" style="table-layout: auto; width: 100%;">
       <thead class="table-dark">
@@ -11,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users | paginate: { itemsPerPage: PageSize, currentPage: CurrentPage }">
+        <tr *ngFor="let user of users | paginate: { itemsPerPage: PageSize, currentPage: CurrentPage } | search: searchText">
           <td>{{user.ID}}</td>
           <td>{{user.first_name}} {{user.last_name}}</td>
           <td>{{user.email}}</td>
