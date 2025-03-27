@@ -82,7 +82,24 @@ export class AuthService {
     );
   }
 
+  // logout() {
+  //   console.log('Logout method called');
+  //   this.http.post(this.base.api + "users/logout", {}, this.base.httpOptions).subscribe(
+  //     {
+  //       next: (res) => {
+  //         console.log(res);
+  //         this.loggedUser = null;
+  //         this.userSub.next(null);
+  //         localStorage.removeItem('loggedUser');
+  //         console.log('Logged user removed from local storage');
+  //       },
+  //       error: (err) => console.log(err)
+  //     }
+  //   );
+  // }
+
   logout() {
+    console.log('Logout method called');
     this.http.post(this.base.api + "users/logout", {}, this.base.httpOptions).subscribe(
       {
         next: (res) => {
@@ -90,10 +107,11 @@ export class AuthService {
           this.loggedUser = null;
           this.userSub.next(null);
           localStorage.removeItem('loggedUser');
-          this.userSub.next(this.loggedUser);
+          console.log('Logged user removed from local storage');
         },
         error: (err) => console.log(err)
       }
     );
+    return false;
   }
 }

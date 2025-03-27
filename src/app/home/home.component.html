@@ -127,12 +127,13 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-outline-primary" data-bs-target="#rentplaceModalStart" data-bs-toggle="modal">Vissza</button>
-          <button class="btn btn-outline-primary" data-bs-target="#rentplaceModalEnd" data-bs-toggle="modal">Tovább</button>
+          <button id="rentplaceModalHour" class="btn btn-outline-primary" data-bs-target="#rentplaceModalEnd" data-bs-toggle="modal">Tovább</button>
           <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
         </div>
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="rentplaceModalEnd" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -160,6 +161,7 @@
           <button class="btn btn-outline-primary" data-bs-dismiss="modal" (click)="rentPlace()"
           *ngIf="selectedDate && startHour && endHour && startHour < endHour && startHour >= 0 && endHour >= 0  && getDate(selectedDate) > getCurrentDate()">Foglalás</button>
           <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
+          <button class="btn btn-outline-primary" (click)="getRentsByPlaceID()">asd</button>
         </div>
       </div>
     </div>

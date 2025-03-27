@@ -42,13 +42,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   
 
   ngOnDestroy(): void {
-    if (this.feliratkozas) this.feliratkozas.unsubscribe()    
-    this.feliratkozas?.unsubscribe()    
+    this.feliratkozas?.unsubscribe();
   }
 
   logout(){
     console.log("Kilép")
-    if (this.loggedUser) this.auth.logout()
+    if (this.feliratkozas) {
+      this.feliratkozas.unsubscribe();
+    }
+    this.auth.logout()
   }
 
 }
