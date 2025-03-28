@@ -136,6 +136,7 @@ deletePlaceImage(place: any) {
     this.http.post('http://127.0.0.1:3000/places/create', formData).subscribe(
       (response: any) => {
         console.log(response);
+        alert("Hely sikeresen regisztrálva)")
       },
       (error) => {
         console.error('Hiba a hely létrehozásakor:', error);

@@ -10,6 +10,7 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { AdminComponent } from './admin/admin.component';
 import { adminGuard } from './admin.guard';
 import { authGuard } from './auth.guard';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [authGuard]},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'services', component: InfoComponent},
   {path: 'reservations', component: ReservationsComponent, canActivate: [authGuard]},
   {path: 'admin', component: AdminComponent, canActivate: [adminGuard]},
+  {path: 'reset-password/:token', component: ResetPasswordComponent},
   {path: '', redirectTo : 'home', pathMatch: 'full'},
   {path: '**', redirectTo : 'home', pathMatch: 'full'}
   

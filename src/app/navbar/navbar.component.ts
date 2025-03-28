@@ -52,6 +52,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.feliratkozas.unsubscribe();
     }
     this.auth.logout()
+    localStorage.removeItem('loggedUser');
   }
 
 }

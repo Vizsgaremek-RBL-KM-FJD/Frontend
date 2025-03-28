@@ -20,13 +20,16 @@ import { Observable, map } from 'rxjs';
 export class HomeComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
   selectedDate: any;         
-  selectedPlace: any;
+  selectedPlace: any ;
   newCommentText: string = '';
   comments:any = [];
   data:any = [];
   rents:any[] = [];
   selectedComment: any = [];
   reportText: string = '';
+  selectedPlace2: any = [];
+  selectedUser: any = [];
+
 
   userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
 
@@ -123,77 +126,7 @@ formatDate(date: any) {
   this.selectedDate = new Date(date).toISOString().split('T')[0];
 }
 
-// getRentsByPlaceID() {
-//   this.RentsService.getRentsByPlaceID(this.selectedPlace.PlaceID).subscribe((result) => {
-//     const rentals = result;
-//     console.log(result);
 
-//     const getHoursInRange = (startDate: Date, endDate: Date) => {
-//       const startHour = new Date(startDate).getHours();
-//       const endHour = new Date(endDate).getHours();
-      
-//       let hours = [];
-//       for (let i = startHour; i <= endHour; i++) {
-//           hours.push(i);
-//       }
-//       return hours;
-//     };
-
-//     if (Array.isArray(rentals)) {
-//       const selectedDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day);
-//       const filteredRentals = rentals.filter(rental => {
-//         const rentalDate = new Date(rental.StartDate);
-//         const rentalDateMidnight = new Date(rentalDate.getFullYear(), rentalDate.getMonth(), rentalDate.getDate());
-//         return rentalDateMidnight.getTime() === selectedDate.getTime();
-//       });
-
-//       const hoursInRange = filteredRentals.map(rental => getHoursInRange(rental.StartDate, rental.EndDate));
-//       console.log(hoursInRange.flat()); // [13, 14, 15, 16, 16, 17, 18]
-//     } else {
-//       console.log('Rentals is not an array');
-//     }
-//   });
-// }
-
-
-// getRentsByPlaceID() {
-//   this.RentsService.getRentsByPlaceID(this.selectedPlace.PlaceID).subscribe((result) => {
-//     const rentals = result;
-//     console.log(result);
-
-//     const getHoursInRange = (startDate: Date, endDate: Date) => {
-//       const startHour = new Date(startDate).getHours();
-//       const endHour = new Date(endDate).getHours();
-      
-//       let hours = [];
-//       for (let i = startHour; i <= endHour; i++) {
-//           hours.push(i);
-//       }
-//       return hours;
-//     };
-
-//     if (Array.isArray(rentals)) {
-//       const selectedDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day);
-//       const filteredRentals = rentals.filter(rental => {
-//         const rentalDate = new Date(rental.StartDate);
-//         const rentalDateMidnight = new Date(rentalDate.getFullYear(), rentalDate.getMonth(), rentalDate.getDate());
-//         return rentalDateMidnight.getTime() === selectedDate.getTime();
-//       });
-
-//       const hoursInRange = filteredRentals.map(rental => getHoursInRange(rental.StartDate, rental.EndDate));
-//       console.log(hoursInRange.flat()); 
-//       // [13, 14, 15, 16, 16, 17, 18]
-
-//       // Check if selected hours overlap with hoursInRange
-//       const selectedHours = Array.from({length: this.endHour - this.startHour + 1}, (_, i) => i + this.startHour);
-//       const hoursInRangeFlat = hoursInRange.flat();
-//       const areHoursOverlapping = selectedHours.some(hour => hoursInRangeFlat.includes(hour));
-//       console.log('Are selected hours overlapping with hoursInRange?', areHoursOverlapping);
-//     } else {
-//       console.log('Rentals is not an array');
-//     }
-//   });
-// }
 
 getRentsByPlaceID(): Observable<{ areHoursOverlapping: boolean; occupiedHours: number[] }> {
   return this.RentsService.getRentsByPlaceID(this.selectedPlace.PlaceID).pipe(
@@ -263,6 +196,60 @@ reportComment(userID: number) {
     );
   }
 
+  reportPlace(userID: number) {
+    const body = {
+      report_type: "place",
+      reported_id: this.selectedPlace2.UserID,
+      reporter_id: JSON.parse(localStorage.getItem('loggedUser')!).ID,
+      report_date: new Date().toISOString().replace('T', ' ').replace('Z', ''),
+      checked: false,
+      reason: this.reportText,
+      commentID: null,
+      placeID: this.selectedPlace2.PlaceID
+    };
+    console.log(body);
+
+    this.http.post(this.base.api + 'reports/create', body)
+      .subscribe(
+        (response) => {
+          console.log('Report created successfully', response);
+        },
+        (error) => {
+          console.error('Error creating report', error);
+          // You can also display an error message to the user here
+        }
+      );
+  }
+
+  ReportUser(userID: number) {
+    const body = {
+      report_type: "user",
+      reported_id: userID,
+      reporter_id: JSON.parse(localStorage.getItem('loggedUser')!).ID,
+      report_date: new Date().toISOString().replace('T', ' ').replace('Z', ''),
+      checked: false,
+      reason: this.reportText,
+      commentID: null,
+      placeID: null
+    };
+    console.log(body);
+
+    this.http.post(this.base.api + 'reports/create', body)
+      .subscribe(
+        (response) => {
+          console.log('Report created successfully', response);
+        },
+        (error) => {
+          console.error('Error creating report', error);
+          // You can also display an error message to the user here
+        }
+      );
+  }
+
+  deleteComment(id: number) {
+    this.PlacesService.deleteComment(id)
+  }
+
 
 // async function createReport(report_type, reported_id, reporter_id, report_date, checked, reason) {
 //   try {
@@ -283,6 +270,19 @@ setComment(comment: any) {
 
   this.selectedComment = comment;
   console.log("selected komment2 ", this.selectedComment);
+}
+
+setPlace(place: any) {
+  this.selectedPlace2 = place;
+}
+
+setUser(userID: number) {
+  this.http.get(this.base.api + 'users/' + userID).subscribe((user: any) => {
+    console.log(user);
+    this.selectedUser = user;
+    console.log("User as selected", this.selectedUser);
+  })
+  
 }
 
 rentPlace() {

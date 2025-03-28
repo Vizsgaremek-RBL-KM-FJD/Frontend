@@ -30,6 +30,7 @@ export class RegisterComponent {
   }
 
   Register(){
+    this.errorMessage="";
     if (!this.first_name || !this.last_name || !this.email || !this.address || !this.phone_number || !this.password)
       {this.errorMessage="Minden mezőt ki kell tölteni!"; this.succesMessage=""}
   

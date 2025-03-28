@@ -11,6 +11,7 @@
           <th>Fizetendő összeg</th>
           <th>Státusz</th>
           <th>Lemondás</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +28,7 @@
             <td data-label="Lemondás">
               <button class="cancel-btn" (click)="cancelRent(rent)" *ngIf="isCancelable(rent)">Lemondás</button>
             </td>
+            <td></td>
           </ng-container>
         </tr>
       </tbody>

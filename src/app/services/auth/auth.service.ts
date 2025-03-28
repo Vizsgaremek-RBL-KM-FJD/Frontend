@@ -21,6 +21,7 @@ export class AuthService {
     if (storedUser) {
       this.loggedUserSubject.next(JSON.parse(storedUser));
     }
+    this.isAdmin();
   }
 
   private isAdminSubject = new BehaviorSubject<boolean>(false);
@@ -42,6 +43,9 @@ export class AuthService {
     return this.loggedUser$;
   }
 
+  ForgotPassword(email: string) {
+    return this.http.post(this.base.api + "users/forgot-password", { email });
+  }
 
   isLoggedIn(): boolean {
     return !!JSON.parse(localStorage.getItem('loggedUser')!);

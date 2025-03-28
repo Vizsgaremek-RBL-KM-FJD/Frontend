@@ -90,3 +90,18 @@
   color: black;
 }
 
+
+
+@media screen and (max-width: 786px) {
+  .hero-title {
+    font-size: 50px;
+  }
+
+  .hero-description {
+    font-size: 20px;
+  }
+
+  .hero-button {
+    font-size: 12px !important;
+  }
+}

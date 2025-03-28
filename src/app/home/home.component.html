@@ -22,28 +22,32 @@
 <div class="container">
   <div *ngFor="let place of places | search: searchText" class="row justify-content-center mb-5">
     <ng-container >
-      <div *ngIf="place.status == 1" class="card m-4 image" style="width: 60rem;" (click)="selectPlace(place)">
+      <div *ngIf="place.status == 1" class="card m-4 image" style="width: 60rem;" (click)="setPlace(place)">
         <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top border" alt="{{place.place_name}}">
   
         <div class="card-body">
-          <h5 class="card-title">{{place.place_name}}</h5>
+          <h5 class="card-title">{{place.place_name}} </h5>
           <h6 class="card-subtitle mb-2 text-body-secondary">
-            <a routerLink="profil">Üzemeltető: {{place.owner_name}}</a>
+            <a class="userprofileopen" data-bs-toggle="modal" data-bs-target="#userModal" (click)="setUser(place.UserID)">Üzemeltető: {{place.owner_name}}</a>
           </h6>
           <p class="card-text">{{place.address}}</p>
+          <button class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#reportModalPlace" (click)="selectPlace(place) "><i class="bi bi-exclamation-circle"></i> report place</button>
         </div>
         <div class="card-footer">
           <div>
             <h6>Hozzászólások:</h6>
             <ul *ngFor="let comment of comments" class="list-group mb-3">
               <li *ngIf="comment.placeID == place.PlaceID && comment.userID != userID" class="list-group-item masok">
-                <strong>{{comment.username}}</strong> <span class="owner" *ngIf="comment.userID==place.UserID"> Tulajdonos</span>
-                <button class="btn btn-outlinve-warning" data-bs-toggle="modal" data-bs-target="#reportModal" (click)="setComment(comment)"><i class="bi bi-exclamation-circle"></i></button>
+                <strong><a class="userprofileopen" data-bs-toggle="modal" data-bs-target="#userModal" (click)="setUser(comment.userID)">{{comment.username}}</a></strong> <span class="owner" *ngIf="comment.userID==place.UserID"> Tulajdonos</span>
+                <button class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#reportModal" (click)="setComment(comment)"><i class="bi bi-exclamation-circle"></i></button>
+                
                 <p>{{comment.text}}</p>
               </li>
               <li *ngIf="comment.placeID == place.PlaceID && comment.userID == userID" class="list-group-item sajat">
                 <strong>{{comment.username}}</strong> <span class="owner" *ngIf="comment.userID==place.UserID"> Tulajdonos</span>
+                <button (click)="deleteComment(comment.id)" class="btn btn-outline"><i class="bi bi-trash3"></i></button>
                 <p>{{comment.text}}</p>
+                
               </li>
             </ul>
           </div>
@@ -56,7 +60,7 @@
         </div>
         <div class="col d-md-flex textecske gap-3 m-3">
           <p class="textecskep fw-bold">{{place.price}}Ft</p>
-          <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#rentplaceModalStart">Foglalás <i class="bi bi-check-circle"></i></button>
+          <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#rentplaceModalStart" (click)="selectPlace(place)">Foglalás <i class="bi bi-check-circle"></i></button>
         </div>
       </div>
     </ng-container>
@@ -164,6 +168,54 @@
         </div>
         <div class="modal-footer border-0">
           <button class="btn btn-outline-success" data-bs-dismiss="modal" (click)="reportComment(selectedComment.userID)">Jelentés</button>
+          <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="reportModalPlace" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content shadow-lg rounded-lg border-0">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fs-4" id="exampleModalToggleLabel2">Bejelentés</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-3">
+          <p>Jelenteni kívánt terem neve: {{selectedPlace2.place_name}}</p>
+
+          <div class="form-floating mb-3">
+            <h5>Miért szeretnéd bejelenteni a helyet?</h5>
+            <textarea [(ngModel)]="reportText" type="text" class="form-control" id="reportText" placeholder="Bejelentés"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-outline-success" data-bs-dismiss="modal" (click)="reportPlace(selectedPlace2.UserID)">Jelentés</button>
+          <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="userModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content shadow-lg rounded-lg border-0">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fs-4" id="exampleModalToggleLabel2">Felhasználói profil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-3">
+          <p>Felhasználó neve: {{selectedUser.first_name}} {{selectedUser.last_name}}</p>
+          <p>Problémát tapasztalsz a felhasználóval?</p>
+
+          <div class="form-floating mb-3">
+            <h5>Miért szeretnéd bejelenteni a felhasználót?</h5>
+            <textarea [(ngModel)]="reportText" type="text" class="form-control" id="reportText" placeholder="Bejelentés"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-outline-success" data-bs-dismiss="modal" (click)="ReportUser(selectedUser.ID)">Jelentés</button>
           <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
         </div>
       </div>

@@ -15,6 +15,7 @@ body {
 .link {
     text-decoration: none;
     color:darkgoldenrod;
+    cursor: pointer;
 }
 
 .link:hover {

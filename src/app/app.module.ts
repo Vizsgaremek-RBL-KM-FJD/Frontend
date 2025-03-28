@@ -19,6 +19,7 @@ import { HourFormatPipe } from './hour-format.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from './search.pipe';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -38,6 +39,7 @@ import { SearchPipe } from './search.pipe';
     AdminComponent,
     InfoComponent,
     SearchPipe,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

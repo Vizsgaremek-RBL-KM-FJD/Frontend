@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   email=""
   password=""
   errorMessage=""
+  forgottedemail=""
 
   private loggedUser: any;
     private userSub = new Subject();
@@ -78,7 +79,14 @@ export class LoginComponent implements OnInit {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
   
-  
+  ForgotPassword() {
+    console.log(this.forgottedemail);
+    this.auth.ForgotPassword(this.forgottedemail).subscribe(
+      (res) => {
+        console.log(res);
+        alert("Jelszó visszaállító link elküldve!");
+      })
+  }
 
   Login() {
     if (!this.email || !this.password) {

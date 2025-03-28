@@ -19,9 +19,34 @@
           {{ errorMessage }}
         </div>
         <p>Nincs még fiókod? <a class="link" routerLink="/register">regisztrálj egyet!</a></p>
+        <!-- <p><a class="link" data-bs-target="#forgotPasswordModal" data-bs-toggle="modal">Elfelejtetted a jelszavadat?</a>
+        </p> -->
       </div>
     </div>
   
+    <!-- <div class="modal fade" id="forgotPasswordModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content shadow-lg rounded-lg border-0">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fs-4" id="exampleModalToggleLabel2">Elfelejtetted a jelszavadat?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body py-3">
+            <p>Adja meg az e-mail címét</p>
+
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="forgottedemail" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+              <label for="floatingInput">E-mail cím...</label>
+            </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button class="btn btn-outline-success" data-bs-dismiss="modal" (click)="ForgotPassword()">Email kérése</button>
+            <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
   </div>
 </body>
 
