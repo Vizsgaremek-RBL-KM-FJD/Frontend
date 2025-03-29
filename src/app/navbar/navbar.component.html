@@ -8,20 +8,20 @@
       <div class="collapse navbar-collapse navbarRight" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="services">Főoldal</a>
+            <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="services"><i class="bi bi-house-door-fill"></i> Főoldal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" *ngIf="loggedUser" [routerLinkActive]="['active']" aria-current="page" routerLink="home">Böngészés</a>
+            <a class="nav-link" *ngIf="loggedUser" [routerLinkActive]="['active']" aria-current="page" routerLink="home"><i class="bi bi-search"></i> Böngészés</a>
           </li>
           <li class="nav-item" *ngIf="isAdmin == true">
-            <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="admin">Admin</a>
+            <a class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="admin"><i class="bi bi-gear-fill"></i> Karbantartás</a>
           </li>
           <li class="nav-item">
-            <a *ngIf="!loggedUser" class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="login">Bejelentkezés</a>
+            <a *ngIf="!loggedUser" class="nav-link" [routerLinkActive]="['active']" aria-current="page" routerLink="login"><i class="bi bi-box-arrow-in-right"></i> Bejelentkezés</a>
           </li>
           <li *ngIf="loggedUser" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-circle"></i>
+              <i class="bi bi-person-circle"></i> Profil
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" [routerLinkActive]="['active']" routerLink="profil">Profil</a></li>

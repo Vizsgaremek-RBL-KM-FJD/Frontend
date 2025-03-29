@@ -1,25 +1,28 @@
 .navbar {
-    padding: 12px 50px;
-    background-color: rgba(68, 45, 31, 0.9) !important;
+    padding: 5px 50px;
+    background-color: rgba(31, 31, 31, 0.9) !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .navbar-brand {
     font-size: 24px;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
-    color: #fff !important;
-    letter-spacing: -1px;
+    color: #fff;
+    letter-spacing: -2px;
     transition: color 0.3s ease;
 }
 
 .navbar-brand:hover {
-    color: #a67c52 !important; /* Világosabb barna */
+    color: #FFD36D !important; /* Világosabb barna */
 }
 
 .navbar-nav .nav-link {
-    color: #fff !important;
+    color: #fff;
     font-size: 18px;
     padding: 8px 15px;
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -27,7 +30,7 @@
 
 .navbar-nav .nav-link:hover, 
 .navbar-nav .nav-link.active {
-    color: #a67c52 !important;
+    color: #FFD36D ;
 }
 
 .navbar-toggler {
@@ -39,26 +42,27 @@
 }
 
 .dropdown-menu {
-    background-color: rgba(68, 45, 31, 0.95);
+    background-color: #1F1F1F;
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-menu .dropdown-item {
-    color: #fff !important;
+    color: #fff;
     transition: background-color 0.3s ease;
 }
 
 .dropdown-menu .dropdown-item:hover {
-    background-color: #a67c52 !important; /* Világosabb barna */
-    color: #fff !important;
+    background-color: #282828; /* Világosabb barna */
+    color: #FFD36D;
 }
 
 .logout {
-    color: #ff4d4d !important; /* Pirosabb kiemelés */
+    color: #fff; /* Pirosabb kiemelés */
     font-weight: bold;
 }
 
 .logout:hover {
-    background-color: rgba(255, 0, 0, 0.2) !important;
+    color: #ff6d6d !important;
 }
+
