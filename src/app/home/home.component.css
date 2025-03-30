@@ -1,106 +1,248 @@
-.search {
-  margin: 50px 10% 100px 10%;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.content {
+  min-height: 100vh;
+  background-color:#161616;
+  padding-top: 100px;
 }
 
-.textecske {
-  justify-content: end;
-}
-
-.textecskep {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.image {
-  padding-top: 10px;
-}
-
-.border {
-  border-radius: 10px;
-}
-
-a {
-  text-decoration: none;
-  color: darkgray;
-}
-a:hover {
-  color: black;
-}
-
-.custom-day {
-  text-align: center;
-  padding: 0.185rem 0.25rem;
-  display: inline-block;
-  height: 2rem;
-  width: 2rem;
-}
-.custom-day.focused {
-  background-color: #e6e6e6;
-  border-radius: 10px;
-}
-.custom-day.range,
-.custom-day:hover {
-  background-color: rgb(2, 117, 216);
+.search-card {
+  background-color: #282828 !important;
   color: white;
-  border-radius: 10px;
-}
-.custom-day.faded {
-  background-color: rgba(2, 117, 216, 0.5);
-}
-
-.masok {
-  background-color: rgba(228, 228, 228, 0.5);
-  border-radius: 10px;
-  width: 60%;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.sajat {
-  background-color: rgba(2, 117, 216, 0.5);
-  border-radius: 10px;
-  width: 60%;
-  margin-left: 40%;
+.search {
+  background-color: #393939;
+  color: white;
+  border: none  !important;
+  border-radius: 20px;
 }
 
-.owner {
-  color: rgb(2, 117, 216);
-  font-weight: italic;
+.post {
+  background-color: #282828 !important;
+  color: white;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.modal-body {
+.modal-content {
+  background-color:#282828;
+  color: white;
+  border: 25px;
+}
+
+.report-control {
+  background-color: #3e3e3e;
+  border: none;
+  border-radius: 20px;
+  color: white;
+}
+
+.place-owner { 
+  font-weight: bold;
+  font-size: 18px !important;
+}
+
+.place-name {
+  font-size: 15px;
+  color: rgb(197, 197, 197);
+}
+
+.report {
+  color: #888888;
+  border: none;
+}
+
+.report:hover, .report:active {
+  color: rgb(180, 180, 180);
+  border: none;
+}
+
+.userprofileopen {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.place-address {
+  padding: 15px;
+  font-size: 19px;
+}
+
+.comment {
+  padding-left: 25px;
+  padding-top: 10px;
+  border-radius: 45px;  
+  background-color: #393939;
+  border: none;
+}
+
+.own-comment { 
+  background-color: #3e3e3e !important;
+  width: 52%;
+  justify-content: end;
+  margin-left: auto;
+}
+
+.others-comment{
+  width: 52%;
+  justify-content: start;
+  margin-right: auto;
+}
+
+.mb {
+  margin-bottom: 5px !important;
+}
+
+.comment-text {
+  color: rgb(220, 220, 220);
+  margin: 0;
+}
+
+.comment-send {
+  background-color: #393939 !important;
+  color: white;
+  border: none;
+  border-radius: 45px;
+}
+
+.send-button {
+  background-color: #3e3e3e !important;
+  color: #d3d3d4;
+  border-radius: 0 15px 15px 0;
+}
+
+.send-button:hover, .send-button:active {
+  background-color: #3e3e3e !important;
+  color: #fbfbff;
+}
+
+.action-button {
+  background-color: #3e3e3e !important;
+  color: #d3d3d4;
+  border-radius: 15px;
+  border: none;
+  margin: 0 !important;
+}
+
+.action-button:hover, .action-button:active {
+  background-color: #3e3e3e !important;
+  color: #fbfbff;
+}
+
+
+.comment-send::placeholder, .search::placeholder {
+  color: #d3d3d4 !important;
+}
+
+.footer-comments {
+  max-height: 270px !important;
+  overflow-y: scroll;
+}
+
+.rent-button {
+  border: none;
+  background-color: #3e3e3e;
+  color: #888888;
+  border-radius: 25px;
+}
+
+.rent {
+  margin: 0 !important;
+}
+
+.rent-button:hover, .rent-button:active {
+  background-color: #3e3e3e;
+  color: #fbfbff;
+}
+
+pagination-controls {
   display: flex;
-  justify-content: center; /* Középre igazítja a két oszlopot */
-  align-items: center; /* Vertikálisan középre igazítja */
-  gap: 30px; /* Két elem közötti távolság */
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.calendar-container, .hour-picker-container {
-  width: 100%; /* Kitölti a rendelkezésre álló helyet */
-  max-width: 500px; /* Beállíthatsz egy maximális szélességet */
+::ng-deep pagination-controls {
+  display: flex;
+  justify-content: center;
 }
 
-.hour-picker-container {
-  max-height: 300px;
-  overflow-y: auto;
+.row {
+  max-width: 100%;
 }
 
-
-.table th, .table td {
-  text-align: center;
+::ng-deep .ngx-pagination li a {
+  text-decoration: none;
+  border: none;
+  border-radius: 25px;
+  color: #888888 !important; 
+  transition: all 0.3s ease;
 }
 
-.table th {
-  width: 50%;
+/* Ha hover-elsz egy oldalszámra vagy a Previous/Next gombra */
+::ng-deep .ngx-pagination li a:hover {
+  background-color: #FFD36D;
+  color: black !important;
+  border-radius: 25px;
+
 }
 
-.table td {
-  width: 50%;
+/* Az aktuális oldal kiemelése */
+::ng-deep .ngx-pagination .current {
+  background-color: #FFD36D !important;
+  color: black !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+}
+
+/* Previous és Next gomb hover */
+::ng-deep .ngx-pagination .pagination-previous:hover,
+::ng-deep .ngx-pagination .pagination-next:hover {
+  color: white !important;
+  background-color: none !important;
+  
+}
+
+.calendar-container {
+  background-color: #222; /* Sötét háttér */
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .custom-day {
+  color: white; /* Fehér betűszín */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 36px;
+  height: 36px;
 }
 
+
+.calendar-container {
+  background-color: #282828;
+}
+
+.darkinput { 
+  background-color:#282828;
+  color: #d3d3d4;
+  
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  background-color:#222;
+  color: #3e3e3e;
+  border: none;
+}
+
+.selected-hour {
+  background-color: rgb(255, 120, 120); /* Piros háttér, ha az óra ki van választva */
+}

@@ -2,3 +2,43 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #282828; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #606060;
+  border-radius: 6px; 
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+ngb-datepicker {
+  background-color: #282828;
+  border: none ! important;
+
+
+
+  .ngb-dp-header {
+      background-color:#282828;
+  }
+
+  .ngb-dp-navigation-select {
+      background-color: #282828 !important;
+  }
+
+  .ngb-dp-week {
+      background-color: #282828 !important;
+  }
+
+ 
+}

@@ -39,7 +39,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AdminComponent,
     InfoComponent,
     SearchPipe,
-    ResetPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

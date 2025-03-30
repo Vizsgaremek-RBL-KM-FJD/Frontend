@@ -30,7 +30,10 @@ export class HomeComponent implements OnInit {
   selectedPlace2: any = [];
   selectedUser: any = [];
 
+  PageSize: number = 10;
+  CurrentPage: number = 1;
 
+  
   userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
 
 selectPlace(place: any) {
@@ -115,11 +118,20 @@ selectPlace(place: any) {
     return this.hoveredDate ? date.equals(this.hoveredDate) : false;
   }
 
-  
+  selectedHours: Set<number> = new Set();
+
+  isHourSelected(hour: number): boolean {
+    return this.selectedHours.has(hour);
+  }
 
 selectDate(date: any) {
   this.selectedDate = date;
-  console.log(this.selectedDate);
+  console.log("kiválasztott nap",this.selectedDate);
+  this.getRentsByPlaceID().subscribe((result) => {
+    const hoursOverlapping = result.occupiedHours;
+    console.log("Occupied hours", hoursOverlapping);
+    this.selectedHours = new Set(hoursOverlapping);
+  });
 }
 
 formatDate(date: any) {
@@ -194,6 +206,7 @@ reportComment(userID: number) {
         // You can also display an error message to the user here
       }
     );
+    alert ("Sikeres bejelentés! Elnézést kérünk a kellemetlenségért, kollégáink hamarosan megnézik a problémát!");
   }
 
   reportPlace(userID: number) {
@@ -218,7 +231,9 @@ reportComment(userID: number) {
           console.error('Error creating report', error);
           // You can also display an error message to the user here
         }
+        
       );
+      alert ("Sikeres bejelentés! Elnézést kérünk a kellemetlenségért, kollégáink hamarosan megnézik a problémát!");
   }
 
   ReportUser(userID: number) {
@@ -244,6 +259,7 @@ reportComment(userID: number) {
           // You can also display an error message to the user here
         }
       );
+    alert ("Sikeres bejelentés! Elnézést kérünk a kellemetlenségért, kollégáink hamarosan megnézik a problémát!");
   }
 
   deleteComment(id: number) {
@@ -292,21 +308,33 @@ rentPlace() {
       const userID = JSON.parse(localStorage.getItem('loggedUser')!).ID;
       const placeID = this.selectedPlace.PlaceID;
       
-      const startDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.startHour, 0);
-      const endDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.endHour, 0);
+      const startDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.startHour+2, 0);
+      console.log("Final Start date", startDate);
+      const endDate = new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day, this.endHour+2, 0);
+      console.log("Final End date", endDate);
 
       this.RentsService.createRent(userID, placeID, startDate, endDate)
         .subscribe((result) => {
           console.log(result);
-          alert('Rent created successfully!');
+          alert('A foglalás sikeresen megtörtént!');
         }, (error) => {
           console.error(error);
           alert('Error creating rent: ' + error.message);
         });
+
+        this.startHour = null;
+        this.endHour = null;
+        this.selectedDate = null;
+        this.reportText = '';
     } else {
-      console.log('Selected hours are overlapping with existing rentals. Cannot create rent.');
-      const occupiedHoursText = `The following hours are occupied: ${result.occupiedHours.join(', ')}`;
-      alert(`Error: Selected hours are overlapping with existing rentals. ${occupiedHoursText} Please choose a different time slot.`);
+      console.log('Az adott időszakra már van foglalás!');
+      const occupiedHoursText = `Lefoglalt órák: ${result.occupiedHours.join(', ')}`;
+      alert(`Az adott időszakra már vannak lefoglalt órák: ${occupiedHoursText} Kérlek válassz másik időpontot!`);
+
+      this.startHour = null;
+      this.endHour = null;
+      this.selectedDate = null;
+      this.reportText = '';
     }
   });
 }

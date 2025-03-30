@@ -27,6 +27,8 @@ export class RentsService {
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString()
     };
+
+    console.log("final body, with the isoString start and enddate",body);
   
     return this.http.post(this.base.api + 'rents', body);
   }
