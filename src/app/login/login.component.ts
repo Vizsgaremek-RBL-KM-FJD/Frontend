@@ -39,11 +39,6 @@ export class LoginComponent implements OnInit {
         const startDate = new Date(rent.StartDate);
         const endDate = new Date(rent.EndDate); 
 
-        // console.log(`Rent ID: ${rent.RentID}`);
-        // console.log(`Start Date: ${startDate.toISOString()}`);
-        // console.log(`End Date: ${endDate.toISOString()}`);
-        // console.log(`Current Status: ${rent.status}`);
-
         if (rent.status === 'canceled') {
           console.log("Skipping update - status is 'canceled'");
           return;
@@ -96,14 +91,13 @@ export class LoginComponent implements OnInit {
   
     this.auth.Login(this.email, this.password).subscribe({
       next: (res) => {
-        this.errorMessage = ""; // Sikeres bejelentkezés esetén töröljük az üzenetet
+        this.errorMessage = ""; 
         this.email = "";
         this.password = "";
         this.loggedUser = res;
         localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
         this.userSub.next(this.loggedUser);
         this.router.navigate(['home']);
-        // this.router.navigate(['home']);
       },
       error: (err) => {
         if (err.status === 401 || err.status === 500) {

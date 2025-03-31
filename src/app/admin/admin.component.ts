@@ -25,10 +25,16 @@ export class AdminComponent implements OnInit {
   comments:any[] = [];
   commentsByUser:any[] = [];
 
+  selectedReport:any[] = [];
+
   
 
   PageSize: number = 10;
   CurrentPage: number = 1;
+  ReportPageSize: number = 5;
+  ReportPage: number = 1;
+  PastReportPageSize: number = 5;
+  PastReportPage: number = 1;
 
   constructor(
     private base:BaseService,
@@ -62,9 +68,11 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  updateReport(id: number, checked: boolean) {
-    console.log(id, checked);
-    this.http.put(this.base.api + 'reports/update', { id, checked }).subscribe((res: any) => {
+  updateReport(report: any) {
+    report.checked = !report.checked;
+    console.log(report.checked);
+    
+    this.http.put(this.base.api + 'reports/update', { id: report.id, checked: report.checked }).subscribe((res: any) => {
       console.log(res);
     })
     
@@ -195,5 +203,12 @@ export class AdminComponent implements OnInit {
     // "2025-03-20T10:27"
     return date.replace("T", " ")+(":00")
 
+  }
+
+  selectReport(id: number) {
+    this.http.get(this.base.api + 'reports/' + id).subscribe((res: any) => {
+      console.log("selected report", res);
+      this.selectedReport = res;
+    })
   }
 }

@@ -225,6 +225,10 @@ pagination-controls {
   background-color: #282828;
 }
 
+.darkinput { 
+  background-color:#282828 !important;
+  color: white !important;
+}
 
 
 .checkbox {
@@ -236,5 +240,5 @@ pagination-controls {
 }
 
 .selected-hour {
-  background-color: rgb(255, 120, 120); /* Piros háttér, ha az óra ki van választva */
+  background-color: rgb(255, 120, 120) !important; /* Piros háttér, ha az óra ki van választva */
 }

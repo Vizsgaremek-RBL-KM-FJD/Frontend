@@ -27,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of users | paginate: { itemsPerPage: PageSize, currentPage: CurrentPage } | search: searchText">
+              <tr *ngFor="let user of users | search: searchText | paginate: { itemsPerPage: PageSize, currentPage: CurrentPage, id:'userpaginate' } ">
                 <td>{{user.ID}}</td>
                 <td>{{user.first_name}} {{user.last_name}}</td>
                 <td>{{user.email}}</td>
@@ -42,34 +42,73 @@
           
         </div>
         <div class="card-footer ">
-          <pagination-controls previousLabel="Előző" nextLabel="Következő" class="text-center pt-4 pb-4" (pageChange)="CurrentPage = $event"></pagination-controls>
+          <pagination-controls  previousLabel="Előző" nextLabel="Következő" class="text-center pt-4 pb-4" (pageChange)="CurrentPage = $event" id='userpaginate'></pagination-controls>
         </div>
       </div>
         <div class="card post p-0 mt-3">
           <div class="card-header">
-            <h3>Bejelentések</h3>
+            <h3>Ellenőrzésre váró jelentések
+            </h3>
           </div>
           <div class="card-body">
+            <pagination-controls previousLabel="Előző" nextLabel="Következő" class="text-center pt-4 pb-4" (pageChange)="ReportPage = $event" id='reportpaginate'></pagination-controls>
             <table class="table table-dark table-striped table-bordered">
               <thead class="table-dark">
                 <tr>
                   <th style="width: 80px;">Típus</th>
                   <th>Indok</th>
                   <th style="width: 50px;">Megnézve?</th>
-                  <th style="width: 90px;"></th>
+                  <th style="width: 50px;"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let report of reports">
-                  <td>{{ report.report_type }}</td>
-                  <td>{{ report.reason }}</td>
-                  <td class="text-center">
-                    <input type="checkbox" [(ngModel)]="report.checked" />
-                  </td>
-                  <td>
-                    <button (click)="viewReport(report.id)" class="btn btn-outline dark-button btn-sm me-1 edit"><i class="bi bi-arrow-up"></i></button>
-                    <button (click)="updateReport(report.id, report.checked)" class="btn btn-outline dark-button btn-sm edit"><i class="bi bi-floppy"></i></button>
-                  </td>
+                <tr *ngFor="let report of reports | paginate: { itemsPerPage: ReportPageSize, currentPage: ReportPage, id:'reportpaginate' }" >
+                  <ng-container *ngIf="report.checked == 0">
+                    <td>{{ report.report_type }}</td>
+                    <td>{{ report.reason }}</td>
+                    <td class="text-center">
+                      <input type="checkbox" disabled [(ngModel)]="report.checked" />
+                    </td>
+                    <td>
+                      <button data-bs-toggle="modal" (click)="selectReport(report.id)" data-bs-target="#checkReportsModal" class="btn btn-outline dark-button btn-sm me-1 edit"><i class="bi bi-box-arrow-up-right"></i></button>
+                      <!-- <button (click)="updateReport(report.id, report.checked)" class="btn btn-outline dark-button btn-sm edit"><i class="bi bi-floppy"></i></button> -->
+                    </td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card post p-0 mt-3">
+          <div class="card-header">
+            <h3>Ellenőrzött jelentések
+            </h3>
+          </div>
+          <div class="card-body">
+            <pagination-controls previousLabel="Előző" nextLabel="Következő" class="text-center pt-4 pb-4" (pageChange)="PastReportPage = $event" id='pastreportpaginate'></pagination-controls>
+            <table class="table table-dark table-striped table-bordered">
+              <thead class="table-dark">
+                <tr>
+                  <th style="width: 80px;">Típus</th>
+                  <th>Indok</th>
+                  <th style="width: 50px;">Megnézve?</th>
+                  <th style="width: 50px;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let report of reports | paginate: { itemsPerPage: PastReportPageSize, currentPage: PastReportPage, id:'pastreportpaginate'}" >
+                  <ng-container *ngIf="report.checked == 1">
+                    <td>{{ report.report_type }}</td>
+                    <td>{{ report.reason }}</td>
+                    <td class="text-center">
+                      <input type="checkbox" disabled [(ngModel)]="report.checked" />
+                    </td>
+                    <td>
+                      <button data-bs-toggle="modal" (click)="selectReport(report.id)" data-bs-target="#checkReportsModal" class="btn btn-outline dark-button btn-sm me-1 edit"><i class="bi bi-box-arrow-up-right"></i></button>
+                      <!-- <button (click)="updateReport(report.id, report.checked)" class="btn btn-outline dark-button btn-sm edit"><i class="bi bi-floppy"></i></button> -->
+                    </td>
+                  </ng-container>
                 </tr>
               </tbody>
             </table>
@@ -371,6 +410,55 @@
               <td><input [(ngModel)]="comment.created_at" readonly type="text" class="form-control darkinput"></td>
               <td>
                 <button class="btn dark-button delete btn-outline" (click)="deleteComment(comment.id)"><i class="bi bi-trash3"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Bezárás</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="checkReportsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-scrollable" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-dark table-striped table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 50px;">ID</th>
+              <th style="width: 100px;">Type</th>
+              <th style="width: 100px;">Type ID</th>
+              <th style="width: 80px;">Reported User ID</th>
+              <th style="width: 80px;">Reporter User ID</th>
+              <th style="width: 130px;">Report Date</th>
+              <th>Reason</th>
+              <th style="width: 50px;">Checked?</th>
+              <th style="width: 50px;">Save</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let report of selectedReport">
+              <td>{{ report.id }}</td>
+              <td>{{ report.report_type }}</td>
+              <td><span *ngIf="report.commentID != null">{{ report.commentID }}</span> <span *ngIf="report.placeID != null">{{report.placeID}}</span></td>
+              <td>{{ report.reported_id }}</td>
+              <td>{{ report.reporter_id }}</td>
+              <td>{{ report.report_date | date: 'yyyy-MM-dd HH:mm'}}</td>
+              <td>{{ report.reason }}</td>
+              <td class="text-center">
+                <input type="checkbox" disabled [(ngModel)]="report.checked" />
+              </td>
+              <td>
+                <button *ngIf="report.checked == 0" (click)="updateReport(report)" class="btn btn-outline-primary"><i class="bi bi-check2-circle"></i></button>
+                <button *ngIf="report.checked ==1" (click)="updateReport(report)" class="btn btn-outline-primary"><i class="bi bi-circle"></i></button>
               </td>
             </tr>
           </tbody>

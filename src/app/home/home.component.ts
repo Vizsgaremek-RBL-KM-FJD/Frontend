@@ -330,6 +330,7 @@ rentPlace() {
       console.log('Az adott időszakra már van foglalás!');
       const occupiedHoursText = `Lefoglalt órák: ${result.occupiedHours.join(', ')}`;
       alert(`Az adott időszakra már vannak lefoglalt órák: ${occupiedHoursText} Kérlek válassz másik időpontot!`);
+      
 
       this.startHour = null;
       this.endHour = null;
