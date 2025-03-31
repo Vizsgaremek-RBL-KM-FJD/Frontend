@@ -1,8 +1,4 @@
-.content {
-  min-height: 100vh;
-  background-color:#161616;
-  padding-top: 100px;
-}
+
 
 .search-card {
   background-color: #282828 !important;
@@ -229,11 +225,7 @@ pagination-controls {
   background-color: #282828;
 }
 
-.darkinput { 
-  background-color:#282828;
-  color: #d3d3d4;
-  
-}
+
 
 .checkbox {
   width: 20px;

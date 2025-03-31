@@ -39,6 +39,18 @@ ngb-datepicker {
   .ngb-dp-week {
       background-color: #282828 !important;
   }
+}
 
- 
+.content {
+  min-height: 100vh;
+  max-width: 100%;
+  background-color:#161616;
+  padding-top: 100px;
+  color: white;
+}
+
+.darkinput { 
+  background-color:#282828;
+  color: #d3d3d4;
+  
 }

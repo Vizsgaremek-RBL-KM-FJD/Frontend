@@ -52,7 +52,8 @@
     transition: background-color 0.3s ease;
 }
 
-.dropdown-menu .dropdown-item:hover {
+.dropdown-menu .dropdown-item:hover, 
+.dropdown-menu .dropdown-item.active {
     background-color: #282828; /* Világosabb barna */
     color: #FFD36D;
 }

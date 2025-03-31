@@ -1,81 +1,90 @@
-<div class="container py-4">
-  <div class="row g-4">
-    <!-- Profil szekció -->
-    <div class="col-lg-4 col-md-6">
-      <h3 class="text-center">Profil</h3>
-      <div class="card border-info shadow-sm">
-        <div class="card-body">
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="user.first_name" type="text" class="form-control" id="firstName">
-            <label for="firstName">Keresztnév</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="user.last_name" type="text" class="form-control" id="lastName">
-            <label for="lastName">Vezetéknév</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="user.email" type="email" class="form-control" id="email">
-            <label for="email">Email</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="user.address" type="text" class="form-control" id="address">
-            <label for="address">Lakcím</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="user.phone_number" type="text" class="form-control" id="phone">
-            <label for="phone">Telefonszám</label>
-          </div>
-        </div>
-        <div class="card-footer text-center">
-          <button class="btn btn-info w-100" (click)="updateProfile()">Adatok frissítése</button>
-        </div>
+<div class="content">
+  <div class="row w-100">
+    <div class="col w-20 profile-col">
+      <h2 class="text-center mb-3 ">
+        {{user.last_name}} {{user.first_name}}
+      </h2>
+  
+      <div class="form-floating dark-form mb-3">
+        <p class="mb-0">Vezetéknév</p>
+        <input [(ngModel)]="user.last_name" type="text" class="form-control darkinput" id="lastName">
       </div>
-    </div>
 
-    <!-- Termek szekció -->
-    <div class="col-lg-8 col-md-6">
-      <h3 class="text-center">Termek</h3>
-      <div class="d-flex flex-wrap gap-3 justify-content-center">
-        <ng-container *ngFor="let place of places">
-          <div class="card border-info shadow-sm" style="max-width: 18rem;">
+      <div class="form-floating dark-form mb-3">
+        <p class="mb-0">Keresztnév</p>
+        <input [(ngModel)]="user.first_name" type="text" class="form-control darkinput" id="firstName">
+      </div>
+      
+      <div class="form-floating mb-3 dark-form">
+        <p class="mb-0">Email-cím</p>
+        <input [(ngModel)]="user.email" type="email" class="form-control darkinput" id="email">
+      </div>
+
+      <div class="form-floating mb-3 dark-form">
+        <p class="mb-0">Lakcím</p>
+        <input [(ngModel)]="user.address" type="text" class="form-control darkinput" id="address">
+      </div>
+
+      <div class="form-floating mb-3 dark-form">
+        <p class="mb-0">Telefonszám</p>
+        <input [(ngModel)]="user.phone_number" type="text" class="form-control darkinput" id="phone">
+      </div>
+
+      <button class="btn btn-outline updatebutton w-100 mt-2" (click)="updateProfile()">Adatok frissítése</button>
+    </div>
+    <div class="col w-80 places-col">
+      <h2 class="mb-4">
+        Termeim
+        <button class="btn btn-secondary ms-2" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem regisztrálása</button>
+      </h2> 
+      <ng-container *ngFor="let place of places">
+        <div class="row mb-5 placerow">
+          <h3>
+            {{place.place_name}} 
+          </h3>
+
+          <div class="col">
             <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
-            <div class="card-body">
-              <div class="form-floating mb-2">
-                <input type="text" class="form-control" [(ngModel)]="place.place_name">
-                <label>Hely neve</label>
-              </div>
-              <div class="form-floating mb-2">
-                <input type="text" class="form-control" [(ngModel)]="place.address">
-                <label>Cím</label>
-              </div>
-              <div class="form-floating mb-2">
-                <input type="text" class="form-control" [(ngModel)]="place.price">
-                <label>Ár (Ft/óra)</label>
-              </div>
-              <div class="mb-2">
-                <label for="imageUpload" class="form-label">Kép feltöltése</label>
-                <input type="file" class="form-control" id="imageUpload" (change)="onFileSelectedUpdate($event, place)">
-              </div>
-              <h5>Foglalások a teremhez:</h5>
-              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rentsModal" (click)="getRentsbyPlaceID(place.PlaceID)" >Foglalások mutatása</button>
-              
-              <button class="btn btn-success w-100 mb-1" (click)="updatePlace(place)">Mentés</button>
-              <button class="btn btn-danger w-100 mb-1" (click)="deletePlace(place)">Törlés</button>
-              <button class="btn btn-warning w-100" (click)="deletePlaceImage(place)">Kép törlése</button>
+          </div>
+
+          <div class="col">
+            <div class="form-floating mb-2">
+              <p class="mb-0">Hely neve</p>
+              <input type="text" class="form-control darkinput" [(ngModel)]="place.place_name">
+            </div>
+  
+            <div class="form-floating mb-2">
+              <p class="mb-0">Cím</p>
+              <input type="text" class="form-control darkinput" [(ngModel)]="place.address">
+            </div>
+  
+            <div class="form-floating mb-2">
+              <p class="mb-0">Ár (Ft/óra)</p>
+              <input type="text" class="form-control darkinput" [(ngModel)]="place.price">
+            </div>
+  
+            <div class="mb-2">
+              <p class="mb-0">Kép feltöltése</p>
+              <input type="file"  class="form-control darkinput" id="imageUpload" (change)="onFileSelectedUpdate($event, place)">
             </div>
           </div>
-        </ng-container>
-      </div>
-      <div class="text-center mt-4">
-        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem létrehozása</button>
-      </div>
+          <div class="buttons d-flex align-items-center" *ngIf="place.status === 1">
+            <button class="btn btn-outline me-2 updatebutton" data-bs-toggle="modal" data-bs-target="#rentsModal" (click)="getRentsbyPlaceID(place.PlaceID)" >Foglalások mutatása</button>
+            <button class="btn btn-outline updatebutton-dark save me-2" (click)="updatePlace(place)"><i class="bi bi-floppy-fill"></i></button>
+            <button class="btn btn-outline updatebutton-dark delete me-2" (click)="deletePlace(place)"><i class="bi bi-x-square"></i> Inaktiválás</button>
+            <button class="btn btn-outline updatebutton-dark me-2" (click)="deletePlaceImage(place)">Kép törlése</button>
+          </div>
+          <div class="buttons" *ngIf="place.status === 0">
+            <p>A termed jelenleg inaktiv </p>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
 
-<!-- Modal az új terem létrehozásához -->
 <div class="modal fade" id="createPlaceModal" tabindex="-1" aria-labelledby="createPlaceModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="createPlaceModalLabel">Új terem létrehozása</h5>
@@ -83,20 +92,20 @@
       </div>
       <div class="modal-body">
         <div class="form-floating mb-3">
-          <input [(ngModel)]="NewplaceName" type="text" class="form-control" id="placeNameInput">
-          <label for="placeNameInput">Hely neve</label>
+          <p class="mb-0">Hely neve</p>
+          <input [(ngModel)]="NewplaceName" type="text" class="form-control darkinput" id="placeNameInput">
         </div>
         <div class="form-floating mb-3">
-          <input [(ngModel)]="NewplaceAddress" type="text" class="form-control" id="addressInput">
-          <label for="addressInput">Cím</label>
+          <p class="mb-0">Cím</p>
+          <input [(ngModel)]="NewplaceAddress" type="text" class="form-control darkinput" id="addressInput">
         </div>
         <div class="form-floating mb-3">
-          <input [(ngModel)]="NewplacePrice" type="number" class="form-control" id="priceInput">
-          <label for="priceInput">Ft / óra</label>
+          <p class="mb-0">Ár (Ft/óra)</p>
+          <input [(ngModel)]="NewplacePrice" type="number" class="form-control darkinput" id="priceInput">
         </div>
         <div class="mb-3">
-          <label for="imageInput" class="form-label">Kép feltöltése</label>
-          <input type="file" class="form-control" id="imageInput" (change)="onFileSelected($event)">
+          <p class="mb-0">Kép feltöltése</p>
+          <input type="file" class="form-control darkinput" id="imageInput" (change)="onFileSelected($event)">
         </div>
       </div>
       <div class="modal-footer">
@@ -106,6 +115,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="modal fade" id="rentsModal" tabindex="-1" aria-labelledby="rentsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
@@ -117,7 +127,7 @@
       <div class="modal-body">
 
         <h4>Jelenlegi foglalás</h4>
-        <table class="table table-stripped">
+        <table class="table table-dark table-stripped">
           <thead>
             <tr>
               <td>Ügyfél</td>
@@ -143,7 +153,7 @@
                   {{ rent.status }}
                 </td>
                 <td data-label="Lemondás" >
-                  <button class="btn btn-outline-danger" *ngIf="rent.status !== 'canceled'" (click)="cancelRent(rent)">Lemondás</button>
+                  <button class="btn btn-outline delete updatebutton-dark" *ngIf="rent.status !== 'canceled'" (click)="cancelRent(rent)">Lemondás</button>
                 </td>
               </ng-container>
             </tr>
@@ -152,7 +162,7 @@
 
 
         <h4 class="mt-5">Jövőbeli foglalások</h4>
-        <table class="table table-stripped">
+        <table class="table table-dark table-stripped">
           <thead>
             <tr>
               <th>Bérlő</th>
@@ -166,7 +176,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rent of rents">
+            <tr *ngFor="let rent of rents" >
               <ng-container *ngIf="rent.status=='not started'">
                 <td data-label="Név">{{rent.UserName}}</td>
                 <td data-label="Telefonszám">{{rent.UserPhoneNumber}}</td>
@@ -178,7 +188,7 @@
                   {{ rent.status }}
                 </td>
                 <td data-label="Lemondás" >
-                  <button class="btn btn-outline-danger" *ngIf="rent.status !== 'canceled'" (click)="cancelRent(rent)">Lemondás</button>
+                  <button class="btn btn-outline updatebutton-dark delete" *ngIf="rent.status !== 'canceled'" (click)="cancelRent(rent)">Lemondás</button>
                 </td>
               </ng-container>
             </tr>
@@ -186,7 +196,7 @@
         </table>
 
         <h4 class="mt-5">Egyéb foglalások</h4>
-        <table class="table table-stripped">
+        <table class="table table-dark table-stripped">
           <thead>
             <tr>
               <th>Bérlő</th>
