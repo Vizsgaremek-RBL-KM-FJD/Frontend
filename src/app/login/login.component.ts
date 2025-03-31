@@ -47,14 +47,14 @@ export class LoginComponent implements OnInit {
         if (currentDate.getTime() >= startDate.getTime() && currentDate.getTime() < endDate.getTime()) {
           console.log("Updating to 'ongoing'");
           rent.status = 'ongoing';
-          rent.startDate = startDate.toISOString();
-          rent.endDate = endDate.toISOString();
+          rent.startDate = this.formatDate(startDate);
+          rent.endDate = this.formatDate(endDate);
           this.rentsServce.updateRent(rent);
         } else if (currentDate.getTime() >= endDate.getTime()) {
           console.log("Updating to 'done'");
           rent.status = 'done';
-          rent.startDate = startDate.toISOString();
-          rent.endDate = endDate.toISOString();
+          rent.startDate = this.formatDate(startDate);
+          rent.endDate = this.formatDate(endDate);
           this.rentsServce.updateRent(rent);
         } else {
           console.log("Status ok - no update needed");

@@ -4,6 +4,23 @@ body {
     background-size: cover;
 }
 
+.dark {
+    background-color: #1d1d1d;
+    color: white;
+    border-radius: 20px;
+    border: none;
+}
+
+.dark:hover, .dark:active {
+    background-color: #FFD36D ;
+    color: black ;
+
+}
+
+.darkinput {
+    border-radius: 25px;
+}
+
 .content {
     display: flex;
     justify-content: center;

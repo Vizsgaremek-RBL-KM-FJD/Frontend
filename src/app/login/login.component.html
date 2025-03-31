@@ -19,13 +19,13 @@
           {{ errorMessage }}
         </div>
         <p>Nincs még fiókod? <a class="link" routerLink="/register">regisztrálj egyet!</a></p>
-        <p><a class="link" data-bs-target="#forgotPasswordModal" data-bs-toggle="modal">Elfelejtetted a jelszavadat?</a>
+        <p class="text-center"><a class="link" data-bs-target="#forgotPasswordModal" data-bs-toggle="modal">Elfelejtetted a jelszavadat?</a>
         </p>
       </div>
     </div>
   
     <div class="modal fade" id="forgotPasswordModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg rounded-lg border-0">
           <div class="modal-header border-0 pb-0">
             <h5 class="modal-title fs-4" id="exampleModalToggleLabel2">Elfelejtetted a jelszavadat?</h5>
@@ -39,8 +39,7 @@
             </div>
           </div>
           <div class="modal-footer border-0">
-            <button class="btn btn-outline-success" data-bs-dismiss="modal" (click)="ForgotPassword()">Email kérése</button>
-            <button class="btn btn-outline-danger" data-bs-dismiss="modal">Kilépés</button>
+            <button class="btn btn-outline dark" data-bs-dismiss="modal" (click)="ForgotPassword()">Email kérése</button>
           </div>
         </div>
       </div>
