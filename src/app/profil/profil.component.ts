@@ -159,8 +159,20 @@ deletePlaceImage(place: any) {
     this.PlacesService.updatePlaceFromForm(place.PlaceID, formData);
   }
   
+inactivatePlace(place: any) {
+  place.status = 0;
+  this.PlacesService.updatePlace(place);
+}
+
+activatePlace(place: any) {
+  place.status = 1;
+  this.PlacesService.updatePlace(place);
+}
+
 deletePlace(place: any) {
-  this.PlacesService.deletePlace(place)
+  place.is_deleted = 1;
+  console.log(place);
+  this.PlacesService.updatePlace(place);
 }
 
 }

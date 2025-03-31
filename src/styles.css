@@ -50,7 +50,19 @@ ngb-datepicker {
 }
 
 .darkinput { 
-  background-color:#282828;
+  background-color:#373737;
   color: #d3d3d4;
-  
+  border: none;
+}
+
+.darkinput:disabled {
+  background-color:#373737;
+  color: #d3d3d4;
+  border: none;
+}
+
+.darkinput:focus {
+  background-color:#282828;
+  color: white;
+  border: none;
 }

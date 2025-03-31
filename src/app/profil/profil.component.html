@@ -38,12 +38,13 @@
         <button class="btn btn-secondary ms-2" data-bs-toggle="modal" data-bs-target="#createPlaceModal">Új terem regisztrálása</button>
       </h2> 
       <ng-container *ngFor="let place of places">
-        <div class="row mb-5 placerow">
-          <h3>
-            {{place.place_name}} 
+        <div class="row mb-5 placerow" *ngIf="place.is_deleted === 0">
+          <h3 class="d-flex align-items-center">
+            {{place.place_name}}
+            <button class="btn btn-outline updatebutton-dark delete me-2 ms-auto" (click)="deletePlace(place)"><i class="bi bi-trash-fill"></i> Hely törlése</button>
           </h3>
 
-          <div class="col">
+          <div class="col" *ngIf="place.image_path">
             <img *ngIf="place.image_path" [src]="'http://127.0.0.1:3000' + place.image_path" class="card-img-top" alt="{{place.place_name}}">
           </div>
 
@@ -68,14 +69,19 @@
               <input type="file"  class="form-control darkinput" id="imageUpload" (change)="onFileSelectedUpdate($event, place)">
             </div>
           </div>
-          <div class="buttons d-flex align-items-center" *ngIf="place.status === 1">
-            <button class="btn btn-outline me-2 updatebutton" data-bs-toggle="modal" data-bs-target="#rentsModal" (click)="getRentsbyPlaceID(place.PlaceID)" >Foglalások mutatása</button>
+          <div class="buttons d-flex align-items-center mt-2" *ngIf="place.status === 1">
+            <button class="btn btn-outline me-2 updatebutton" data-bs-toggle="modal" data-bs-target="#rentsModal" (click)="getRentsbyPlaceID(place.PlaceID)" >Foglalások kezelése</button>
             <button class="btn btn-outline updatebutton-dark save me-2" (click)="updatePlace(place)"><i class="bi bi-floppy-fill"></i></button>
-            <button class="btn btn-outline updatebutton-dark delete me-2" (click)="deletePlace(place)"><i class="bi bi-x-square"></i> Inaktiválás</button>
-            <button class="btn btn-outline updatebutton-dark me-2" (click)="deletePlaceImage(place)">Kép törlése</button>
+            <button class="btn btn-outline updatebutton-dark delete me-2" (click)="inactivatePlace(place)"><i class="bi bi-x-square"></i> Inaktiválás</button>
+            
+            <button *ngIf="place.image_path" class="btn btn-outline updatebutton-dark me-2" (click)="deletePlaceImage(place)">Kép törlése</button>
           </div>
-          <div class="buttons" *ngIf="place.status === 0">
+          <div class="buttons mt-2" *ngIf="place.status === 0">
             <p>A termed jelenleg inaktiv </p>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-outline updatebutton-dark me-2" (click)="activatePlace(place)">Újranyitás</button>
+              <button class="btn btn-outline me-2 updatebutton" data-bs-toggle="modal" data-bs-target="#rentsModal" (click)="getRentsbyPlaceID(place.PlaceID)" >Foglalások kezelése</button>
+            </div>
           </div>
         </div>
       </ng-container>

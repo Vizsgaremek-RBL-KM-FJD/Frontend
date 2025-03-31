@@ -70,6 +70,8 @@ export class AdminComponent implements OnInit {
     
   }
 
+  viewReport(id: number) {}
+
   searchText = '';
 
   viewDetails(id: number) {

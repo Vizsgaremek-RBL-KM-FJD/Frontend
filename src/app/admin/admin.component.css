@@ -1,21 +1,169 @@
-.container {
-  min-height: 100vh;
+.row {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
 }
 
-.table-container {
-  width: 45%;  /* Bal oldal: 20% */
-  padding-right: 20px; /* Térköz a két rész között */
+.main-row {
+  padding: 30px;
+}
+
+.search-card {
+  background-color: #282828 !important;
+  color: white;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .ngx-pagination li a {
+  text-decoration: none;
+  border: none;
+  border-radius: 25px;
+  color: #888888 !important; 
+  transition: all 0.3s ease;
+}
+
+.search::placeholder {
+  color: #d3d3d4 !important;
+}
+
+/* Ha hover-elsz egy oldalszámra vagy a Previous/Next gombra */
+::ng-deep .ngx-pagination li a:hover {
+  background-color: #FFD36D;
+  color: black !important;
+  border-radius: 25px;
+
+}
+
+/* Az aktuális oldal kiemelése */
+::ng-deep .ngx-pagination .current {
+  background-color: #FFD36D !important;
+  color: black !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+}
+
+/* Previous és Next gomb hover */
+::ng-deep .ngx-pagination .pagination-previous:hover,
+::ng-deep .ngx-pagination .pagination-next:hover {
+  color: white !important;
+  background-color: none !important;
+  
+}
+
+.modal-content {
+  background-color:#282828;
+  color: white;
+  border: 25px;
+}
+
+td {
+  vertical-align: middle !important;
+}
+
+.edit:hover, .edit:active {
+  background-color: #96e3ff !important;
+  border: 1px solid #96e3ff !important;
+  color: black ;
+}
+
+.delete:hover, .delete:active {
+  background-color: #e38a8a !important;
+  color: white;
+  border: 1px solid #e38a8a !important;
+}
+
+
+.search {
+  background-color: #393939;
+  color: white;
+  border: none  !important;
+  border-radius: 20px;
+}
+
+.user-col {
+  margin: 0 5px !important;
+}
+
+.post {
+  background-color: #282828 !important;
+  color: white;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dark-button {
+  background-color: #282828;
+  border: 1px solid #282828;
+  border-radius: 10px;
+  color: rgb(165, 165, 165);
+}
+
+.dark-button:hover, .dark-button:active {
+  background-color: #FFD36D ;
+  border: 1px solid #FFD36D ;
+  color: black ;
+}
+
+.table-col {
+  flex: 0 0 40%;
+}
+
+.datas-col {
+  flex: 0 0 60%;
+}
+
+.user-details .col {
+  background-color: #393939;
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.user-details {
+  padding: 10px;
+}
+
+.user-details .col:first-child {
+  margin-right: 15px;
+}
+
+.user-details .col:last-child {
+  margin-left: 15px;
+}
+
+.label {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.value {
+  font-weight: 400;
+  color: #979797;
+  display: block;
+  margin-top: 5px;
+}
+
+
+/* .table-container {
+  width: 45%;
+  padding-right: 20px; 
 }
 
 .content {
-  width: 55%;  /* Jobb oldal: 80% */
-  padding-left: 20px; /* Térköz a két rész között */
+  width: 55%; 
+  padding-left: 20px;
 }
 
 .table-container table {
-  width: 100%;  /* A táblázat kitöltse a teljes szélességet */
+  width: 100%; 
 }
 
 .content {
@@ -67,4 +215,4 @@
 
 .user-details .col:last-child {
   margin-left: 15px;
-}
+} */
