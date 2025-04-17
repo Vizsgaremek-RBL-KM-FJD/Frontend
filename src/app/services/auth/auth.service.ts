@@ -32,10 +32,10 @@ export class AuthService {
     if (user) {
       this.http.get<boolean>(this.base.api + "users/isAdmin/" + user.ID, this.base.httpOptions)
         .subscribe((response) => {
-          this.isAdminSubject.next(response); // Frissíti az admin státuszt
+          this.isAdminSubject.next(response);
         });
     } else {
-      this.isAdminSubject.next(false); // Ha nincs bejelentkezett felhasználó, nem admin
+      this.isAdminSubject.next(false);
     }
   }
 
@@ -58,7 +58,7 @@ export class AuthService {
     email: string,
     address: string,
     phone_number: string,
-    password: string ) {
+    password: string ): Observable<any> {
     let body = {
       first_name: first_name,
       last_name: last_name,
@@ -69,12 +69,7 @@ export class AuthService {
       password: password
     };
 
-    this.http.post(this.base.api + "users/register", body).subscribe(
-      {
-        next: (res) => console.log(res),
-        error: (err) => console.log(err)
-      }
-    );
+    return this.http.post(this.base.api + "users/register", body);
   }
 
   errorMessage: string = '';
@@ -84,61 +79,13 @@ export class AuthService {
 
   return this.http.post(this.base.api + "users/login", body, this.base.httpOptions).pipe(
     map((res: any) => {
-      this.loggedUserSubject.next(res); // Beállítja az aktuális bejelentkezett felhasználót
-      localStorage.setItem('loggedUser', JSON.stringify(res)); // Mentés LocalStorage-be
+      this.loggedUserSubject.next(res);
+      localStorage.setItem('loggedUser', JSON.stringify(res));
       this.isAdmin();
       return res;
     })
   );
 }
-
-
-// Login(email: string, password: string): Observable<any> {
-//   let body = {
-//     email: email,
-//     password: password
-//   };
-
-//   return this.http.post(this.base.api + "users/login", body, this.base.httpOptions).subscribe({
-//     next: (res) => {
-//       console.log(res);
-//       this.loggedUser = res;
-//       localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
-//       this.userSub.next(this.loggedUser);
-//       this.router.navigate(['home']);
-//       this.errorMessage = ''; // Ha sikeres a bejelentkezés, töröld a hibaüzenetet
-//     },
-//     error: (err) => {
-//       console.log(err);
-//       this.loggedUser = null;
-//       this.userSub.next(this.loggedUser);
-
-//       // Ellenőrizzük, hogy milyen hibaüzenet érkezett a szervertől
-//       if (err.status === 401) {
-//         this.errorMessage = "Hibás e-mail vagy jelszó!";
-//       } else {
-//         this.errorMessage = "Ismeretlen hiba történt. Próbáld újra később!";
-//       }
-//     }
-//   });
-// }
-
-
-  // logout() {
-  //   console.log('Logout method called');
-  //   this.http.post(this.base.api + "users/logout", {}, this.base.httpOptions).subscribe(
-  //     {
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.loggedUser = null;
-  //         this.userSub.next(null);
-  //         localStorage.removeItem('loggedUser');
-  //         console.log('Logged user removed from local storage');
-  //       },
-  //       error: (err) => console.log(err)
-  //     }
-  //   );
-  // }
 
   logout() {
     console.log('Logout method called');

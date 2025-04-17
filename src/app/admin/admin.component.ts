@@ -194,10 +194,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  DisableUser(user:any) {
-    this.UserService.DisableUser(user);
-  }
-
   convertDate(date:String){
     // '2025-03-30 15:00:00'
     // "2025-03-20T10:27"

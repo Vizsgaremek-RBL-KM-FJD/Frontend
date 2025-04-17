@@ -6,10 +6,6 @@ import { RentsService } from '../services/rents/rents.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-
-
-
-
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -265,20 +261,6 @@ reportComment(userID: number) {
   deleteComment(id: number) {
     this.PlacesService.deleteComment(id)
   }
-
-
-// async function createReport(report_type, reported_id, reporter_id, report_date, checked, reason) {
-//   try {
-//        const result = await db.query(
-//            'INSERT INTO reported (report_type, reported_id, reporter_id, report_date, checked, reason) VALUES (?, ?, ?, ?, ?, ?)',
-//            [report_type, reported_id, reporter_id, report_date, checked, reason]
-//        );
-//        return { message: 'Report created successfully'};
-//    } catch (err) {
-//        console.error('Error creating report:', err);
-//        throw new Error('Failed to create report', err);
-//   }
-// }
 
 setComment(comment: any) {
   console.log("komment",comment);

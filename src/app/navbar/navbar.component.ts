@@ -14,12 +14,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isAdmin?:boolean;
   feliratkozas?:Subscription;
   constructor(private auth:AuthService){ }
-
-  // ngOnInit(): void {
-  //   this.feliratkozas=this.auth.getLoggedUser().subscribe(
-  //     (user)=>this.loggedUser=user
-  //   )
-  // }
   
   ngOnInit(): void {
     
@@ -27,7 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       (user) => {
         this.loggedUser = user;
         if (user) {
-          this.isAdmin = user.isAdmin; // Ha van ilyen mező az API válaszában
+          this.isAdmin = user.isAdmin;
         } else {
           this.isAdmin = false;
         }
@@ -39,8 +33,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
   
   }
-
-  
 
   ngOnDestroy(): void {
     this.feliratkozas?.unsubscribe();

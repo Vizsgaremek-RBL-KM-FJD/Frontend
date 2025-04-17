@@ -12,7 +12,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { InfoComponent } from './info/info.component';
-import { ContactComponent } from './contact/contact.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { HourFormatPipe } from './hour-format.pipe';
@@ -32,7 +31,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegisterComponent,
     FooterComponent,
 
-    ContactComponent,
     ProfilComponent,
     ReservationsComponent,
     HourFormatPipe,

@@ -33,10 +33,6 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
   
-    // const headers = new HttpHeaders({
-    //   'Authorization': 'Bearer ' + localStorage.getItem('token')
-    // });
-  
     this.http.put(this.base.api + 'users/reset-password', { resetPasswordToken, password })
       .subscribe((response: any) => {
         if (response.message === 'User updated successfully') {

@@ -52,11 +52,6 @@ export class ReservationsComponent implements OnInit {
     })
   }
   
-  getPlaceImage(placeID: number): string | null {
-    const place = this.places.find((p: any) => p.ID === placeID);
-    return place ? place.image_path : null;
-  }
-  
 
   cancelRent(rent:any) {
     rent.startDate = this.convertDate(rent.StartDate);

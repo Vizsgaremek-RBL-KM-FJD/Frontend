@@ -34,7 +34,6 @@ getPlaceByPlaceID(placeID: number) {
   return this.http.get(this.base.api + 'places/places-rent/' + placeID);
 }
 
-// Add a new method to your PlacesService class
 deletePlaceImage(placeId: number) {
   return this.http.delete(`${this.base.api}places/${placeId}/image`);
 }

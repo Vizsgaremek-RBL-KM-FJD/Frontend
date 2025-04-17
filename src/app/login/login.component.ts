@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         if (err.status === 401 || err.status === 500) {
-          this.errorMessage = "Hibás e-mail vagy jelszó!";
+          this.errorMessage = "Hibás e-mail cím vagy jelszó!";
         } else {
           this.errorMessage = "Ismeretlen hiba történt. Próbáld újra később!";
         }
