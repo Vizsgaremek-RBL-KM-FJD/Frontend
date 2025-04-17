@@ -1,103 +1,172 @@
 .profil {
-    padding: 25px;
+  padding: 25px;
 }
 
 .darkinput {
-    border: none;
-    border-radius: 25px;
-    padding: 15px !important;
+  border: none;
+  border-radius: 25px;
+  padding: 15px !important;
 }
 
 .darkinput:focus {
-    outline: none;
-    background-color: #282828;
-    color: white;
+  outline: none;
+  background-color: #282828;
+  color: white;
 }
 
 .content {
-    padding-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 .row {
-    
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.card-img-top {
+  max-width: 100%;
+  height: auto;
+}
+
+.profile-col {
+  padding: 100px 50px 0 50px;
+  flex: 0 0 30%;
+  background-color: #0f0f0f;
+  min-height: 100vh;
+}
+
+.places-col {
+  padding: 100px 50px 0 50px;
+  flex: 0 0 70%;
+}
+
+.updatebutton {
+  background-color: #FFD36D;
+  border: 1px solid #FFD36D;
+  border-radius: 10px;
+}
+
+.updatebutton-dark {
+  background-color: #282828;
+  border: 1px solid #282828;
+  border-radius: 10px;
+  color: rgb(165, 165, 165);
+}
+
+.updatebutton-dark:hover,
+.updatebutton-dark:active {
+  background-color: #FFD36D;
+  border: 1px solid #FFD36D;
+  color: black;
+}
+
+.save:hover,
+.save:active {
+  background-color: #abd89e;
+  border: 1px solid #abd89e;
+  color: white;
+}
+
+.delete:hover,
+.delete:active {
+  background-color: #e38a8a;
+  border: 1px solid #e38a8a;
+  color: white;
+}
+
+.btn-secondary {
+  border-radius: 15px;
+}
+
+.updatebutton:hover,
+.updatebutton:active {
+  background-color: #ffc745;
+  border: 1px solid #ffc745;
+  color: white;
+}
+
+.placerow {
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 50px;
+}
+
+#imageUpload::-webkit-file-upload-button,
+#imageInput::-webkit-file-upload-button {
+  background-color: #313131 !important;
+  border: none;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.modal-content {
+  background-color: #1b1b1b;
+  color: white;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .row {
+    flex-direction: column;
   }
 
-  .card-img-top {
-    max-width: 45rem;
-  }
-  
-  .profile-col {
-    padding: 100px 50px 0 50px;
-    flex: 0 0 30%;
-    background-color: #0f0f0f;
-    min-height: 100vh; 
-  }
-  
+  .profile-col,
   .places-col {
-    padding: 100px 50px 0 50px;
-    flex: 0 0 70%; 
-  }
-  
-  .updatebutton {
-    background-color: #FFD36D;
-    border: 1px solid #FFD36D;
-    border-radius: 10px;
-  }
-
-  .updatebutton-dark {
-    background-color: #282828;
-    border: 1px solid #282828;
-    border-radius: 10px;
-    color: rgb(165, 165, 165);
-  }
-
-  .updatebutton-dark:hover, .updatebutton-dark:active {
-    background-color: #FFD36D ;
-    border: 1px solid #FFD36D ;
-    color: black ;
-  }
-
-  .save:hover, .save:active {
-    background-color: #abd89e ;
-    border: 1px solid #abd89e ;
-    color: white ;
-  }
-
-  .delete:hover, .delete:active {
-    background-color: #e38a8a ;
-    border: 1px solid #e38a8a ;
-    color: white ;
-  }
-
-  .btn-secondary {
-    border-radius: 15px;
-  }
-
-  .updatebutton:hover, .updatebutton:active {
-    background-color: #ffc745 ;
-    border: 1px solid #ffc745 ;
-    color: white ;
+    flex: 0 0 100%;
+    padding: 30px 20px 0 20px;
+    min-height: auto;
   }
 
   .placerow {
-    background-color: #1e1e1e;
-    padding: 30px;
-    border-radius: 50px;
+    border-radius: 25px;
+    padding: 20px
+  }
+}
+
+@media (max-width: 1000px) {
+  table.table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  #imageUpload::-webkit-file-upload-button, #imageInput::-webkit-file-upload-button {
-    background-color:  #313131 !important;
-    border: none;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    margin: 5px;
+  table.table thead {
+    display: none;
   }
 
-  .modal-content {
-    background-color: #1b1b1b;
-    color: white;
+  table.table tbody,
+  table.table tr,
+  table.table td {
+    display: block;
+    width: 100%;
   }
+
+  table.table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #2a2a2a;
+  }
+
+  table.table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  table.table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    white-space: normal;
+    font-weight: bold;
+    text-align: left;
+  }
+}
 

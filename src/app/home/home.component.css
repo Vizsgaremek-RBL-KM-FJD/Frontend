@@ -242,3 +242,50 @@ pagination-controls {
 .selected-hour {
   background-color: rgb(255, 120, 120) !important; /* Piros háttér, ha az óra ki van választva */
 }
+
+@media screen and (max-width: 768px) {
+  .search-card,
+  .post {
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+
+  .place-owner {
+    font-size: 16px !important;
+  }
+
+  .place-name {
+    font-size: 13px;
+  }
+
+  .place-address {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .comment {
+    padding-left: 15px;
+    padding-top: 8px;
+  }
+
+  .own-comment,
+  .others-comment {
+    width: 90%;
+  }
+
+  .custom-day {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .comment-send,
+  .send-button {
+    font-size: 14px;
+  }
+
+  .darkinput {
+    font-size: 14px !important;
+  }
+}
