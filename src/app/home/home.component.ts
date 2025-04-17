@@ -52,13 +52,15 @@ selectPlace(place: any) {
 
     console.log("elküldendő elemek1", placeID, userID, username, text);
 
-    this.PlacesService.addComment(placeID, userID, username, text).subscribe((result) => {
-      this.PlacesService.getComments().subscribe((comments) => {
-        console.log('Kapott kommentek:', comments);
-        this.comments = comments
+    if (this.newCommentText !== '') {
+      this.PlacesService.addComment(placeID, userID, username, text).subscribe((result) => {
+        this.PlacesService.getComments().subscribe((comments) => {
+          console.log('Kapott kommentek:', comments);
+          this.comments = comments
+        })
+        console.log(result);
       })
-      console.log(result);
-    })
+    }
     this.newCommentText = '';
 
   }
@@ -203,6 +205,7 @@ reportComment(userID: number) {
       }
     );
     alert ("Sikeres bejelentés! Elnézést kérünk a kellemetlenségért, kollégáink hamarosan megnézik a problémát!");
+    this.reportText = "";
   }
 
   reportPlace(userID: number) {
@@ -230,6 +233,7 @@ reportComment(userID: number) {
         
       );
       alert ("Sikeres bejelentés! Elnézést kérünk a kellemetlenségért, kollégáink hamarosan megnézik a problémát!");
+      this.reportText = "";
   }
 
   ReportUser(userID: number) {
@@ -252,14 +256,18 @@ reportComment(userID: number) {
         },
         (error) => {
           console.error('Error creating report', error);
-          // You can also display an error message to the user here
         }
       );
     alert ("Sikeres bejelentés! Elnézést kérünk a kellemetlenségért, kollégáink hamarosan megnézik a problémát!");
+    this.reportText = "";
   }
 
   deleteComment(id: number) {
     this.PlacesService.deleteComment(id)
+    this.PlacesService.getComments().subscribe((comments) => {
+      console.log('Kapott kommentek:', comments);
+      this.comments = comments
+    })
   }
 
 setComment(comment: any) {
